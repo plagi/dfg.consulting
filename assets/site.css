@@ -124,7 +124,7 @@ section{padding:clamp(56px,7vw,96px) 0 clamp(48px,6vw,80px);border-top:1px solid
 /* Stage: 0 → 1 and 1 → ∞ */
 .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:clamp(28px,3.5vw,44px)}
 .tab{position:relative;text-align:left;padding:16px 20px 18px;border:1px solid var(--line-2);background:var(--panel);display:flex;flex-direction:column;gap:4px;overflow:hidden;transition:border-color .15s,background .15s}
-.tab b{font-family:var(--d);font-weight:500;font-size:22px;letter-spacing:-.01em;color:var(--bone-45);transition:color .15s}
+.tab b{font-family:var(--d);font-weight:500;font-size:17px;line-height:1.2;letter-spacing:-.01em;color:var(--bone-45);transition:color .15s}
 .tab span{font-size:13.5px;color:var(--bone-45);transition:color .15s}
 .tab:hover{border-color:var(--bone-70)} .tab:hover b{color:var(--bone)}
 .tab.on{border-color:var(--bone-70);background:var(--panel-2)} .tab.on b{color:var(--bone)} .tab.on span{color:var(--bone-70)}
@@ -352,6 +352,6 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
   .btn{white-space:normal}
   .checks a.row{padding:16px 18px} .checks-h{flex-direction:column;gap:4px;padding:14px 18px}
   .areas{grid-template-columns:1fr}
-  .tab b{font-size:20px} .tab{padding:14px 16px 16px}
+  .tab b{font-size:16px} .tab{padding:14px 16px 16px}
   .spec-r{grid-template-columns:1fr;gap:8px} .spec-s{justify-self:start}
 }
