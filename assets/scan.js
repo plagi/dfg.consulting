@@ -15,7 +15,7 @@
     for(var j=0;j<NZ;j++)for(var i=0;i<NX;i++){var u=i/(NX-1), v=j/(NZ-1); pts.push({x:X0+(X1-X0)*u, z:Z0+(Z1-Z0)*v, y:height(u,v)});}
     var cam={y:1.05,z:-0.55,pitch:0.50,f:1.0}, yaw=0, o={x:0,y:0,d:0};
     // the plan: six sites in the order an engagement runs, set on the surveyed ground as the sweep passes
-    var SITES=[{l:'Diagnose'},{l:'Plan'},{l:'Vendors'},{l:'Pilot'},{l:'Production'},{l:'Stay'}];
+    var SITES=[]; // the route and its labels were drawn here once; the surface says enough on its own
 
     var readM=document.getElementById('rM');
     function size(){dpr=Math.min(2,window.devicePixelRatio||1); W=c.clientWidth||hero.clientWidth; H=c.clientHeight||hero.clientHeight; c.width=W*dpr; c.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); placeSites();}
