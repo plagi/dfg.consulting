@@ -33,8 +33,16 @@
   function note(t,soft){var old=form.querySelector('.ok');if(old)old.remove();form.appendChild(el('div','ok'+(soft?' soft':''),t));}
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    var d=new FormData(form), missing=['name','company','email','problem'].filter(function(k){return !String(d.get(k)||'').trim();});
-    if(missing.length){form.querySelector('[name='+missing[0]+']').focus();return;}
+    var d=new FormData(form), LBL={name:'your name',company:'the company',email:'a work email',problem:'a line about the problem'};
+    var missing=['name','company','email','problem'].filter(function(k){return !String(d.get(k)||'').trim();});
+    var em=String(d.get('email')||'').trim(); if(em&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em))missing.push('email:format');
+    ['name','company','email','problem'].forEach(function(k){var f=form.querySelector('[name='+k+']'); var bad=missing.indexOf(k)>=0||(k==='email'&&missing.indexOf('email:format')>=0); f.classList.toggle('bad',bad); f.setAttribute('aria-invalid',bad?'true':'false');});
+    if(missing.length){
+      var parts=missing.filter(function(k){return k!=='email:format';}).map(function(k){return LBL[k];});
+      var msg=parts.length?'Still needed: '+parts.join(', ')+'.':'';
+      if(missing.indexOf('email:format')>=0)msg+=(msg?' ':'')+'The email address does not look right.';
+      note(msg,true); form.querySelector('.bad').focus(); return;
+    }
     var body='Name: '+d.get('name')+'\nCompany: '+d.get('company')+'\nEmail: '+d.get('email')+'\n\n'+d.get('problem');
     var mailto='mailto:hello@dfg.consulting?subject='+encodeURIComponent('DFG: '+d.get('company'))+'&body='+encodeURIComponent(body);
     var sendBtn=form.querySelector('.send .btn');
