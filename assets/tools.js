@@ -31,8 +31,8 @@
         'One or more, with results measured and reported to the sponsor.'],
         w:'Taking one use-case to production with a measured result, so the board sees evidence before the next budget round.'},
       {d:'Engineering',q:'Who would build and run the first use-case?',o:[
-        'Vendors only; no in-house engineering.',
-        'An in-house team with no ML or LLM delivery experience.',
+        'Vendors build and run it; no one in-house owns it.',
+        'Vendors build; an in-house owner runs the contract and the operations, without ML or LLM delivery experience.',
         'An in-house team that has shipped one ML or LLM feature, with vendor support.',
         'An in-house team that ships and operates ML or LLM features, with monitoring and on-call.'],
         w:'Deciding what is built in-house and what is bought, and setting vendor terms so the team can operate it afterwards.'},
@@ -54,13 +54,17 @@
   var BANK={
     key:'bank', name:'Bank onboarding evidence', kind:'list',
     title:'Mark each item as it stands today.',
-    intro:'In place means the document exists and is current. Partly means it exists but is out of date or incomplete.',
+    intro:'In place means the document exists and is current. Partly means it exists but is out of date or incomplete. The first three groups are the ones a review stops on.',
+    gate:['Entity and ownership','Regulatory and licensing','Financial crime'],
     groups:[
+      ['Entity and ownership',[
+        ['Corporate documents: incorporation, shareholder and UBO chart, directors and their fit-and-proper status, source of funds']]],
       ['Regulatory and licensing',[
         ['Written confirmation of regulatory status in each market: licence, registration, or a legal opinion on exemption'],
         ['A register of regulatory obligations, with an owner and a change log']]],
       ['Financial crime',[
         ['AML and KYC programme documented, with a named MLRO or compliance officer'],
+        ['Business-wide risk assessment, customer risk rating, transaction monitoring and suspicious-activity reporting, with records'],
         ['Sanctions and PEP screening in operation, with records of alerts handled']]],
       ['Information security',[
         ['SOC 2 Type II or ISO 27001 certificate, or a dated audit plan the bank can review'],
@@ -77,28 +81,30 @@
       ['Technology',[
         ['Integration architecture written down: APIs, environments, responsibilities, and the change process']]]
     ],
-    read:function(n,t){
-      if(n>=10)return{h:'Ready to open the conversation.',p:'Most of what a sponsor bank’s third-party review asks for exists. The open items below set the length of onboarding, not whether it happens.'};
-      if(n>=5)return{h:'Halfway. The order matters.',p:'A bank’s review opens with regulatory status and the financial-crime programme, and stops if either is missing. Close those first; the security and data items can be prepared alongside.'};
-      return{h:'Not yet. Start with the first two groups.',p:'Without written regulatory status and a documented AML programme, a bank will not open a file. Those two groups are the first four to six weeks of work, and they are the same in every market.'};
+    read:function(n,t,hard){
+      if(hard>0)return{h:hard===1?'One hard stop open.':hard+' hard stops open.',p:'A bank’s review opens with who you are, your regulatory status and the financial-crime programme, and stops at the first of those it cannot see. However complete the rest is, the file does not open until the items marked below in the first three groups are in place. Those are usually the first four to six weeks of work; the detail differs by regulator.'};
+      if(n>=t*0.75)return{h:'Ready to open the conversation.',p:'The hard stops are in place and most of what a sponsor bank’s third-party review asks for exists. The open items below set the length of onboarding, not whether it happens.'};
+      return{h:'The file opens. The rest sets the timeline.',p:'Who you are, your regulatory status and the financial-crime programme are in place, so a bank will open the review. The security, data, resilience and technology items below decide how long it takes; prepare them in this order.'};
     }
   };
 
   var SEC={
     key:'sec', name:'ISO 27001 control check', kind:'list',
-    title:'Mark each control as it stands today.',
-    intro:'In place means written, operating, and evidenced. Partly means one of those three is missing.',
+    title:'Mark each item as it stands today.',
+    intro:'In place means written, operating, and evidenced. Partly means one of those three is missing. The first two items are what a Stage 1 audit opens with; the rest are the Annex A controls sampled first.',
     groups:[
+      ['Management system',[
+        ['Scope, risk assessment and risk treatment plan, current and approved','Cl. 4.3, 6.1.2'],
+        ['Statement of Applicability, with a justification for every included and excluded control','Cl. 6.1.3']]],
       ['Organisational controls',[
         ['Information security policy approved by management and reviewed within the last year','A.5.1'],
-        ['Inventory of information assets, each with a named owner','A.5.9'],
-        ['Access control policy with joiner, mover and leaver procedures','A.5.15'],
-        ['Supplier security requirements in contracts, with a supplier register','A.5.19'],
+        ['Inventory of information and associated assets, each with a named owner','A.5.9'],
+        ['Access control policy, with identity and access-rights procedures for joiners, movers and leavers','A.5.15, A.5.18'],
+        ['Supplier security requirements in agreements, with a supplier register','A.5.19, A.5.20'],
+        ['Cloud services: security requirements, and the responsibilities split with each provider','A.5.23'],
         ['Incident management plan with roles, escalation and a contact list','A.5.24']]],
       ['People controls',[
         ['Security awareness training for all staff in the last year, with attendance records','A.6.3']]],
-      ['Physical controls',[
-        ['Physical entry controls to offices and server areas, with visitor records','A.7.2']]],
       ['Technological controls',[
         ['Privileged access restricted, logged and reviewed quarterly','A.8.2'],
         ['Multi-factor authentication on email, cloud consoles and remote access','A.8.5'],
@@ -107,9 +113,9 @@
         ['Logging enabled on critical systems, protected from change and reviewed','A.8.15']]]
     ],
     read:function(n,t){
-      if(n>=10)return{h:'Audit-ready on paper.',p:'The controls an auditor samples first exist. What remains is evidence: records that show each control operating over time, not only a document saying it should.'};
-      if(n>=5)return{h:'Half the controls. Gaps in audit order.',p:'An auditor works from policy and inventory to access, then to the technical controls. The open items below follow that order; the first is the one to close first.'};
-      return{h:'Start with policy, inventory and access.',p:'The technical controls depend on knowing what you hold and who can reach it. The open items are in the order an assessment would take them.'};
+      if(n>=t*0.8)return{h:'Ready for Stage 1 on paper.',p:'The documents a Stage 1 opens with and the controls sampled first exist. What remains is evidence: records that show each control operating over time, not only a document saying it should. Expect minor findings; the aim is no majors at Stage 2.'};
+      if(n>=t*0.4)return{h:'Half the items. Gaps in audit order.',p:'An auditor works from the risk assessment and the Statement of Applicability to policy, inventory and access, then to the technical controls. The open items below follow that order; the first is the one to close first.'};
+      return{h:'Start with the risk assessment, then policy, inventory and access.',p:'The technical controls depend on knowing what you hold, what you have decided to protect, and who can reach it. The open items are in the order an assessment would take them.'};
     }
   };
 
@@ -212,7 +218,7 @@
       var nav=el('div','nav'); go=btn('pri','See the gaps '+arrow(),function(){done=true;render();root.scrollIntoView({behavior:'auto',block:'nearest'});}); go.disabled=marked()===0; nav.appendChild(go); foot.appendChild(nav); root.appendChild(foot);
     }
     function result(){
-      var n=score(), c=tally(), r=def.read(n,items.length);
+      var n=score(), c=tally(), hard=def.gate?items.filter(function(it){return def.gate.indexOf(it.g)>=0&&it.s!==0;}).length:0, r=def.read(n,items.length,hard);
       var body=el('div','body step-in'); var res=el('div','res');
       res.appendChild(el('div','score','<b>'+fmt(n)+'</b><span>of '+items.length+' in place</span>'));
       var segs=el('div','segs'); items.forEach(function(_,k){var s=el('i'); if(k<Math.floor(n))s.className='on'; else if(k<n)s.className='half'; segs.appendChild(s);}); res.appendChild(segs);
