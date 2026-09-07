@@ -291,4 +291,5 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
   .inst .foot .nav{width:100%;justify-content:flex-end}
   .btn{white-space:normal}
   .checks a.row{padding:16px 18px} .checks-h{flex-direction:column;gap:4px;padding:14px 18px}
+  .spec-r{grid-template-columns:1fr;gap:8px} .spec-s{justify-self:start}
 }
