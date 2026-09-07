@@ -9,6 +9,8 @@ Static site, no build step. `index.html` is the whole homepage (styles and scrip
 - `index.html` — homepage
 - `404.html` — not-found page
 - `favicon.svg`, `robots.txt`, `sitemap.xml`
+- `og.png` — Open Graph / social preview image (1200x630)
+- `functions/api/contact.js` — Pages Function behind the contact form
 - `deploy.sh` — pushes the site to Cloudflare Pages
 
 ## Hosting
@@ -30,6 +32,28 @@ DNS is on Cloudflare (nameservers boyd.ns.cloudflare.com and heather.ns.cloudfla
 |-------|------|----------------------------|-------|
 | CNAME | @    | dfg-consulting.pages.dev   | on    |
 | CNAME | www  | dfg.consulting             | on    |
+
+## Contact form
+
+The form posts JSON to `/api/contact`, a Pages Function that sends the message to hello@dfg.consulting through [Resend](https://resend.com). If the endpoint is unavailable or not configured, the page falls back to opening the visitor's mail client with the message prefilled.
+
+Configure once in Cloudflare Pages > dfg-consulting > Settings > Variables and Secrets:
+
+| Name             | Type   | Value                                                    |
+|------------------|--------|----------------------------------------------------------|
+| `RESEND_API_KEY` | secret | API key from Resend                                      |
+| `CONTACT_FROM`   | text   | optional, default `DFG website <website@dfg.consulting>` |
+| `CONTACT_TO`     | text   | optional, default `hello@dfg.consulting`                 |
+
+Or from the terminal:
+
+```bash
+npx wrangler pages secret put RESEND_API_KEY --project-name dfg-consulting
+```
+
+The sending domain (dfg.consulting) must be verified in Resend, which means adding its SPF and DKIM records in Cloudflare DNS.
+
+The "Book a 30-minute call" button is hidden until `BOOKING_URL` in `index.html` is set.
 
 ## Local preview
 

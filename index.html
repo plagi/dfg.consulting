@@ -13,7 +13,12 @@
 <meta property="og:title" content="DFG. Digital Frontiers Group">
 <meta property="og:description" content="DFG advises banks, fintechs and corporations on AI, technology and security. A written diagnosis first, then we stay through delivery.">
 <meta property="og:site_name" content="DFG. Digital Frontiers Group">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://dfg.consulting/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DFG. Advisory that stays until it ships.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dfg.consulting/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
@@ -195,6 +200,9 @@
   .form .send{grid-column:1/3;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   .form .send small{font-size:13px;color:var(--bone-45)} .form .send small a{color:var(--bone)}
   .form .ok{grid-column:1/3;font-size:15px;color:var(--signal);border:1px solid var(--signal-dim);padding:12px 14px}
+  .form .ok.soft{color:var(--bone-70);border-color:var(--line-2)}
+  .form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0}
+  .form .send .btn[disabled]{opacity:.6;cursor:progress}
 
   footer{border-top:1px solid var(--line);padding:28px 0 36px;font-size:13.5px;color:var(--bone-45)}
   footer .grid>div{display:flex;flex-direction:column;gap:6px}
@@ -365,8 +373,9 @@
           <label>Company<input type="text" name="company" autocomplete="organization" required></label>
           <label class="full">Work email<input type="email" name="email" autocomplete="email" required></label>
           <label class="full">What is the problem?<textarea name="problem" required placeholder=""></textarea></label>
+          <label class="hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
           <div class="attach" id="attach"></div>
-          <div class="send"><button class="btn" type="submit">Send <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></button><small>Or write to <a href="mailto:hello@dfg.consulting">hello@dfg.consulting</a></small></div>
+          <div class="send"><button class="btn" type="submit">Send <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></button><a class="btn ghost" id="book" href="#" hidden>Book a 30-minute call</a><small>Or write to <a href="mailto:hello@dfg.consulting">hello@dfg.consulting</a></small></div>
         </form>
       </div>
     </div>
@@ -614,16 +623,35 @@
   mountChecklist(document.getElementById('inst-bank'),BANK,'bank');
   mountChecklist(document.getElementById('inst-sec'),SEC,'sec');
 
-  /* ---------- Form: composes an email; swap for a real endpoint when one exists ---------- */
+  /* ---------- Form: posts to /api/contact; falls back to composing an email if the endpoint is unavailable ---------- */
+  var BOOKING_URL=''; // e.g. 'https://cal.com/dfg/30min'. Empty hides the button.
+  var book=document.getElementById('book'); if(book&&BOOKING_URL){book.href=BOOKING_URL;book.target='_blank';book.rel='noopener';book.hidden=false;}
   var form=document.getElementById('contactForm');
+  function note(t,soft){var old=form.querySelector('.ok');if(old)old.remove();form.appendChild(el('div','ok'+(soft?' soft':''),t));}
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var d=new FormData(form), missing=['name','company','email','problem'].filter(function(k){return !String(d.get(k)||'').trim();});
     if(missing.length){form.querySelector('[name='+missing[0]+']').focus();return;}
+    var keys=Object.keys(ATTACHED), attached=keys.map(function(k){return ATTACHED[k];});
     var body='Name: '+d.get('name')+'\nCompany: '+d.get('company')+'\nEmail: '+d.get('email')+'\n\n'+d.get('problem');
-    var keys=Object.keys(ATTACHED); if(keys.length){body+='\n\n'+keys.map(function(k){return ATTACHED[k];}).join('\n');}
-    window.location.href='mailto:hello@dfg.consulting?subject='+encodeURIComponent('DFG: '+d.get('company'))+'&body='+encodeURIComponent(body);
-    var ok=el('div','ok','Your email client should open with the message ready to send. If it did not, write to hello@dfg.consulting.'); form.appendChild(ok);
+    if(attached.length){body+='\n\n'+attached.join('\n');}
+    var mailto='mailto:hello@dfg.consulting?subject='+encodeURIComponent('DFG: '+d.get('company'))+'&body='+encodeURIComponent(body);
+    var btn=form.querySelector('.send .btn');
+    function fallback(){
+      btn.disabled=false;
+      window.location.href=mailto;
+      note('Your email client should open with the message ready to send. If it did not, write to hello@dfg.consulting.',true);
+    }
+    if(!window.fetch||!window.Promise){fallback();return;}
+    btn.disabled=true;
+    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:d.get('name'),company:d.get('company'),email:d.get('email'),problem:d.get('problem'),attached:attached,website:d.get('website')})})
+    .then(function(r){return r.json().then(function(j){return r.ok&&j.ok;},function(){return false;});})
+    .then(function(ok){
+      if(!ok){fallback();return;}
+      btn.disabled=false; form.reset(); keys.forEach(function(k){delete ATTACHED[k];}); renderAttach();
+      note('Sent. You will hear from us within one working day.');
+    },fallback);
   });
 
 
