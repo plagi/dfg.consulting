@@ -53,26 +53,26 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;display:block}
 .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:160px;background:linear-gradient(to bottom,transparent,var(--void));z-index:-1;pointer-events:none}
 .hero .grid{align-items:center;position:relative;width:100%}
-.hero .copy{grid-column:1/7;display:flex;flex-direction:column;gap:28px;align-items:flex-start;position:relative}
-.hero .copy::before{content:"";position:absolute;inset:-40px -80px -40px -60px;background:radial-gradient(ellipse at 40% 50%,rgba(10,12,16,.92) 40%,rgba(10,12,16,0) 75%);z-index:-1;pointer-events:none}
+.hero .copy{grid-column:1/7;display:flex;flex-direction:column;gap:28px;align-items:flex-start;position:relative;align-self:end;padding-bottom:clamp(24px,5vh,64px)}
+.hero .copy::before{content:"";position:absolute;inset:-60px -120px -40px -80px;background:radial-gradient(ellipse at 35% 55%,rgba(10,12,16,.94) 38%,rgba(10,12,16,0) 72%);z-index:-1;pointer-events:none}
 .hero h1{font-size:clamp(34px,3.9vw,58px)}
 .hero .sub{font-size:clamp(17px,1.35vw,21px);line-height:1.45;max-width:38ch;text-wrap:pretty;color:var(--bone-70)}
 .hero .who{font-size:14.5px;color:var(--bone-70);max-width:38ch;line-height:1.5;border-top:1px solid var(--line);padding-top:14px}
-.hero .tool{grid-column:8/13}
 .hero .w{display:inline-block;opacity:0;transform:translateY(.4em);animation:wup .9s cubic-bezier(.2,.8,.2,1) forwards}
 @keyframes wup{to{opacity:1;transform:none}}
 .hero .sub,.hero .who,.hero .btn{opacity:0;animation:wup .9s cubic-bezier(.2,.8,.2,1) forwards}
 .hero .sub{animation-delay:.6s} .hero .btn{animation-delay:.8s}
-.hero .tool{opacity:0;transform:translateY(16px);animation:wup 1.1s cubic-bezier(.2,.8,.2,1) .7s forwards}
 
-/* The three checks, as a panel */
-.checks{border:1px solid var(--line-2);background:rgba(17,20,26,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+/* The three checks, as a band under the hero */
+section.band{padding-top:clamp(36px,4.5vw,56px);padding-bottom:clamp(36px,4.5vw,56px)}
+.checks{border:1px solid var(--line-2);background:var(--panel);display:grid;grid-template-columns:repeat(3,1fr)}
 .checks-h{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .checks-h h2{font-family:var(--d);font-weight:500;font-size:15px;letter-spacing:-.01em}
 .checks-h span{font-family:var(--m);font-size:12px;letter-spacing:.04em;white-space:nowrap}
 .checks-h span{font-size:13px;color:var(--bone-70)}
-.checks a.row{display:grid;grid-template-columns:34px 1fr 18px;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line);align-items:center;transition:background .12s,box-shadow .12s}
-.checks a.row:last-child{border-bottom:0}
+.checks a.row{display:grid;grid-template-columns:34px 1fr 18px;gap:14px;padding:22px 24px;border-right:1px solid var(--line);align-items:start;transition:background .12s,box-shadow .12s}
+.checks a.row:last-child{border-right:0}
+.checks .go{margin-top:3px}
 .checks a.row:hover{background:var(--panel-2);box-shadow:inset 2px 0 0 var(--signal)}
 .checks .n{font-family:var(--d);font-weight:500;font-size:15px;color:var(--signal);letter-spacing:0}
 .checks .t{display:block;font-weight:500;font-size:16px;color:var(--bone);line-height:1.3}
@@ -274,6 +274,13 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
 .inst .foryou .k{font-family:var(--m);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal)}
 .inst .foryou p{color:var(--bone);font-size:15px;max-width:66ch} .inst .foryou .need{color:var(--bone-70);border-top:1px solid var(--signal-dim);padding-top:8px;margin-top:2px}
 .inst .res ol li .ask{display:block;font-size:13px;color:var(--bone-45);margin-top:3px;text-wrap:pretty}
+.inst .res .sec{font-family:var(--m);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);margin-top:6px}
+.inst .res ol.findings li{grid-template-columns:32px 1fr;align-items:start;font-size:15px;color:var(--bone);line-height:1.45;text-wrap:pretty}
+.inst .res ol.findings li b{font-family:var(--m);font-weight:400;font-size:12px;color:var(--signal);padding-top:4px}
+.inst .res ul.asks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.inst .res ul.asks li{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--bone);font-style:italic}
+.inst .res ol.order li{grid-template-columns:88px 1fr;align-items:baseline;font-size:15px;color:var(--bone)}
+.inst .res ol.order li .w{font-family:var(--m);font-size:12px;color:var(--signal);white-space:nowrap}
 .sendbar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px var(--g);background:rgba(10,12,16,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line-2);display:none;transition:transform .25s,opacity .25s}
 .sendbar button{width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-weight:500;font-size:15px;padding:13px 16px;background:var(--bone);color:var(--void);border:1px solid var(--bone)}
 .sendbar.off{transform:translateY(110%);opacity:0}
@@ -331,8 +338,9 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
 @media (max-width:1100px){ .idx{gap:16px} .brand .desc{display:none} .hero .copy{grid-column:1/7} .hero .tool{grid-column:7/13} }
 @media (max-width:900px){
   .hero{min-height:0;display:block;padding-top:60px}
-  .hero canvas{position:relative;inset:auto;z-index:0;width:calc(100% + 2*var(--g));height:260px;margin:0 calc(-1*var(--g)) 28px}
-  .hero .copy,.hero .tool{grid-column:1/13} .hero .tool{margin-top:32px}
+  .hero canvas{position:relative;inset:auto;z-index:0;width:calc(100% + 2*var(--g));height:300px;margin:0 calc(-1*var(--g)) 24px}
+  .hero .copy{grid-column:1/13;align-self:auto;padding-bottom:0}
+  .checks{grid-template-columns:1fr} .checks a.row{border-right:0;border-bottom:1px solid var(--line)} .checks a.row:last-child{border-bottom:0}
   .sh{grid-column:1/13;position:static;margin-bottom:12px} .sh p{max-width:none}
   .sb{grid-column:1/13}
   .svc .txt{position:static} .terms .term{grid-template-columns:1fr;row-gap:6px}
@@ -368,7 +376,7 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
   .inst .foot .nav{width:100%;justify-content:flex-end}
   .sendbar{display:block}
   .btn{white-space:normal}
-  .checks a.row{padding:16px 18px} .checks-h{flex-direction:column;gap:4px;padding:14px 18px}
+  .checks a.row{padding:16px 18px}
   .areas{grid-template-columns:1fr}
   .tab b{font-size:16px} .tab{padding:14px 16px 16px}
   .spec-r{grid-template-columns:1fr;gap:8px} .spec-s{justify-self:start}

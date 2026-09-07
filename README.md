@@ -10,7 +10,7 @@ Static site, no build step. Six HTML pages sharing one stylesheet and three smal
 - `ai-readiness.html`, `bank-onboarding.html`, `iso-27001.html` — the three checks, one page each (served at clean URLs without `.html`)
 - `privacy.html`, `terms.html` — legal pages
 - `404.html` — not-found page
-- `assets/site.css` — all styles; `assets/site.js` — header, contact form; `assets/tools.js` — the three checks; `assets/city.js` — the world renderer (hero story and stage scenes); `assets/stage.js` — the stage switch
+- `assets/site.css` — all styles; `assets/site.js` — header, contact form; `assets/tools.js` — the three diagnostics (branching questions, computed findings and timelines); `assets/city.js` — the axonometric district (hero story and stage scenes); `assets/stage.js` — the stage switch
 - `favicon.svg`, `robots.txt`, `sitemap.xml`, `og.png`
 - `functions/api/contact.js` — Pages Function behind the contact form; `functions/_middleware.js` — canonical-host redirect
 - `deploy.sh` — pushes the site to Cloudflare Pages
