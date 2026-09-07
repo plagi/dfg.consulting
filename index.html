@@ -30,6 +30,7 @@
   <div class="grid">
     <a class="brand" href="/" aria-label="DFG, home"><span class="wm">DFG</span><span class="desc">Digital Frontiers Group</span></a>
     <nav class="idx" id="idx" aria-label="Site">
+      <a href="#stage">Stage</a>
       <a href="#services">Services</a>
       <a href="#expertise">Expertise</a>
       <a href="#checks">Checks</a>
@@ -61,9 +62,50 @@
     </div>
   </div>
 
+  <section id="stage" class="page">
+    <div class="grid">
+      <div class="sh"><span class="no">01</span><h2>Stage</h2><p>Where the project is now. Pick the line that describes today.</p></div>
+      <div class="sb">
+        <div class="tabs" role="tablist" aria-label="Stage">
+          <button class="tab on" role="tab" type="button" aria-selected="true" id="tab-0" aria-controls="panel-0"><span class="fill"></span><b>0 &rarr; 1</b><span>Nothing running yet</span></button>
+          <button class="tab" role="tab" type="button" aria-selected="false" id="tab-1" aria-controls="panel-1"><span class="fill"></span><b>1 &rarr; 10</b><span>It works once. Now it has to repeat.</span></button>
+          <button class="tab" role="tab" type="button" aria-selected="false" id="tab-2" aria-controls="panel-2"><span class="fill"></span><b>10 &rarr; 100</b><span>It runs. Now it has to scale and pass.</span></button>
+          <button class="tab" role="tab" type="button" aria-selected="false" id="tab-3" aria-controls="panel-3"><span class="fill"></span><b>100 &rarr; &infin;</b><span>It's live. Now it has to hold.</span></button>
+        </div>
+        <div class="stage-p frame">
+          <div class="fig">
+            <canvas id="stageCanvas" aria-hidden="true"></canvas>
+            <div class="glyph" aria-hidden="true"><span class="g0">0</span><span class="ar">&rarr;</span><span class="g1">1</span></div>
+            <p class="cap" id="stageCap">From a mandate, a deck or a dataset to one thing running in production.</p>
+          </div>
+          <div class="rows" id="panel-0" role="tabpanel" aria-labelledby="tab-0">
+          <a class="srow" href="/expertise/ai-strategy"><span class="s">A board with an AI mandate and no plan</span><span class="w">Thirty use-cases become two, with owners and a budget line.</span><span class="l">AI strategy &rarr;</span></a>
+          <a class="srow" href="/expertise/fintech-product"><span class="s">A founder with a product and no model</span><span class="w">Segment, pricing, unit economics, the licensing landscape, the plan.</span><span class="l">Fintech product &rarr;</span></a>
+          <a class="srow" href="/expertise/data-and-it"><span class="s">A dataset nobody owns</span><span class="w">Inventory, named owners, and the cost to make it usable.</span><span class="l">Data and IT &rarr;</span></a>
+          </div>
+          <div class="rows" id="panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+          <a class="srow" href="/expertise/ai-strategy"><span class="s">A pilot that stopped</span><span class="w">One use-case to production, measured, before the next budget round.</span><span class="l">AI strategy &rarr;</span></a>
+          <a class="srow" href="/expertise/partnerships"><span class="s">Choosing a sponsor bank or a card programme</span><span class="w">Partnership design, and a provider shortlist with exit terms.</span><span class="l">Partnerships &rarr;</span></a>
+          <a class="srow" href="/expertise/security-posture"><span class="s">A first customer's security questionnaire</span><span class="w">Posture against ISO 27001, and the gap list in audit order.</span><span class="l">Security posture &rarr;</span></a>
+          </div>
+          <div class="rows" id="panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+          <a class="srow" href="/expertise/ai-strategy"><span class="s">Three use-cases at once, and vendors slipping</span><span class="w">Governance, vendor oversight, a delivery plan. Monthly, until it ships.</span><span class="l">AI strategy &rarr;</span></a>
+          <a class="srow" href="/expertise/partnerships"><span class="s">A sponsor bank's third-party review</span><span class="w">Thirteen documents in the bank's order, and us alongside the review.</span><span class="l">Partnerships &rarr;</span></a>
+          <a class="srow" href="/expertise/security-posture"><span class="s">The first certification audit</span><span class="w">Remediation vendor by vendor until it passes first time.</span><span class="l">Security posture &rarr;</span></a>
+          </div>
+          <div class="rows" id="panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+          <a class="srow" href="/expertise/incident-response"><span class="s">The day something goes wrong</span><span class="w">A plan people have rehearsed, and third parties on file.</span><span class="l">Incident response &rarr;</span></a>
+          <a class="srow" href="/expertise/partnerships"><span class="s">Replacing a KYC or payments provider</span><span class="w">A written comparison with exit terms. No referral fees.</span><span class="l">Partnerships &rarr;</span></a>
+          <a class="srow" href="/expertise/ai-strategy"><span class="s">An AI review path that takes quarters</span><span class="w">A review path that approves in weeks, with a record an auditor can read.</span><span class="l">AI strategy &rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="services" class="page">
     <div class="grid">
-      <div class="sh"><span class="no">01</span><h2>Services</h2><p>Three lines of work. Each starts with a Diagnosis and ends in production.</p></div>
+      <div class="sh"><span class="no">02</span><h2>Services</h2><p>Three lines of work. Each starts with a Diagnosis and ends in production.</p></div>
       <div class="sb">
         <p class="lead">For a board with an AI mandate and no plan, a fintech choosing its market, its model and its partners, or a CTO holding a customer's due-diligence questionnaire. Every engagement starts with a two-week written Diagnosis and ends with something running in production. Fixed scope, fixed price, in writing before day one.</p>
 
@@ -137,7 +179,7 @@
 
   <section id="expertise" class="page">
     <div class="grid">
-      <div class="sh"><span class="no">02</span><h2>Expertise</h2><p>Six areas within the three lines. Each has its own page.</p></div>
+      <div class="sh"><span class="no">03</span><h2>Expertise</h2><p>Six areas within the three lines. Each has its own page.</p></div>
       <div class="sb">
         <div class="areas">
         <a class="area frame" href="/expertise/ai-strategy">
@@ -189,7 +231,7 @@
 
   <section id="method" class="page">
     <div class="grid">
-      <div class="sh"><span class="no">03</span><h2>Method</h2><p>Three steps, with the durations written down.</p></div>
+      <div class="sh"><span class="no">04</span><h2>Method</h2><p>Three steps, with the durations written down.</p></div>
       <div class="sb">
         <p class="lead">Diagnose, plan, stay. The third step is where the plan meets the vendors, the budget and the calendar. It is the one we are hired for.</p>
         <div class="tl" aria-label="Engagement timeline">
@@ -206,7 +248,7 @@
 
   <section id="terms" class="page">
     <div class="grid">
-      <div class="sh"><span class="no">04</span><h2>Terms</h2><p>How we work, in writing, before the first call.</p></div>
+      <div class="sh"><span class="no">05</span><h2>Terms</h2><p>How we work, in writing, before the first call.</p></div>
       <div class="sb">
         <dl class="terms">
           <div class="term"><dt>Where</dt><dd>Wherever the client is. Remote by default, on site where a room is needed.</dd></div>
@@ -223,7 +265,7 @@
 
   <section id="contact" class="page">
     <div class="grid">
-      <div class="sh"><span class="no">05</span><h2>Start a conversation</h2><p>Two lines about the problem is enough.</p></div>
+      <div class="sh"><span class="no">06</span><h2>Start a conversation</h2><p>Two lines about the problem is enough.</p></div>
       <div class="sb">
         <p class="lead">No deck, no discovery workshop, and a straight answer if someone else is the better fit.</p>
         <ol class="next" aria-label="What happens after you write"><li><b>1</b>A reply within one working day.</li><li><b>2</b>A thirty-minute call.</li><li><b>3</b>A written scope and price within three working days.</li></ol>
@@ -252,5 +294,6 @@
 
 <script src="/assets/site.js" defer></script>
 <script src="/assets/scan.js" defer></script>
+<script src="/assets/stage.js" defer></script>
 </body>
 </html>
