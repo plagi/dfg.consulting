@@ -26,10 +26,6 @@
   /* Headline: one rise, word by word */
   (function(){var h=document.getElementById('h1'); if(!h||reduce)return; var words=h.textContent.trim().split(/\s+/); h.innerHTML=words.map(function(w,i){return '<span class="w" style="animation-delay:'+(0.15+i*0.09)+'s">'+w+'</span>';}).join(' ');})();
 
-  /* Timeline fills when seen */
-  (function(){var tl=document.querySelector('.tl'); if(!tl)return; if(!('IntersectionObserver' in window)||reduce){tl.classList.add('in');return;}
-    new IntersectionObserver(function(es,o){if(es[0].isIntersecting){tl.classList.add('in');o.disconnect();}},{threshold:.4}).observe(tl);})();
-
   /* Contact form: posts to /api/contact; falls back to composing an email if the endpoint is unavailable */
   var BOOKING_URL=''; // e.g. 'https://cal.com/dfg/30min'. Empty hides the button.
   var book=document.getElementById('book'); if(book&&BOOKING_URL){book.href=BOOKING_URL;book.target='_blank';book.rel='noopener';book.hidden=false;}

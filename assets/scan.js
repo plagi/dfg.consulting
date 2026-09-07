@@ -38,7 +38,7 @@
       out.x=W*0.5+f*vx/vz2; out.y=H*(W<700?0.42:0.56)-f*vy2/vz2; out.d=vz2; return true;
     }
     function draw(ts){
-      if(t0===null)t0=ts; var el=(ts-t0)%(sweepT+holdT); var s=Math.min(1,el/sweepT); // sweep position 0..1 across x
+      if(t0===null)t0=ts-sweepT*0.42; var el=(ts-t0)%(sweepT+holdT); var s=Math.min(1,el/sweepT); // sweep position 0..1 across x
       var e=s*s*(3-2*s); var sx=X0+(X1-X0)*e;
       if(!reduce) yaw=Math.sin(ts*0.00012)*0.035;
       ctx.fillStyle='#0A0C10'; ctx.fillRect(0,0,W,H);
@@ -46,7 +46,7 @@
       // known points
       for(var k=0;k<pts.length;k++){var p=pts[k]; if(p.x>sx)continue; resolved++; if(!project(p,o))continue;
         var depth=Math.max(0,Math.min(1,(o.d-0.6)/3.2)); var near=Math.max(0,1-(sx-p.x)/band);
-        var a=(0.22+ (1-depth)*0.5)*(1-near*0.4) + near*0.9; var r=(1-depth)*1.6+0.6;
+        var a=(0.28+ (1-depth)*0.55)*(1-near*0.4) + near*0.9; var r=(1-depth)*1.6+0.6;
         if(near>0){ctx.fillStyle='rgba(242,180,65,'+Math.min(1,a)+')';} else {ctx.fillStyle='rgba(233,235,239,'+Math.min(1,a)+')';}
         ctx.fillRect(o.x-r*0.5,o.y-r*0.5,r,r);
       }

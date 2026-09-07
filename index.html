@@ -51,7 +51,7 @@
         <a class="btn" href="#contact">Start a conversation <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
       </div>
       <div class="tool">
-        <nav class="checks" id="checks" aria-label="Three checks you can run now">
+        <nav class="checks frame" id="checks" aria-label="Three checks you can run now">
           <div class="checks-h"><h2>Three checks you can run now</h2><span>Free. Nothing is stored.</span></div>
           <a class="row" href="/ai-readiness"><span class="n">01</span><span><span class="t">AI readiness assessment</span><span class="s">Six questions, about three minutes. Where an AI programme stands and what to fix first.</span></span><span class="go"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
           <a class="row" href="/bank-onboarding"><span class="n">02</span><span><span class="t">Bank onboarding evidence</span><span class="s">Thirteen documents a sponsor bank asks for, in the order its review runs.</span></span><span class="go"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
@@ -63,7 +63,7 @@
 
   <section id="services" class="page">
     <div class="grid">
-      <div class="sh"><h2>Services</h2><p>Three lines. Each begins with a Diagnosis, and each has a check you can run before you write to us.</p></div>
+      <div class="sh"><span class="no">01</span><h2>Services</h2><p>Three lines. Each begins with a Diagnosis, and each has a check you can run before you write to us.</p></div>
       <div class="sb">
         <p class="lead">Every engagement starts with a two-week written Diagnosis and ends with something running in production. Not a slide deck, not a roadmap nobody owns.</p>
 
@@ -74,7 +74,7 @@
             <p class="for">For a board with a mandate for AI and no plan, or a programme that stalled at the pilot stage. The readiness assessment is the first ten minutes of that Diagnosis.</p>
             <a class="btn ghost" href="/ai-readiness">Run the readiness assessment <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
           </div>
-          <div class="toc" aria-label="What the Diagnosis contains">
+          <div class="toc frame" aria-label="What the Diagnosis contains">
             <div class="toc-h"><span>The Diagnosis</span><span>8 sections &middot; 20 to 40 pages</span></div>
             <ol>
               <li><b>01</b><span><em>What is there</em> Systems, data, contracts, people. Verified, not reported.</span></li>
@@ -96,11 +96,18 @@
             <p>Product and go-to-market strategy for fintechs, partnership design with banks and card networks, and the exact order in which a bank's onboarding team wants regulatory, security and operational questions answered. We have sat on the bank's side of that table; we know which answer ends the conversation. Advisory only. We don't carry out regulated activity.</p>
             <p class="for">For a fintech preparing for a sponsor bank, a new market, or an enterprise customer's due diligence.</p>
           </div>
-          <div class="card">
+          <div class="card frame">
             <span class="k">Check 02 &middot; About five minutes</span>
             <h4>The thirteen documents a sponsor bank's third-party review works from, in its order.</h4>
             <p>Mark each as in place, partly, or not yet. The result lists the gaps in the order the bank will raise them, and can be sent to us with your enquiry.</p>
-            <ul><li>Regulatory and licensing</li><li>Financial crime</li><li>Information security</li><li>Data and privacy</li><li>Operational resilience</li><li>Financial standing and technology</li></ul>
+            <div class="spec" aria-hidden="true">
+              <div class="spec-g">Regulatory and licensing</div>
+              <div class="spec-r"><span>Written confirmation of regulatory status in each market</span><span class="spec-s"><i class="on">In place</i><i>Partly</i><i>Not yet</i></span></div>
+              <div class="spec-r"><span>A register of regulatory obligations, with an owner and a change log</span><span class="spec-s"><i>In place</i><i class="p">Partly</i><i>Not yet</i></span></div>
+              <div class="spec-g">Financial crime</div>
+              <div class="spec-r"><span>AML and KYC programme documented, with a named MLRO</span><span class="spec-s"><i>In place</i><i>Partly</i><i class="n">Not yet</i></span></div>
+              <div class="spec-more">Ten more items in five groups: information security, data and privacy, operational resilience, financial standing, technology.</div>
+            </div>
             <a class="btn ghost" href="/bank-onboarding">Run the onboarding check <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
           </div>
         </div>
@@ -111,11 +118,18 @@
             <p>Posture assessment against ISO 27001 and the frameworks your customers ask about, architecture and vendor review, an incident-response plan people have rehearsed, and a gap list in the order an auditor works through it. Then we stay for the remediation, vendor by vendor, until the audit passes on the first attempt.</p>
             <p class="for">For a CTO whose largest customer has sent a due-diligence questionnaire, or a board that wants to know what would actually happen on the day something goes wrong.</p>
           </div>
-          <div class="card">
+          <div class="card frame">
             <span class="k">Check 03 &middot; About five minutes</span>
             <h4>Twelve Annex A controls from ISO 27001:2022, in the order an auditor samples them.</h4>
             <p>In place means written, operating, and evidenced. The result is a gap list in audit order, and can be sent to us with your enquiry.</p>
-            <ul><li>Organisational controls</li><li>People controls</li><li>Physical controls</li><li>Technological controls</li></ul>
+            <div class="spec" aria-hidden="true">
+              <div class="spec-g">Organisational controls</div>
+              <div class="spec-r"><span>Information security policy approved and reviewed within the year<span class="c">A.5.1</span></span><span class="spec-s"><i class="on">In place</i><i>Partly</i><i>Not yet</i></span></div>
+              <div class="spec-r"><span>Inventory of information assets, each with a named owner<span class="c">A.5.9</span></span><span class="spec-s"><i>In place</i><i class="p">Partly</i><i>Not yet</i></span></div>
+              <div class="spec-g">Technological controls</div>
+              <div class="spec-r"><span>Multi-factor authentication on email, cloud consoles and remote access<span class="c">A.8.5</span></span><span class="spec-s"><i>In place</i><i>Partly</i><i class="n">Not yet</i></span></div>
+              <div class="spec-more">Nine more controls across people, physical and technological groups.</div>
+            </div>
             <a class="btn ghost" href="/iso-27001">Run the control check <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
           </div>
         </div>
@@ -125,12 +139,11 @@
 
   <section id="method" class="page">
     <div class="grid">
-      <div class="sh"><h2>Method</h2><p>Three steps, the same on every engagement, with the durations written down.</p></div>
+      <div class="sh"><span class="no">02</span><h2>Method</h2><p>Three steps, the same on every engagement, with the durations written down.</p></div>
       <div class="sb">
         <p class="lead">Diagnose, plan, stay. The third step is where the plan meets the vendors, the budget and the calendar. It is the one we are hired for.</p>
         <div class="tl" aria-label="Engagement timeline">
-          <div class="bar" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="lab" aria-hidden="true"><span>Weeks 1-2</span><span>Weeks 3-4</span><span>Until it ships</span></div>
+          <div class="bar" aria-hidden="true"><span><b>Weeks 1-2</b>Diagnose</span><span><b>Weeks 3-4</b>Plan</span><span><b>Until it ships</b>Stay</span></div>
           <div class="steps">
             <div><h3>Diagnose</h3><p>Two weeks. Interviews, systems, data, contracts. A written Diagnosis of what is actually there, what it costs and what is at risk. If the honest answer is that you don't need us, it is on page one.</p></div>
             <div><h3>Plan</h3><p>Two weeks. Owners, sequence, budget bands and the vendors worth talking to. Written for the people who approve it and the people who build it, in the same document.</p></div>
@@ -143,7 +156,7 @@
 
   <section id="terms" class="page">
     <div class="grid">
-      <div class="sh"><h2>Terms</h2><p>How we work, in writing, before the first call.</p></div>
+      <div class="sh"><span class="no">03</span><h2>Terms</h2><p>How we work, in writing, before the first call.</p></div>
       <div class="sb">
         <dl class="terms">
           <div class="term"><dt>Where</dt><dd>Wherever the client is. Remote by default, on site where a room is needed.</dd></div>
@@ -160,9 +173,10 @@
 
   <section id="contact" class="page">
     <div class="grid">
-      <div class="sh"><h2>Start a conversation</h2><p>Two lines about the problem is enough.</p></div>
+      <div class="sh"><span class="no">04</span><h2>Start a conversation</h2><p>Two lines about the problem is enough.</p></div>
       <div class="sb">
-        <p class="lead">What happens after you write: a reply within one working day, a thirty-minute call, and a written scope and price within three working days. No deck, no discovery workshop, and a straight answer if someone else is the better fit.</p>
+        <p class="lead">No deck, no discovery workshop, and a straight answer if someone else is the better fit.</p>
+        <ol class="next" aria-label="What happens after you write"><li><b>1</b>A reply within one working day.</li><li><b>2</b>A thirty-minute call.</li><li><b>3</b>A written scope and price within three working days.</li></ol>
         <form class="form" id="contactForm" novalidate>
           <label>Name<input type="text" name="name" autocomplete="name" required></label>
           <label>Company<input type="text" name="company" autocomplete="organization" required></label>
