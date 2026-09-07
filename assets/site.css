@@ -93,7 +93,8 @@ section{padding:clamp(56px,7vw,96px) 0 clamp(48px,6vw,80px);border-top:1px solid
 .svc .idx{font-family:var(--m);font-size:12.5px;letter-spacing:.08em;color:var(--signal)}
 .svc .txt{display:flex;flex-direction:column;gap:14px;padding-top:6px;align-items:flex-start;position:sticky;top:88px}
 .svc .txt p,.svc .txt h3{width:100%}
-.svc h3{font-family:var(--d);font-weight:500;font-size:clamp(20px,1.8vw,25px);letter-spacing:-.01em;line-height:1.15}
+.svc .k{font-family:var(--m);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal)}
+.svc h3{font-family:var(--d);font-weight:500;font-size:clamp(20px,1.8vw,25px);letter-spacing:-.01em;line-height:1.15;text-wrap:balance}
 .svc .txt p{color:var(--bone-70);font-size:15.5px;text-wrap:pretty;max-width:46ch}
 .svc .txt .for{font-size:14.5px;color:var(--bone-70);border-top:1px solid var(--line);padding-top:12px;max-width:46ch}
 .toc{border:1px solid var(--line-2);background:var(--panel);font-size:14.5px}
@@ -132,13 +133,9 @@ section{padding:clamp(56px,7vw,96px) 0 clamp(48px,6vw,80px);border-top:1px solid
 .tab.on .fill{animation:tabfill var(--cycle,0s) linear forwards}
 @keyframes tabfill{from{width:0}to{width:100%}}
 .stage-p{margin-top:6px;border:1px solid var(--line-2);background:var(--panel);display:grid;grid-template-columns:5fr 7fr}
-.fig{position:relative;min-height:400px;border-right:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:26px 28px}
+.fig{position:relative;min-height:420px;border-right:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:26px 28px}
 .fig canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.fig .glyph{position:relative;font-family:var(--d);font-weight:500;font-size:clamp(48px,5.2vw,84px);line-height:1;letter-spacing:-.03em;display:flex;align-items:baseline;gap:.14em;color:var(--bone)}
-.fig .glyph .ar{color:var(--bone-45);font-size:.5em;position:relative;top:-.08em} .fig .glyph .g1{color:var(--signal)}
-.fig .glyph.swap .g0,.fig .glyph.swap .g1{animation:glyphin .5s cubic-bezier(.2,.8,.2,1) both} .fig .glyph.swap .g1{animation-delay:.12s}
-@keyframes glyphin{from{opacity:0;transform:translateY(.25em)}to{opacity:1;transform:none}}
-.fig .cap{position:relative;margin-top:18px;font-size:14.5px;color:var(--bone-70);max-width:30ch;text-wrap:pretty}
+.fig .cap{position:relative;font-size:14.5px;color:var(--bone-70);max-width:34ch;text-wrap:pretty;padding-top:60px;background:linear-gradient(to bottom,rgba(17,20,26,0),rgba(17,20,26,.92) 45%)}
 .rows{display:flex;flex-direction:column}
 .srow{display:grid;grid-template-columns:5fr 6fr auto;gap:20px;padding:17px 24px;border-bottom:1px solid var(--line);align-items:baseline;transition:background .12s}
 .srow:last-child{border-bottom:0} .srow:hover{background:var(--panel-2)}
@@ -265,6 +262,22 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
 .inst .nav button.pri[disabled]:hover{background:var(--bone);color:var(--void);border-color:var(--bone)}
 .inst .step-in{animation:stepin .25s ease} @keyframes stepin{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
 
+/* Intake and insight */
+.inst .ql{font-size:14.5px;color:var(--bone-70);margin:6px 0 -8px}
+.inst .chips{display:flex;flex-wrap:wrap;gap:8px}
+.inst .chip{font-size:14px;font-weight:500;padding:9px 14px;border:1px solid var(--line-2);background:var(--panel-2);color:var(--bone-70);transition:border-color .12s,color .12s,background .12s}
+.inst .chip:hover{border-color:var(--bone-70);color:var(--bone)} .inst .chip.on{border-color:var(--signal);background:var(--signal-tint);color:var(--bone)}
+.inst .ins{font-size:14.5px;line-height:1.45;color:var(--bone-70);padding:12px 14px;border:1px solid var(--line-2);border-left:2px solid var(--signal);background:var(--panel-2);text-wrap:pretty;animation:stepin .25s ease}
+.inst .ins .k{display:block;font-family:var(--m);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);margin-bottom:5px}
+.inst .rowins{margin:-4px 0 10px}
+.inst .foryou{padding:16px 18px;border:1px solid var(--signal-dim);background:var(--signal-tint);display:flex;flex-direction:column;gap:8px}
+.inst .foryou .k{font-family:var(--m);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal)}
+.inst .foryou p{color:var(--bone);font-size:15px;max-width:66ch} .inst .foryou .need{color:var(--bone-70);border-top:1px solid var(--signal-dim);padding-top:8px;margin-top:2px}
+.inst .res ol li .ask{display:block;font-size:13px;color:var(--bone-45);margin-top:3px;text-wrap:pretty}
+.sendbar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px var(--g);background:rgba(10,12,16,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line-2);display:none;transition:transform .25s,opacity .25s}
+.sendbar button{width:100%;justify-content:center;display:inline-flex;align-items:center;gap:10px;font-weight:500;font-size:15px;padding:13px 16px;background:var(--bone);color:var(--void);border:1px solid var(--bone)}
+.sendbar.off{transform:translateY(110%);opacity:0}
+
 /* Checklist rows */
 .inst .list{display:flex;flex-direction:column}
 .inst .grp{font-family:var(--m);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-70);padding:20px 0 8px;border-bottom:1px solid var(--line)}
@@ -353,6 +366,7 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
   .inst .prof .prow{grid-template-columns:1fr 72px 44px}
   .inst .body{padding:20px 16px 18px} .inst .foot{padding:12px 16px;flex-wrap:wrap} .inst .bar{padding:12px 16px}
   .inst .foot .nav{width:100%;justify-content:flex-end}
+  .sendbar{display:block}
   .btn{white-space:normal}
   .checks a.row{padding:16px 18px} .checks-h{flex-direction:column;gap:4px;padding:14px 18px}
   .areas{grid-template-columns:1fr}
