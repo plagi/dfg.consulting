@@ -7,7 +7,8 @@ DIST="$(mktemp -d)"
 trap 'rm -rf "$DIST"' EXIT
 rsync -a --exclude .git --exclude .claude --exclude README.md --exclude .gitignore --exclude deploy.sh ./ "$DIST"/
 # Cache-busting: stamp every /assets/*.css|js reference with a version so the CDN never serves a stale file.
-VER="$(git rev-parse --short HEAD 2>/dev/null || date +%s)$( [ -n "$(git status --porcelain 2>/dev/null)" ] && echo "-$(date +%s)" )"
+VER="$(git rev-parse --short HEAD 2>/dev/null || date +%s)"
+if [ -n "$(git status --porcelain 2>/dev/null)" ]; then VER="${VER}-$(date +%s)"; fi
 find "$DIST" -name '*.html' -print0 | while IFS= read -r -d '' f; do
   sed -E -i '' "s#(/assets/[a-z0-9_-]+\.(css|js))(\?v=[^\"']*)?#\1?v=${VER}#g" "$f"
 done
