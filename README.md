@@ -9,12 +9,27 @@ Static site, no build step. `index.html` is the whole homepage (styles and scrip
 - `index.html` — homepage
 - `404.html` — not-found page
 - `favicon.svg`, `robots.txt`, `sitemap.xml`
+- `deploy.sh` — pushes the site to Cloudflare Pages
 
 ## Hosting
 
-Not yet decided. Any static host works: point it at the repo root, no build step.
+Cloudflare Pages, project `dfg-consulting` (account: vorobiev.alexey@gmail.com).
+Preview URL: https://dfg-consulting.pages.dev. Custom domains: dfg.consulting and www.dfg.consulting.
 
-DNS lives at GoDaddy.
+Deploy with:
+
+```bash
+./deploy.sh
+```
+
+Wrangler must be logged in once (`npx wrangler login`). There is no git integration; deploys are manual.
+
+DNS is on Cloudflare (nameservers boyd.ns.cloudflare.com and heather.ns.cloudflare.com); the registrar is GoDaddy.
+
+| Type  | Name | Value                      | Proxy |
+|-------|------|----------------------------|-------|
+| CNAME | @    | dfg-consulting.pages.dev   | on    |
+| CNAME | www  | dfg.consulting             | on    |
 
 ## Local preview
 
