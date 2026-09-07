@@ -2,15 +2,17 @@
 
 Public website for DFG. Digital Frontiers Group.
 
-Static site, no build step. `index.html` is the whole homepage (styles and scripts inline); the only external dependency is Google Fonts.
+Static site, no build step. Six HTML pages sharing one stylesheet and three small scripts; the only external dependency is Google Fonts.
 
 ## Files
 
 - `index.html` — homepage
+- `ai-readiness.html`, `bank-onboarding.html`, `iso-27001.html` — the three checks, one page each (served at clean URLs without `.html`)
+- `privacy.html`, `terms.html` — legal pages
 - `404.html` — not-found page
-- `favicon.svg`, `robots.txt`, `sitemap.xml`
-- `og.png` — Open Graph / social preview image (1200x630)
-- `functions/api/contact.js` — Pages Function behind the contact form
+- `assets/site.css` — all styles; `assets/site.js` — header, contact form; `assets/tools.js` — the three checks; `assets/scan.js` — the homepage canvas
+- `favicon.svg`, `robots.txt`, `sitemap.xml`, `og.png`
+- `functions/api/contact.js` — Pages Function behind the contact form; `functions/_middleware.js` — canonical-host redirect
 - `deploy.sh` — pushes the site to Cloudflare Pages
 
 ## Hosting

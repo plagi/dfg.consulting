@@ -20,240 +20,18 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dfg.consulting/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-<style>
-  :root{
-    --void:#0A0C10; --panel:#11141A; --panel-2:#171B22; --line:#242932; --line-2:#313743;
-    --bone:#E9EBEF; --bone-70:#AEB4BF; --bone-45:#737A86;
-    --signal:#F2B441; --signal-dim:#8C6A2A;
-    --d:'Unbounded','Helvetica Neue',Arial,sans-serif;
-    --t:'Geist','Helvetica Neue',Arial,sans-serif;
-    --m:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-    --g:clamp(20px,4vw,56px);
-  }
-  *{box-sizing:border-box;margin:0}
-  [hidden]{display:none!important}
-  html{scroll-behavior:smooth;color-scheme:dark}
-  body{background:var(--void);color:var(--bone);font-family:var(--t);font-size:clamp(16px,1.05vw,17px);line-height:1.5;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible{outline:1px solid var(--signal);outline-offset:3px}
-  ::selection{background:var(--signal);color:var(--void)}
-  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-  .d{font-family:var(--d);font-weight:500;letter-spacing:-.02em;line-height:1.02;text-wrap:balance}
-  .m{font-family:var(--m);font-size:12px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
-  .page{padding-left:var(--g);padding-right:var(--g)}
-  .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
-
-  /* Header */
-  .top{position:fixed;top:0;left:0;right:0;z-index:20;color:var(--bone);border-bottom:1px solid var(--line);background:rgba(10,12,16,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-  .top .prog{position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--signal);transition:width .1s linear}
-  .top .grid{align-items:center;height:64px}
-  .brand{grid-column:1/5;display:flex;align-items:baseline;gap:12px}
-  .brand .wm{font-family:var(--d);font-weight:600;font-size:20px;letter-spacing:.04em;line-height:1}
-  .brand .desc{font-size:13px;color:var(--bone-45)}
-  .idx{grid-column:5/13;justify-self:end;display:flex;gap:26px;align-items:center}
-  .idx a{font-size:14.5px;color:var(--bone-70);padding:6px 0;border-bottom:1px solid transparent}
-  .idx a:hover,.idx a.on{color:var(--bone);border-bottom-color:var(--bone)}
-  .idx a.go{color:var(--bone);font-weight:500;border:1px solid var(--line-2);padding:8px 14px;margin-left:6px;transition:background .15s,color .15s,border-color .15s}
-  .idx a.go:hover{background:var(--bone);color:var(--void);border-color:var(--bone)}
-  .menu{display:none;font-family:var(--m);font-size:12px;border:1px solid var(--line-2);padding:8px 12px}
-
-  /* Hero: the scan */
-  .hero{position:relative;padding-top:clamp(120px,14vw,168px);padding-bottom:clamp(64px,8vw,104px);overflow:hidden;isolation:isolate;min-height:100svh;display:flex;align-items:center}
-  .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;display:block}
-  .hero .grid{align-items:start;position:relative;width:100%}
-  .hero .copy{grid-column:1/7;display:flex;flex-direction:column;gap:24px;align-items:flex-start;padding-top:8px}
-  .hero h1{font-size:clamp(34px,3.9vw,58px)}
-  .hero .sub{font-size:clamp(16px,1.25vw,19px);line-height:1.45;max-width:34ch;text-wrap:pretty;color:var(--bone-70)}
-  .hero .who{font-size:14px;color:var(--bone-45);max-width:36ch;line-height:1.5;border-top:1px solid var(--line);padding-top:14px}
-  .hero .tool{grid-column:8/13}
-  .hero .read{position:absolute;left:var(--g);bottom:20px;display:flex;gap:28px;font-family:var(--m);font-size:11.5px;color:var(--bone-45);letter-spacing:.02em}
-  .hero .read b{color:var(--bone);font-weight:500;font-variant-numeric:tabular-nums}
-  .hero .w{display:inline-block;opacity:0;transform:translateY(.4em);animation:wup .9s cubic-bezier(.2,.8,.2,1) forwards}
-  @keyframes wup{to{opacity:1;transform:none}}
-  .hero .sub,.hero .who,.hero .btn{opacity:0;animation:wup .9s cubic-bezier(.2,.8,.2,1) forwards}
-  .hero .sub{animation-delay:.7s} .hero .who{animation-delay:.85s} .hero .btn{animation-delay:1s}
-  .hero .tool{opacity:0;transform:translateY(16px);animation:wup 1.1s cubic-bezier(.2,.8,.2,1) .8s forwards}
-
-  .btn{display:inline-flex;align-items:center;gap:12px;font-weight:500;font-size:15px;padding:13px 20px;background:var(--bone);color:var(--void);border:1px solid var(--bone);white-space:nowrap;transition:background .15s,color .15s,border-color .15s,transform .1s}
-  .btn:hover{background:var(--signal);border-color:var(--signal);color:var(--void)}
-  .btn:active{transform:translateY(1px)}
-  .btn.ghost{background:transparent;color:var(--bone);border-color:var(--line-2)} .btn.ghost:hover{background:var(--bone);color:var(--void);border-color:var(--bone)}
-  .btn svg{transition:transform .2s} .btn:hover svg{transform:translateX(3px)}
-
-  /* Instrument: a dark panel with a signal progress */
-  .inst{border:1px solid var(--line-2);background:rgba(17,20,26,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--bone);display:flex;flex-direction:column;min-height:440px;position:relative}
-  .inst::before,.inst::after{content:"";position:absolute;width:10px;height:10px;border-color:var(--bone-45);border-style:solid;pointer-events:none}
-  .inst::before{left:-1px;top:-1px;border-width:1px 0 0 1px} .inst::after{right:-1px;bottom:-1px;border-width:0 1px 1px 0}
-  .inst .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 18px;border-bottom:1px solid var(--line)}
-  .inst .bar .name{font-family:var(--m);font-size:12px;color:var(--bone-70);letter-spacing:.04em;text-transform:uppercase}
-  .inst .bar .prog{display:flex;gap:4px}
-  .inst .bar .prog i{display:block;width:18px;height:4px;background:var(--line-2);transition:background .2s}
-  .inst .bar .prog i.done{background:var(--bone)} .inst .bar .prog i.cur{background:var(--signal)}
-  .inst .body{padding:24px 20px 20px;flex-grow:1;display:flex;flex-direction:column;gap:16px}
-  .inst .q{font-family:var(--d);font-weight:500;font-size:clamp(18px,1.5vw,22px);letter-spacing:-.01em;line-height:1.2;text-wrap:balance}
-  .inst .hint{font-size:14px;color:var(--bone-45);margin-top:-6px}
-  .inst .opts{display:grid;gap:6px}
-  .inst .opt{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;text-align:left;padding:12px 14px;border:1px solid var(--line);background:var(--panel-2);font-size:15px;line-height:1.35;transition:border-color .12s,background .12s,color .12s;width:100%}
-  .inst .opt:hover{border-color:var(--bone-70)}
-  .inst .opt .k{font-family:var(--m);font-size:11.5px;color:var(--bone-45);padding-top:3px}
-  .inst .opt.sel{border-color:var(--signal);background:var(--signal);color:var(--void)} .inst .opt.sel .k{color:var(--void)}
-  .inst .chk{display:grid;grid-template-columns:1fr;gap:6px}
-  .inst .chk label{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;padding:11px 14px;border:1px solid var(--line);background:var(--panel-2);font-size:14.5px;line-height:1.35;cursor:pointer}
-  .inst .chk label:hover{border-color:var(--bone-70)}
-  .inst .chk input{width:16px;height:16px;margin:3px 0 0;accent-color:var(--signal)}
-  .inst .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-top:1px solid var(--line)}
-  .inst .foot .m{color:var(--bone-45)}
-  .inst .nav{display:flex;gap:8px}
-  .inst .nav button{font-weight:500;font-size:14px;padding:10px 14px;border:1px solid var(--line-2);color:var(--bone);transition:background .12s,color .12s,border-color .12s}
-  .inst .nav button.pri{background:var(--bone);color:var(--void);border-color:var(--bone)}
-  .inst .nav button:hover{background:var(--signal);color:var(--void);border-color:var(--signal)}
-  .inst .nav button[disabled]{opacity:.35;cursor:default} .inst .nav button[disabled]:hover{background:none;color:var(--bone);border-color:var(--line-2)}
-  .inst .res{display:flex;flex-direction:column;gap:16px}
-  .inst .res .score{display:flex;align-items:baseline;gap:12px}
-  .inst .res .score b{font-family:var(--d);font-size:52px;font-weight:500;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;color:var(--signal)}
-  .inst .res .score span{font-family:var(--m);font-size:12px;color:var(--bone-45)}
-  .inst .res .seg{display:flex;gap:3px;height:5px} .inst .res .seg i{flex:1;background:var(--line-2)} .inst .res .seg i.on{background:var(--signal)}
-  .inst .res h4{font-family:var(--d);font-weight:500;font-size:21px;letter-spacing:-.01em;line-height:1.2}
-  .inst .res p{font-size:15px;color:var(--bone-70);text-wrap:pretty;max-width:56ch}
-  .inst .res ol{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--line)}
-  .inst .res ol li{display:grid;grid-template-columns:28px 1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;align-items:baseline}
-  .inst .res ol li .n,.inst .res ol li .c{font-family:var(--m);font-size:11.5px;color:var(--bone-45);white-space:nowrap}
-  .inst .res .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-  .inst .res .acts button{font-weight:500;font-size:14px;padding:10px 14px;border:1px solid var(--line-2)}
-  .inst .res .acts button.pri{background:var(--bone);color:var(--void);border-color:var(--bone)} .inst .res .acts button:hover{background:var(--signal);color:var(--void);border-color:var(--signal)}
-  .inst .dim{font-family:var(--m);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);display:flex;gap:12px} .inst .dim span{color:var(--bone-45)}
-  .inst .prof{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-  .inst .prof .row{display:grid;grid-template-columns:1fr 96px 40px;gap:14px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--bone-70)}
-  .inst .prof .row.low .l{color:var(--bone)} .inst .prof .row.low .v{color:var(--signal)}
-  .inst .prof .b{display:flex;gap:3px;height:5px} .inst .prof .b i{flex:1;background:var(--line-2)} .inst .prof .b i.on{background:var(--bone)} .inst .prof .row.low .b i.on{background:var(--signal)}
-  .inst .prof .v{font-family:var(--m);font-size:11.5px;color:var(--bone-45);text-align:right;white-space:nowrap}
-  .inst .first{font-size:14.5px;color:var(--bone-70);line-height:1.45;padding:12px 14px;border:1px solid var(--line-2);border-left:2px solid var(--signal);background:var(--panel-2);text-wrap:pretty}
-  .inst .first .k{display:block;font-family:var(--m);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);margin-bottom:6px}
-  .inst .tri-list{display:flex;flex-direction:column}
-  .inst .grp{font-family:var(--m);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-45);padding:14px 0 6px;border-bottom:1px solid var(--line)}
-  .inst .grp:first-child{padding-top:0}
-  .inst .tri-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.35;color:var(--bone-70)}
-  .inst .tri-row .c{font-family:var(--m);font-size:11px;color:var(--bone-45);white-space:nowrap;margin-left:6px}
-  .inst .tri{display:flex;border:1px solid var(--line-2)}
-  .inst .tri button{font-family:var(--m);font-size:11px;letter-spacing:.02em;padding:6px 9px;color:var(--bone-45);border-left:1px solid var(--line-2);transition:background .12s,color .12s;white-space:nowrap}
-  .inst .tri button:first-child{border-left:0}
-  .inst .tri button:hover{color:var(--bone)}
-  .inst .tri button.on{background:var(--line-2);color:var(--bone)} .inst .tri button.s0.on{background:var(--signal);color:var(--void)} .inst .tri button.s1.on{background:var(--signal-dim);color:var(--void)}
-  .inst .res .seg i.half{background:var(--signal-dim)}
-  .inst .res ol li.g{display:block;font-family:var(--m);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-45);padding:12px 0 4px}
-  .inst .res ol li .st{font-family:var(--m);font-size:11px;color:var(--bone-45);white-space:nowrap} .inst .res ol li .st.p{color:var(--signal-dim)}
-  .inst .step{animation:stepin .28s ease} @keyframes stepin{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
-
-  section{padding:clamp(56px,7vw,96px) 0 clamp(48px,6vw,80px);border-top:1px solid var(--line)}
-  .sh{grid-column:1/4;align-self:start;position:sticky;top:88px}
-  .sh h2{font-family:var(--d);font-weight:500;font-size:clamp(20px,1.9vw,26px);letter-spacing:-.01em;line-height:1.1}
-  .sh p{font-size:14px;color:var(--bone-45);margin-top:10px;max-width:24ch;text-wrap:pretty}
-  .sb{grid-column:4/13}
-  .lead{font-family:var(--d);font-weight:400;font-size:clamp(18px,1.8vw,26px);line-height:1.3;letter-spacing:-.01em;max-width:30ch;text-wrap:pretty}
-
-
-  .toc{border:1px solid var(--line-2);background:var(--panel);position:relative;font-size:14px}
-  .toc:before,.toc:after{content:"";position:absolute;width:10px;height:10px;border:1px solid var(--signal);pointer-events:none}
-  .toc:before{top:-1px;left:-1px;border-right:0;border-bottom:0} .toc:after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-  .toc-h,.toc-f{display:flex;justify-content:space-between;gap:12px;padding:12px 18px;font-family:var(--m);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-45)}
-  .toc-h{border-bottom:1px solid var(--line)} .toc-f{border-top:1px solid var(--line);text-transform:none;letter-spacing:0;font-family:var(--t);font-size:13px;color:var(--bone-45)}
-  .toc ol{list-style:none;margin:0;padding:6px 0}
-  .toc li{text-wrap:pretty;display:grid;grid-template-columns:32px 1fr;gap:10px;padding:9px 18px;color:var(--bone-70);line-height:1.45;border-top:1px solid var(--line)}
-  .toc li:first-child{border-top:0}
-  .toc li b{font-family:var(--m);font-weight:400;font-size:11px;color:var(--signal);padding-top:3px}
-  .toc li em{font-style:normal;color:var(--bone)}
-  .svc{display:grid;grid-template-columns:5fr 7fr;column-gap:24px;row-gap:24px;margin-top:clamp(28px,3.5vw,44px);align-items:start}
-  .svc.flip{grid-template-columns:7fr 5fr} .svc.flip .txt{order:2} .svc.flip .inst{order:1}
-  .svc .txt{display:flex;flex-direction:column;gap:14px;padding-top:6px;align-items:flex-start;position:sticky;top:88px}
-  .svc .txt p,.svc .txt h3{width:100%}
-  .svc h3{font-family:var(--d);font-weight:500;font-size:clamp(20px,1.8vw,26px);letter-spacing:-.01em;line-height:1.15}
-  .svc .txt p{color:var(--bone-70);font-size:15.5px;text-wrap:pretty;max-width:44ch}
-  .svc .txt .for{font-size:14px;color:var(--bone-45);border-top:1px solid var(--line);padding-top:12px;max-width:44ch}
-
-  .tl{margin-top:clamp(28px,3.5vw,44px)}
-  .tl .bar{display:grid;grid-template-columns:2fr 2fr 5fr;gap:6px;height:6px}
-  .tl .bar span{background:var(--bone);transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-  .tl .bar span:nth-child(2){transition-delay:.25s}
-  .tl .bar span:last-child{background:repeating-linear-gradient(90deg,var(--signal) 0 10px,transparent 10px 16px);transition-delay:.5s}
-  .tl.in .bar span{transform:none}
-  .tl .lab{display:grid;grid-template-columns:2fr 2fr 5fr;gap:6px;margin-top:10px}
-  .tl .lab span{font-family:var(--m);font-size:12px;color:var(--bone-45)}
-  .tl .steps{display:grid;grid-template-columns:2fr 2fr 5fr;column-gap:24px;margin-top:26px}
-  .tl h3{font-family:var(--d);font-weight:500;font-size:clamp(19px,1.7vw,24px);letter-spacing:-.01em;line-height:1.15;margin-bottom:8px}
-  .tl p{color:var(--bone-70);font-size:15px;text-wrap:pretty;max-width:40ch}
-
-  .terms{margin-top:clamp(28px,3.5vw,44px)}
-  .terms{margin:0;border-top:1px solid var(--line-2)}
-  .terms .term{display:grid;grid-template-columns:160px 1fr;column-gap:24px;padding:16px 0;border-bottom:1px solid var(--line)}
-  .terms dt{font-family:var(--m);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-45);padding-top:4px}
-  .terms dd{margin:0;color:var(--bone-70);font-size:15.5px;max-width:62ch;text-wrap:pretty}
-  .terms dd b{color:var(--bone);font-weight:500}
-
-  .form{margin-top:clamp(28px,3.5vw,44px);display:grid;grid-template-columns:1fr 1fr;column-gap:24px;row-gap:18px;max-width:760px}
-  .form .full{grid-column:1/3}
-  .form label{display:flex;flex-direction:column;gap:6px;font-size:13.5px;color:var(--bone-70)}
-  .form input,.form textarea{font:inherit;font-size:16px;color:var(--bone);background:var(--panel);border:1px solid var(--line-2);padding:12px 14px;border-radius:0;width:100%}
-  .form input:focus,.form textarea:focus{border-color:var(--signal);outline:none}
-  .form textarea{min-height:120px;resize:vertical}
-  .form .attach{grid-column:1/3;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:14px;color:var(--bone-45);min-height:20px}
-  .form .attach b{font-weight:500;color:var(--bone);font-family:var(--m);font-size:12px;border:1px solid var(--line-2);padding:4px 8px;background:var(--panel)}
-  .form .send{grid-column:1/3;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-  .form .send small{font-size:13px;color:var(--bone-45)} .form .send small a{color:var(--bone)}
-  .form .ok{grid-column:1/3;font-size:15px;color:var(--signal);border:1px solid var(--signal-dim);padding:12px 14px}
-  .form .ok.soft{color:var(--bone-70);border-color:var(--line-2)}
-  .form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0}
-  .form .send .btn[disabled]{opacity:.6;cursor:progress}
-
-  footer{border-top:1px solid var(--line);padding:28px 0 36px;font-size:13.5px;color:var(--bone-45)}
-  footer .grid>div{display:flex;flex-direction:column;gap:6px}
-  footer .c1{grid-column:1/8} footer .c3{grid-column:9/13}
-  footer b{color:var(--bone);font-weight:500} footer a:hover{color:var(--bone)}
-  footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px solid var(--line);line-height:1.55;max-width:96ch}
-
-  .js .rv{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
-  .js .rv.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){ .js .rv{opacity:1;transform:none;transition:none} .inst .step{animation:none} html{scroll-behavior:auto} .hero .w,.hero .sub,.hero .who,.hero .btn,.hero .tool{animation:none;opacity:1;transform:none} .tl .bar span{transform:none;transition:none} }
-
-  @media (max-width:1100px){ .idx{gap:16px} .brand .desc{display:none} .hero .copy{grid-column:1/7} .hero .tool{grid-column:7/13} }
-  @media (max-width:900px){
-    .hero{min-height:0;display:block;padding-top:60px}
-    .hero canvas{position:relative;inset:auto;z-index:0;width:calc(100% + 2*var(--g));height:280px;margin:0 calc(-1*var(--g)) 28px}
-    .hero .copy,.hero .tool{grid-column:1/13} .hero .tool{margin-top:28px}
-    .hero .read{position:static;margin-top:20px;flex-wrap:wrap;gap:16px}
-    .sh{grid-column:1/13;position:static;margin-bottom:12px} .sh p{max-width:none}
-    .sb{grid-column:1/13}
-    .svc .txt{position:static} .terms .term{grid-template-columns:1fr;row-gap:6px}
-    .svc,.svc.flip{grid-template-columns:1fr} .svc.flip .txt{order:1} .svc.flip .inst{order:2}
-    .tl .steps{grid-template-columns:1fr;row-gap:22px}
-    .form{grid-template-columns:1fr} .form .full,.form .attach,.form .send,.form .ok{grid-column:1}
-    footer .c1,footer .c3,footer .reg{grid-column:1/13}
-  }
-  @media (max-width:720px){
-    .top .grid{height:60px}
-    .idx{display:none}
-    .idx.open{display:flex;position:absolute;left:0;right:0;width:100%;justify-self:stretch;top:60px;flex-direction:column;align-items:stretch;gap:0;background:var(--void);border-bottom:1px solid var(--line);padding:0 var(--g) 8px}
-    .idx.open a{padding:16px 0;border-top:1px solid var(--line);border-bottom:0;font-size:18px}
-    .idx.open a.go{margin:12px 0 0;padding:14px;text-align:center}
-    .menu{display:inline-flex;grid-column:9/13;justify-self:end}
-    .brand{grid-column:1/9}
-    .hero h1{font-size:clamp(28px,8vw,40px)}
-    .inst .tri-row{grid-template-columns:1fr} .inst .tri{justify-self:start} .inst .prof .row{grid-template-columns:1fr 72px 40px}
-    .inst .body{padding:20px 16px 16px} .inst .foot{padding:12px 16px} .inst .bar .prog i{width:12px} .inst .bar .prog.many{display:none}
-    .tl .lab span{font-size:11px} .tl .lab span:nth-child(2){text-align:center} .tl .lab span:last-child{text-align:right}
-    .btn{white-space:normal}
-  }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-
-
 <header class="top page" id="top-bar">
   <span class="prog" id="prog" aria-hidden="true"></span>
   <div class="grid">
-    <a class="brand" href="#top" aria-label="DFG, home"><span class="wm">DFG</span><span class="desc">Digital Frontiers Group</span></a>
-    <nav class="idx" id="idx" aria-label="Sections">
+    <a class="brand" href="/" aria-label="DFG, home"><span class="wm">DFG</span><span class="desc">Digital Frontiers Group</span></a>
+    <nav class="idx" id="idx" aria-label="Site">
       <a href="#services">Services</a>
+      <a href="#checks">Checks</a>
       <a href="#method">Method</a>
       <a href="#terms">Terms</a>
       <a class="go" href="#contact">Start a conversation</a>
@@ -273,24 +51,28 @@
         <a class="btn" href="#contact">Start a conversation <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
       </div>
       <div class="tool">
-        <div class="inst" id="inst-ai" data-inst="ai" aria-label="AI readiness assessment"></div>
+        <nav class="checks" id="checks" aria-label="Three checks you can run now">
+          <div class="checks-h"><h2>Three checks you can run now</h2><span>Free. Nothing is stored.</span></div>
+          <a class="row" href="/ai-readiness"><span class="n">01</span><span><span class="t">AI readiness assessment</span><span class="s">Six questions, about three minutes. Where an AI programme stands and what to fix first.</span></span><span class="go"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+          <a class="row" href="/bank-onboarding"><span class="n">02</span><span><span class="t">Bank onboarding evidence</span><span class="s">Thirteen documents a sponsor bank asks for, in the order its review runs.</span></span><span class="go"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+          <a class="row" href="/iso-27001"><span class="n">03</span><span><span class="t">ISO 27001 control check</span><span class="s">Twelve Annex A controls, in the order an auditor samples them.</span></span><span class="go"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+        </nav>
       </div>
     </div>
-    <div class="read" aria-hidden="true"><span>Surface resolved <b id="rP">0%</b></span><span>Points <b id="rN">0</b></span><span>Plan <b id="rM">0 of 6</b></span></div>
   </div>
 
   <section id="services" class="page">
     <div class="grid">
       <div class="sh"><h2>Services</h2><p>Three lines. Each begins with a Diagnosis, and each has a check you can run before you write to us.</p></div>
       <div class="sb">
-        <p class="lead rv">Every engagement starts with a two-week written Diagnosis and ends with something running in production. Not a slide deck, not a roadmap nobody owns.</p>
+        <p class="lead">Every engagement starts with a two-week written Diagnosis and ends with something running in production. Not a slide deck, not a roadmap nobody owns.</p>
 
-        <div class="svc rv" id="svc-ai">
+        <div class="svc" id="svc-ai">
           <div class="txt">
             <h3>AI and IT consulting</h3>
             <p>The Diagnosis ranks your use-cases by value and feasibility, reviews the data and the vendors, and says which two are worth taking to production first. Then a plan with owners, sequence and budget bands, and oversight of the build until the first use-case is live and measured.</p>
-            <p class="for">For a board with a mandate for AI and no plan, or a programme that stalled at the pilot stage. The readiness assessment at the top of this page is the first ten minutes of that Diagnosis.</p>
-            <a class="btn ghost" href="#top">Run the readiness assessment</a>
+            <p class="for">For a board with a mandate for AI and no plan, or a programme that stalled at the pilot stage. The readiness assessment is the first ten minutes of that Diagnosis.</p>
+            <a class="btn ghost" href="/ai-readiness">Run the readiness assessment <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
           </div>
           <div class="toc" aria-label="What the Diagnosis contains">
             <div class="toc-h"><span>The Diagnosis</span><span>8 sections &middot; 20 to 40 pages</span></div>
@@ -308,21 +90,33 @@
           </div>
         </div>
 
-        <div class="svc rv" id="svc-fintech">
+        <div class="svc" id="svc-fintech">
           <div class="txt">
             <h3>Fintech advisory</h3>
             <p>Product and go-to-market strategy for fintechs, partnership design with banks and card networks, and the exact order in which a bank's onboarding team wants regulatory, security and operational questions answered. We have sat on the bank's side of that table; we know which answer ends the conversation. Advisory only. We don't carry out regulated activity.</p>
-            <p class="for">For a fintech preparing for a sponsor bank, a new market, or an enterprise customer's due diligence. The onboarding check on this page is the evidence list a bank's third-party review works from, in its order.</p>
+            <p class="for">For a fintech preparing for a sponsor bank, a new market, or an enterprise customer's due diligence.</p>
           </div>
-          <div class="inst" id="inst-bank" data-inst="bank" aria-label="Bank onboarding readiness check"></div>
+          <div class="card">
+            <span class="k">Check 02 &middot; About five minutes</span>
+            <h4>The thirteen documents a sponsor bank's third-party review works from, in its order.</h4>
+            <p>Mark each as in place, partly, or not yet. The result lists the gaps in the order the bank will raise them, and can be sent to us with your enquiry.</p>
+            <ul><li>Regulatory and licensing</li><li>Financial crime</li><li>Information security</li><li>Data and privacy</li><li>Operational resilience</li><li>Financial standing and technology</li></ul>
+            <a class="btn ghost" href="/bank-onboarding">Run the onboarding check <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
+          </div>
         </div>
 
-        <div class="svc flip rv" id="svc-security">
-          <div class="inst" id="inst-sec" data-inst="sec" aria-label="ISO 27001 control check"></div>
+        <div class="svc" id="svc-security">
           <div class="txt">
             <h3>Cybersecurity consulting</h3>
             <p>Posture assessment against ISO 27001 and the frameworks your customers ask about, architecture and vendor review, an incident-response plan people have rehearsed, and a gap list in the order an auditor works through it. Then we stay for the remediation, vendor by vendor, until the audit passes on the first attempt.</p>
-            <p class="for">For a CTO whose largest customer has sent a due-diligence questionnaire, or a board that wants to know what would actually happen on the day something goes wrong. The control check on this page covers the twelve Annex A controls an auditor samples first.</p>
+            <p class="for">For a CTO whose largest customer has sent a due-diligence questionnaire, or a board that wants to know what would actually happen on the day something goes wrong.</p>
+          </div>
+          <div class="card">
+            <span class="k">Check 03 &middot; About five minutes</span>
+            <h4>Twelve Annex A controls from ISO 27001:2022, in the order an auditor samples them.</h4>
+            <p>In place means written, operating, and evidenced. The result is a gap list in audit order, and can be sent to us with your enquiry.</p>
+            <ul><li>Organisational controls</li><li>People controls</li><li>Physical controls</li><li>Technological controls</li></ul>
+            <a class="btn ghost" href="/iso-27001">Run the control check <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
           </div>
         </div>
       </div>
@@ -333,8 +127,8 @@
     <div class="grid">
       <div class="sh"><h2>Method</h2><p>Three steps, the same on every engagement, with the durations written down.</p></div>
       <div class="sb">
-        <p class="lead rv">Diagnose, plan, stay. The third step is where the plan meets the vendors, the budget and the calendar. It is the one we are hired for.</p>
-        <div class="tl rv" aria-label="Engagement timeline">
+        <p class="lead">Diagnose, plan, stay. The third step is where the plan meets the vendors, the budget and the calendar. It is the one we are hired for.</p>
+        <div class="tl" aria-label="Engagement timeline">
           <div class="bar" aria-hidden="true"><span></span><span></span><span></span></div>
           <div class="lab" aria-hidden="true"><span>Weeks 1-2</span><span>Weeks 3-4</span><span>Until it ships</span></div>
           <div class="steps">
@@ -352,13 +146,13 @@
       <div class="sh"><h2>Terms</h2><p>How we work, in writing, before the first call.</p></div>
       <div class="sb">
         <dl class="terms">
-          <div class="term rv"><dt>Where</dt><dd>Wherever the client is. Remote by default, on site where a room is needed.</dd></div>
-          <div class="term rv"><dt>Regulation</dt><dd>Advisory only. We don't carry out regulated activity, hold client money or give investment advice. Where a regulated step is needed, we bring in the licensed party.</dd></div>
-          <div class="term rv"><dt>Price</dt><dd>Fixed scope, fixed price, in USD, agreed in writing before the start. The Diagnosis is a fixed fee; delivery oversight is a monthly retainer with a notice period. A written quote follows the scoping call within three working days.</dd></div>
-          <div class="term rv"><dt>Vendors</dt><dd>We select and oversee them. No resale, no implementation contracts, no referral fees from anyone we recommend. If the right answer is a tool you already own, the Diagnosis says so.</dd></div>
-          <div class="term rv"><dt>Who</dt><dd>The principal who scoped the work, on every engagement, start to finish. Specialists join for named tasks, a penetration test or a data-engineering sprint, and are named in the scope before you sign.</dd></div>
-          <div class="term rv"><dt>Confidentiality</dt><dd>A non-disclosure agreement before the first document changes hands, on your paper or ours.</dd></div>
-          <div class="term rv"><dt>Fit</dt><dd>If someone else is the better fit, you hear it in the first conversation, with a name. It costs nothing.</dd></div>
+          <div class="term"><dt>Where</dt><dd>Wherever the client is. Remote by default, on site where a room is needed.</dd></div>
+          <div class="term"><dt>Regulation</dt><dd>Advisory only. We don't carry out regulated activity, hold client money or give investment advice. Where a regulated step is needed, we bring in the licensed party.</dd></div>
+          <div class="term"><dt>Price</dt><dd>Fixed scope, fixed price, in USD, agreed in writing before the start. The Diagnosis is a fixed fee; delivery oversight is a monthly retainer with a notice period. A written quote follows the scoping call within three working days.</dd></div>
+          <div class="term"><dt>Vendors</dt><dd>We select and oversee them. No resale, no implementation contracts, no referral fees from anyone we recommend. If the right answer is a tool you already own, the Diagnosis says so.</dd></div>
+          <div class="term"><dt>Who</dt><dd>The principal who scoped the work, on every engagement, start to finish. Specialists join for named tasks, a penetration test or a data-engineering sprint, and are named in the scope before you sign.</dd></div>
+          <div class="term"><dt>Confidentiality</dt><dd>A non-disclosure agreement before the first document changes hands, on your paper or ours.</dd></div>
+          <div class="term"><dt>Fit</dt><dd>If someone else is the better fit, you hear it in the first conversation, with a name. It costs nothing.</dd></div>
         </dl>
       </div>
     </div>
@@ -368,15 +162,14 @@
     <div class="grid">
       <div class="sh"><h2>Start a conversation</h2><p>Two lines about the problem is enough.</p></div>
       <div class="sb">
-        <p class="lead rv">What happens after you write: a reply within one working day, a thirty-minute call, and a written scope and price within three working days. No deck, no discovery workshop, and a straight answer if someone else is the better fit.</p>
-        <form class="form rv" id="contactForm" novalidate>
+        <p class="lead">What happens after you write: a reply within one working day, a thirty-minute call, and a written scope and price within three working days. No deck, no discovery workshop, and a straight answer if someone else is the better fit.</p>
+        <form class="form" id="contactForm" novalidate>
           <label>Name<input type="text" name="name" autocomplete="name" required></label>
           <label>Company<input type="text" name="company" autocomplete="organization" required></label>
           <label class="full">Work email<input type="email" name="email" autocomplete="email" required></label>
-          <label class="full">What is the problem?<textarea name="problem" required placeholder=""></textarea></label>
+          <label class="full">What is the problem?<textarea name="problem" required></textarea></label>
           <label class="hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-          <div class="attach" id="attach"></div>
-          <div class="send"><button class="btn" type="submit">Send <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></button><a class="btn ghost" id="book" href="#" hidden>Book a 30-minute call</a><small>Or write to <a href="mailto:hello@dfg.consulting">hello@dfg.consulting</a></small></div>
+          <div class="send"><button class="btn" type="submit">Send <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></button><a class="btn ghost" id="book" href="#" hidden>Book a 30-minute call</a><small>Or write to <a href="mailto:hello@dfg.consulting">hello@dfg.consulting</a>. By sending, you agree to the <a href="/privacy">privacy notice</a>.</small></div>
         </form>
       </div>
     </div>
@@ -385,391 +178,14 @@
 
 <footer class="page">
   <div class="grid">
-    <div class="c1"><b>DFG. Digital Frontiers Group</b><span>DFG Digital Frontiers FZ-LLC. Licence [XXXXX]</span></div>
-    <div class="c3"><b>Legal</b><a href="#">Privacy</a><a href="#">Terms</a></div>
-    <div class="reg">DFG provides technology and business advisory services. DFG does not provide regulated financial services and does not offer investment, brokerage or financial advice. © 2026 DFG Digital Frontiers FZ-LLC.</div>
+    <div class="c1"><b>DFG. Digital Frontiers Group</b><span>DFG Digital Frontiers FZ-LLC</span><a href="mailto:hello@dfg.consulting">hello@dfg.consulting</a></div>
+    <div class="c2"><b>Checks</b><a href="/ai-readiness">AI readiness</a><a href="/bank-onboarding">Bank onboarding evidence</a><a href="/iso-27001">ISO 27001 controls</a></div>
+    <div class="c3"><b>Legal</b><a href="/privacy">Privacy notice</a><a href="/terms">Terms of use</a></div>
+    <div class="reg">DFG provides technology and business advisory services. DFG does not provide regulated financial services and does not offer investment, brokerage or financial advice. &copy; 2026 DFG Digital Frontiers FZ-LLC.</div>
   </div>
 </footer>
 
-<script>
-(function(){
-  document.documentElement.classList.add('js');
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- Instruments ---------- */
-  var RESULTS={}; // last result per instrument, attachable to the form
-
-  var AI={
-    name:'AI readiness assessment', total:6, levels:3,
-    intro:'Six dimensions, scored 0 to 3. Choose the line that describes today.',
-    qs:[
-      {d:'Executive ownership',q:'Who is accountable for AI at executive level?',o:[
-        'No one is named.',
-        'A named executive, without a budget line.',
-        'A named executive with a budget line.',
-        'A named executive with a budget line, reporting results to the board at least quarterly.'],
-        w:'Name an executive owner and a budget line before any use-case is chosen. Without one, the plan has nobody to be handed to.'},
-      {d:'Data',q:'How would you describe the data the first use-cases depend on?',o:[
-        'Held in separate systems and spreadsheets, reconciled by hand.',
-        'Centralised in a warehouse or lake; quality undocumented.',
-        'Documented, with named owners and measured quality for the main datasets.',
-        'Governed end to end: owners, quality metrics, access controls and lineage.'],
-        w:'Ownership and quality for the two or three datasets the first use-cases need. Not the whole estate; the part the plan depends on.'},
-      {d:'Use-case selection',q:'How far has the list of candidate use-cases been worked?',o:[
-        'There is no list, or a long one nobody has costed.',
-        'A shortlist with rough value estimates only.',
-        'A ranked shortlist: value, feasibility, and a named business owner for each.',
-        'A ranked, owned shortlist, sequenced against delivery capacity and the data that exists.'],
-        w:'Ranking the candidates by value and feasibility, with a named owner each. This usually takes a list of thirty to a list of two.'},
-      {d:'Production record',q:'How many AI use-cases are in production today?',o:[
-        'None. Individual staff use chat tools.',
-        'None. One or more pilots ran and stopped.',
-        'One, without measured results.',
-        'One or more, with results measured and reported to the sponsor.'],
-        w:'Taking one use-case to production with a measured result, so the board sees evidence before the next budget round.'},
-      {d:'Engineering',q:'Who would build and run the first use-case?',o:[
-        'Vendors only; no in-house engineering.',
-        'An in-house team with no ML or LLM delivery experience.',
-        'An in-house team that has shipped one ML or LLM feature, with vendor support.',
-        'An in-house team that ships and operates ML or LLM features, with monitoring and on-call.'],
-        w:'Deciding what is built in-house and what is bought, and setting vendor terms so the team can operate it afterwards.'},
-      {d:'Governance',q:'What is the policy on AI use?',o:[
-        'No policy. Decisions are made case by case.',
-        'A policy that restricts use, with no route to approval.',
-        'A policy with a defined review path for new use-cases.',
-        'A review path, a model inventory, and an assessment record for each use-case in production.'],
-        w:'A review path that approves a use-case in weeks rather than quarters, with a record an auditor can read.'}
-    ],
-    read:function(s){
-      if(s<=6)return{h:'Foundations first.',p:'The plan should begin with ownership and data, not with models. The first two weeks of a Diagnosis would go on who owns what, where the data is, and which two use-cases justify fixing it.'};
-      if(s<=12)return{h:'Ready for a shortlist.',p:'The foundations are partly there. The work now is choosing two use-cases by value and feasibility, and taking one to production with a measured result before the next budget conversation.'};
-      return{h:'Ready to scale.',p:'The question is how to run three or four use-cases at once without losing control of vendors, cost and risk. A Diagnosis here would concentrate on governance, vendor oversight and the delivery plan.'};
-    }
-  };
-
-  var TRI=['In place','Partly','Not yet'];
-  var BANK={
-    name:'Bank onboarding readiness',
-    title:'Evidence a sponsor bank asks for.',
-    intro:'Thirteen items, grouped the way a bank’s third-party review is. In place means the document exists and is current.',
-    groups:[
-      ['Regulatory and licensing',[
-        ['Written confirmation of regulatory status in each market: licence, registration, or a legal opinion on exemption'],
-        ['A register of regulatory obligations, with an owner and a change log']]],
-      ['Financial crime',[
-        ['AML and KYC programme documented, with a named MLRO or compliance officer'],
-        ['Sanctions and PEP screening in operation, with records of alerts handled']]],
-      ['Information security',[
-        ['SOC 2 Type II or ISO 27001 certificate, or a dated audit plan the bank can review'],
-        ['PCI DSS scope and attestation, where card data is touched'],
-        ['Penetration test report from the last twelve months, with remediation status']]],
-      ['Data and privacy',[
-        ['Data-flow map and a data-residency position for each market'],
-        ['Privacy notices and a data-processing agreement template the bank’s counsel can mark up']]],
-      ['Operational resilience',[
-        ['Incident-response and business-continuity plans, tested in the last twelve months'],
-        ['Critical third parties listed (cloud, KYC vendor, processors), each with its own assurance on file']]],
-      ['Financial standing',[
-        ['Audited or reviewed accounts, with twelve months of runway shown']]],
-      ['Technology',[
-        ['Integration architecture written down: APIs, environments, responsibilities, and the change process']]]
-    ],
-    read:function(n,t){
-      if(n>=10)return{h:'Ready to open the conversation.',p:'Most of what a sponsor bank’s third-party review asks for exists. The open items below set the length of onboarding, not whether it happens.'};
-      if(n>=5)return{h:'Halfway. The order matters.',p:'A bank’s review opens with regulatory status and the financial-crime programme, and stops if either is missing. Close those first; the security and data items can be prepared alongside.'};
-      return{h:'Not yet. Start with the first two groups.',p:'Without written regulatory status and a documented AML programme, a bank will not open a file. Those two groups are the first four to six weeks of work, and they are the same in every market.'};
-    }
-  };
-
-  var SEC={
-    name:'ISO 27001:2022 control check',
-    title:'Controls an auditor samples first.',
-    intro:'Twelve Annex A controls, in audit order. In place means written, operating, and evidenced.',
-    groups:[
-      ['Organisational controls',[
-        ['Information security policy approved by management and reviewed within the last year','A.5.1'],
-        ['Inventory of information assets, each with a named owner','A.5.9'],
-        ['Access control policy with joiner, mover and leaver procedures','A.5.15'],
-        ['Supplier security requirements in contracts, with a supplier register','A.5.19'],
-        ['Incident management plan with roles, escalation and a contact list','A.5.24']]],
-      ['People controls',[
-        ['Security awareness training for all staff in the last year, with attendance records','A.6.3']]],
-      ['Physical controls',[
-        ['Physical entry controls to offices and server areas, with visitor records','A.7.2']]],
-      ['Technological controls',[
-        ['Privileged access restricted, logged and reviewed quarterly','A.8.2'],
-        ['Multi-factor authentication on email, cloud consoles and remote access','A.8.5'],
-        ['Vulnerability management with defined patch windows and evidence of closure','A.8.8'],
-        ['Backups taken, tested by restore, and stored separately','A.8.13'],
-        ['Logging enabled on critical systems, protected from change and reviewed','A.8.15']]]
-    ],
-    read:function(n,t){
-      if(n>=10)return{h:'Audit-ready on paper.',p:'The controls an auditor samples first exist. What remains is evidence: records that show each control operating over time, not only a document saying it should.'};
-      if(n>=5)return{h:'Half the controls. Gaps in audit order.',p:'An auditor works from policy and inventory to access, then to the technical controls. The open items below follow that order; the first is the one to close first.'};
-      return{h:'Start with policy, inventory and access.',p:'The technical controls depend on knowing what you hold and who can reach it. The open items are in the order an assessment would take them.'};
-    }
-  };
-
-  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
-  function arrow(){return '<svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9h13M10 4l5 5-5 5" stroke="currentColor" stroke-width="2"/></svg>';}
-
-  function mountQuiz(root,def,key){
-    var i=0, ans=[];
-    function bar(){
-      var b=el('div','bar'); b.appendChild(el('span','name',def.name));
-      var p=el('div','prog'); for(var k=0;k<def.total;k++){var s=el('i'); if(k<i)s.className='done'; else if(k===i)s.className='cur'; p.appendChild(s);} b.appendChild(p); return b;
-    }
-    function render(){
-      root.innerHTML=''; root.appendChild(bar());
-      if(i>=def.total){return result();}
-      var body=el('div','body step'); var q=def.qs[i];
-      body.appendChild(el('div','dim','<span>'+(i+1)+' of '+def.total+'</span>'+q.d));
-      body.appendChild(el('div','q',q.q));
-      if(i===0)body.appendChild(el('div','hint',def.intro));
-      var opts=el('div','opts');
-      q.o.forEach(function(t,idx){
-        var b=el('button','opt'+(ans[i]===idx?' sel':''),'<span class="k">'+idx+'</span><span>'+t+'</span>'); b.type='button';
-        b.addEventListener('click',function(){ans[i]=idx; i++; render();});
-        opts.appendChild(b);
-      });
-      body.appendChild(opts); root.appendChild(body);
-      var foot=el('div','foot'); foot.appendChild(el('span','m','Scored 0 to 3'));
-      var nav=el('div','nav'); var back=el('button',null,'Back'); back.type='button'; back.disabled=i===0; back.addEventListener('click',function(){if(i>0){i--;render();}}); nav.appendChild(back); foot.appendChild(nav); root.appendChild(foot);
-    }
-    function result(){
-      var score=ans.reduce(function(a,b){return a+b;},0), max=def.total*def.levels, r=def.read(score);
-      var low=0; ans.forEach(function(a,k){if(a<ans[low])low=k;}); var lowQ=def.qs[low];
-      var body=el('div','body step'); var res=el('div','res');
-      res.appendChild(el('div','score','<b>'+score+'</b><span>of '+max+'</span>'));
-      res.appendChild(el('h4',null,r.h)); res.appendChild(el('p',null,r.p));
-      var prof=el('div','prof');
-      def.qs.forEach(function(q,k){var row=el('div','row'+(k===low?' low':''),'<span class="l">'+q.d+'</span><span class="b"><i class="'+(ans[k]>=1?'on':'')+'"></i><i class="'+(ans[k]>=2?'on':'')+'"></i><i class="'+(ans[k]>=3?'on':'')+'"></i></span><span class="v">'+ans[k]+' / 3</span>'); prof.appendChild(row);});
-      res.appendChild(prof);
-      res.appendChild(el('div','first','<span class="k">First workstream &middot; '+lowQ.d+'</span>'+lowQ.w));
-      var acts=el('div','acts');
-      var summary=def.name+': '+score+' of '+max+'. '+r.h+' Lowest dimension: '+lowQ.d+' (level '+ans[low]+' of 3).';
-      var use=el('button','pri','Attach to a message '+arrow()); use.type='button'; use.addEventListener('click',function(){attach(key,summary,def.name+': '+score+' of '+max);});
-      var again=el('button',null,'Start again'); again.type='button'; again.addEventListener('click',function(){i=0;ans=[];render();});
-      acts.appendChild(use); acts.appendChild(again); res.appendChild(acts); body.appendChild(res); root.appendChild(body);
-      RESULTS[key]=summary;
-    }
-    render();
-  }
-
-  function mountChecklist(root,def,key){
-    var items=[]; def.groups.forEach(function(g){g[1].forEach(function(it){items.push({t:it[0],c:it[1]||'',g:g[0],s:-1});});});
-    var done=false;
-    function score(){return items.reduce(function(a,it){return a+(it.s===0?1:it.s===1?0.5:0);},0);}
-    function fmt(n){return (n%1?n.toFixed(1):String(n));}
-    function bar(){
-      var b=el('div','bar'); b.appendChild(el('span','name',def.name)); var p=el('div','prog many'); var n=Math.floor(score());
-      items.forEach(function(_,k){var s=el('i'); if(k<n)s.className='done'; p.appendChild(s);}); b.appendChild(p); return b;
-    }
-    function render(){
-      root.innerHTML=''; root.appendChild(bar());
-      if(done)return result();
-      var body=el('div','body step');
-      body.appendChild(el('div','q',def.title));
-      body.appendChild(el('div','hint',def.intro));
-      var list=el('div','tri-list'); var lastG=null;
-      items.forEach(function(it,k){
-        if(it.g!==lastG){list.appendChild(el('div','grp',it.g)); lastG=it.g;}
-        var row=el('div','tri-row'); row.appendChild(el('span','t',it.t+(it.c?' <span class="c">'+it.c+'</span>':'')));
-        var seg=el('div','tri'); seg.setAttribute('role','radiogroup'); seg.setAttribute('aria-label',it.t);
-        TRI.forEach(function(lab,si){var b=el('button','s'+si+(it.s===si?' on':''),lab); b.type='button'; b.setAttribute('role','radio'); b.setAttribute('aria-checked',it.s===si?'true':'false');
-          b.addEventListener('click',function(){it.s=si; [].forEach.call(seg.children,function(x,j){x.className='s'+j+(j===si?' on':''); x.setAttribute('aria-checked',j===si?'true':'false');});
-            var n=Math.floor(score()); [].forEach.call(root.querySelector('.prog').children,function(x,j){x.className=j<n?'done':'';}); root.querySelector('.foot .m').textContent=fmt(score())+' of '+items.length+' in place';});
-          seg.appendChild(b);});
-        row.appendChild(seg); list.appendChild(row);
-      });
-      body.appendChild(list); root.appendChild(body);
-      var foot=el('div','foot'); foot.appendChild(el('span','m',fmt(score())+' of '+items.length+' in place'));
-      var nav=el('div','nav'); var go=el('button','pri','See the gaps'); go.type='button'; go.addEventListener('click',function(){done=true;render();}); nav.appendChild(go); foot.appendChild(nav); root.appendChild(foot);
-    }
-    function result(){
-      var n=score(), r=def.read(n,items.length);
-      var body=el('div','body step'); var res=el('div','res');
-      res.appendChild(el('div','score','<b>'+fmt(n)+'</b><span>of '+items.length+' in place</span>'));
-      var seg=el('div','seg'); items.forEach(function(_,k){var s=el('i'); if(k<Math.floor(n))s.className='on'; else if(k<n)s.className='half'; seg.appendChild(s);}); res.appendChild(seg);
-      res.appendChild(el('h4',null,r.h)); res.appendChild(el('p',null,r.p+(unanswered===items.length?' Nothing was marked, so every item is listed as open.':'')));
-      var gaps=items.filter(function(it){return it.s!==0;}); var unanswered=items.filter(function(it){return it.s<0;}).length;
-      if(gaps.length){var ol=el('ol'); var lastG=null; var num=0;
-        gaps.forEach(function(it){ if(it.g!==lastG){ol.appendChild(el('li','g',it.g)); lastG=it.g;} num++;
-          ol.appendChild(el('li',null,'<span class="n">'+num+'</span><span>'+it.t+(it.c?' <span class="c">'+it.c+'</span>':'')+'</span><span class="st'+(it.s===1?' p':'')+'">'+(it.s===1?'Partly':'Not yet')+'</span>'));});
-        res.appendChild(ol);}
-      var acts=el('div','acts');
-      var use=el('button','pri','Attach to a message '+arrow()); use.type='button';
-      var summary=def.name+': '+fmt(n)+' of '+items.length+' in place.'+(gaps.length?' Open items: '+gaps.map(function(g){return g.t+(g.s===1?' (partly)':'');}).join('; ')+'.':'');
-      use.addEventListener('click',function(){attach(key,summary,def.name+': '+fmt(n)+' of '+items.length+' in place');});
-      var again=el('button',null,'Edit answers'); again.type='button'; again.addEventListener('click',function(){done=false;render();});
-      acts.appendChild(use); acts.appendChild(again); res.appendChild(acts); body.appendChild(res); root.appendChild(body);
-      RESULTS[key]=summary;
-    }
-    render();
-  }
-
-  var ATTACHED={}, LABELS={};
-  function attach(key,text,label){
-    ATTACHED[key]=text; LABELS[key]=label||text.split('. ')[0]; renderAttach();
-    var f=document.getElementById('contact'); if(f)f.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
-  }
-  function renderAttach(){
-    var a=document.getElementById('attach'); a.innerHTML='';
-    var keys=Object.keys(ATTACHED); if(!keys.length)return;
-    a.appendChild(el('span',null,'Attached to this message:'));
-    keys.forEach(function(k){var b=el('b',null,LABELS[k]+' <button type="button" aria-label="Remove">×</button>'); b.querySelector('button').addEventListener('click',function(){delete ATTACHED[k];renderAttach();}); a.appendChild(b);});
-  }
-
-  mountQuiz(document.getElementById('inst-ai'),AI,'ai');
-  mountChecklist(document.getElementById('inst-bank'),BANK,'bank');
-  mountChecklist(document.getElementById('inst-sec'),SEC,'sec');
-
-  /* ---------- Form: posts to /api/contact; falls back to composing an email if the endpoint is unavailable ---------- */
-  var BOOKING_URL=''; // e.g. 'https://cal.com/dfg/30min'. Empty hides the button.
-  var book=document.getElementById('book'); if(book&&BOOKING_URL){book.href=BOOKING_URL;book.target='_blank';book.rel='noopener';book.hidden=false;}
-  var form=document.getElementById('contactForm');
-  function note(t,soft){var old=form.querySelector('.ok');if(old)old.remove();form.appendChild(el('div','ok'+(soft?' soft':''),t));}
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var d=new FormData(form), missing=['name','company','email','problem'].filter(function(k){return !String(d.get(k)||'').trim();});
-    if(missing.length){form.querySelector('[name='+missing[0]+']').focus();return;}
-    var keys=Object.keys(ATTACHED), attached=keys.map(function(k){return ATTACHED[k];});
-    var body='Name: '+d.get('name')+'\nCompany: '+d.get('company')+'\nEmail: '+d.get('email')+'\n\n'+d.get('problem');
-    if(attached.length){body+='\n\n'+attached.join('\n');}
-    var mailto='mailto:hello@dfg.consulting?subject='+encodeURIComponent('DFG: '+d.get('company'))+'&body='+encodeURIComponent(body);
-    var btn=form.querySelector('.send .btn');
-    function fallback(){
-      btn.disabled=false;
-      window.location.href=mailto;
-      note('Your email client should open with the message ready to send. If it did not, write to hello@dfg.consulting.',true);
-    }
-    if(!window.fetch||!window.Promise){fallback();return;}
-    btn.disabled=true;
-    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name:d.get('name'),company:d.get('company'),email:d.get('email'),problem:d.get('problem'),attached:attached,website:d.get('website')})})
-    .then(function(r){return r.json().then(function(j){return r.ok&&j.ok;},function(){return false;});})
-    .then(function(ok){
-      if(!ok){fallback();return;}
-      btn.disabled=false; form.reset(); keys.forEach(function(k){delete ATTACHED[k];}); renderAttach();
-      note('Sent. You will hear from us within one working day.');
-    },fallback);
-  });
-
-
-  /* ---------- The scan. A surface being resolved into a point cloud by a sweep moving across it.
-     Behind the sweep: known, drawn. Ahead of it: nothing yet. The readout is real: points resolved so far. ---------- */
-  (function(){
-    var c=document.getElementById('scan'); if(!c)return; var hero=c.parentNode, ctx=c.getContext('2d',{alpha:false});
-    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var NX=170,NZ=96, X0=-1.9,X1=1.9, Z0=0.25,Z1=3.4;
-    var pts=[], W=0,H=0,dpr=1, t0=null, sweepT=15000, holdT=2600, readN=document.getElementById('rN'), readP=document.getElementById('rP');
-    function rng(seed){return function(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};}
-    // heightfield: value noise, three octaves, one ridge
-    var rand=rng(90626), G=[]; [3,6,12,24].forEach(function(f){var g=[];for(var i=0;i<(f+1)*(f+1);i++)g.push(rand());G.push({f:f,g:g});});
-    function n2(gd,u,v){var f=gd.f, x=u*f, y=v*f, x0=Math.floor(x), y0=Math.floor(y), tx=x-x0, ty=y-y0; tx=tx*tx*(3-2*tx); ty=ty*ty*(3-2*ty);
-      var g=gd.g, r0=y0*(f+1), r1=(y0+1)*(f+1); var a=g[r0+x0],b=g[r0+x0+1],cc=g[r1+x0],d=g[r1+x0+1]; return (a*(1-tx)+b*tx)*(1-ty)+(cc*(1-tx)+d*tx)*ty;}
-    function height(u,v){var h=n2(G[0],u,v)*1+n2(G[1],u,v)*.5+n2(G[2],u,v)*.25+n2(G[3],u,v)*.12; h/=1.87; var r=1-Math.abs(n2(G[1],u*.7+.3,v*.7)*2-1); return Math.pow(h,1.6)*.55+r*r*.12;}
-    for(var j=0;j<NZ;j++)for(var i=0;i<NX;i++){var u=i/(NX-1), v=j/(NZ-1); pts.push({x:X0+(X1-X0)*u, z:Z0+(Z1-Z0)*v, y:height(u,v)});}
-    var cam={y:1.05,z:-0.55,pitch:0.50,f:1.0}, yaw=0, o={x:0,y:0,d:0};
-    // the plan: six sites in the order an engagement runs, set on the surveyed ground as the sweep passes
-    var SITES=[{l:'Diagnose'},{l:'Plan'},{l:'Vendors'},{l:'Pilot'},{l:'Production'},{l:'Stay'}];
-
-    var readM=document.getElementById('rM');
-    function size(){dpr=Math.min(2,window.devicePixelRatio||1); W=c.clientWidth||hero.clientWidth; H=c.clientHeight||hero.clientHeight; c.width=W*dpr; c.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); placeSites();}
-    function placeSites(){
-      var fx=[0.07,0.23,0.40,0.57,0.74,0.91], fy=W<700?[0.80,0.68,0.82,0.66,0.80,0.70]:[0.90,0.85,0.93,0.86,0.92,0.90];
-      var saveYaw=yaw; yaw=0;
-      SITES.forEach(function(m,i){var tx=fx[i]*W, ty=fy[i]*H, best=null, bd=1e12;
-        for(var k=0;k<pts.length;k+=1){var p=pts[k]; if(!project(p,o))continue; var dx=o.x-tx, dy=o.y-ty, d=dx*dx+dy*dy; if(d<bd){bd=d;best=p;}}
-        m.x=best.x; m.z=best.z; m.y=best.y; m.u=(best.x-X0)/(X1-X0); m.v=(best.z-Z0)/(Z1-Z0); m.h=(0.04+i*0.012)*(W<700?0.7:1); m.t=null;});
-      yaw=saveYaw;
-    }
-    function project(p,out){
-      var cy=Math.cos(yaw), sy=Math.sin(yaw); var x=p.x*cy - p.z*sy*0.0 ; // yaw kept tiny; apply as x shear for cheapness
-      x=p.x + yaw*p.z;
-      var vx=x, vy=p.y-cam.y, vz=p.z-cam.z;
-      var cp=Math.cos(cam.pitch), sp=Math.sin(cam.pitch);
-      var vy2=vy*cp+vz*sp, vz2=-vy*sp+vz*cp;
-      if(vz2<0.05)return false;
-      var f=cam.f*(W<700?W*0.72:Math.min(W,H*1.35));
-      out.x=W*0.5+f*vx/vz2; out.y=H*(W<700?0.42:0.56)-f*vy2/vz2; out.d=vz2; return true;
-    }
-    function draw(ts){
-      if(t0===null)t0=ts; var el=(ts-t0)%(sweepT+holdT); var s=Math.min(1,el/sweepT); // sweep position 0..1 across x
-      var e=s*s*(3-2*s); var sx=X0+(X1-X0)*e;
-      if(!reduce) yaw=Math.sin(ts*0.00012)*0.035;
-      ctx.fillStyle='#0A0C10'; ctx.fillRect(0,0,W,H);
-      var resolved=0, band=0.16;
-      // known points
-      for(var k=0;k<pts.length;k++){var p=pts[k]; if(p.x>sx)continue; resolved++; if(!project(p,o))continue;
-        var depth=Math.max(0,Math.min(1,(o.d-0.6)/3.2)); var near=Math.max(0,1-(sx-p.x)/band);
-        var a=(0.22+ (1-depth)*0.5)*(1-near*0.4) + near*0.9; var r=(1-depth)*1.6+0.6;
-        if(near>0){ctx.fillStyle='rgba(242,180,65,'+Math.min(1,a)+')';} else {ctx.fillStyle='rgba(233,235,239,'+Math.min(1,a)+')';}
-        ctx.fillRect(o.x-r*0.5,o.y-r*0.5,r,r);
-      }
-      // the sweep itself: the intersection line across the surface at x = sx
-      if(s<1){ctx.beginPath(); var first=true; var ui=(sx-X0)/(X1-X0);
-        for(var j=0;j<NZ;j++){var v=j/(NZ-1); var q={x:sx,z:Z0+(Z1-Z0)*v,y:height(ui,v)}; if(!project(q,o))continue; if(first){ctx.moveTo(o.x,o.y);first=false;} else ctx.lineTo(o.x,o.y);}
-        ctx.strokeStyle='rgba(242,180,65,.9)'; ctx.lineWidth=1; ctx.stroke();
-        // and its vertical extent, faint, to read as a plane
-        var top={x:sx,z:Z0,y:1.1}, bot={x:sx,z:Z0,y:0}; if(project(top,o)){var tx=o.x,ty=o.y; if(project(bot,o)){ctx.strokeStyle='rgba(242,180,65,.18)'; ctx.beginPath(); ctx.moveTo(tx,ty); ctx.lineTo(o.x,o.y); ctx.stroke();}}
-      }
-      // plan: markers, route, structures
-      var built=0, prevEl=draw.prevEl||0; if(el<prevEl){SITES.forEach(function(m){m.t=null;});} draw.prevEl=el;
-      ctx.font='11px "Geist Mono", Menlo, monospace'; ctx.textBaseline='middle';
-      for(var i=0;i<SITES.length;i++){var m=SITES[i]; if(m.x>sx){break;} if(m.t===null)m.t=ts; var age=ts-m.t; built++;
-        var seg=Math.min(1,age/900), rise=Math.max(0,Math.min(1,(age-500)/1100)), last=(i===SITES.length-1||SITES[i+1].x>sx);
-        // route from the previous site, along the surface
-        if(i>0&&seg>0){var a=SITES[i-1]; ctx.beginPath(); var first=true, n=28;
-          for(var k=0;k<=Math.floor(n*seg);k++){var f=k/n; var u=a.u+(m.u-a.u)*f, v=a.v+(m.v-a.v)*f; var q={x:X0+(X1-X0)*u,z:Z0+(Z1-Z0)*v,y:height(u,v)+0.012}; if(!project(q,o))continue; if(first){ctx.moveTo(o.x,o.y);first=false;} else ctx.lineTo(o.x,o.y);}
-          ctx.strokeStyle='rgba(233,235,239,.85)'; ctx.lineWidth=1.2; ctx.stroke();}
-        // marker on the ground
-        if(project(m,o)){var mx=o.x,my=o.y; ctx.fillStyle=last?'rgba(242,180,65,1)':'rgba(233,235,239,.95)'; ctx.fillRect(mx-2.5,my-2.5,5,5);
-          // structure rising
-          if(rise>0){var top={x:m.x,z:m.z,y:m.y+m.h*rise}; if(project(top,o)){ctx.strokeStyle=last?'rgba(242,180,65,.95)':'rgba(233,235,239,.8)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(mx,my); ctx.lineTo(o.x,o.y); ctx.stroke();
-            // platform cap and label once it stands
-            if(rise>=1){ctx.fillStyle=last?'rgba(242,180,65,1)':'rgba(233,235,239,.9)'; ctx.fillRect(o.x-5,o.y-1,10,2);
-              if(W>=700){ctx.fillStyle=last?'rgba(242,180,65,1)':'rgba(174,180,191,1)'; var lab=('0'+(i+1))+'  '+m.l, lw=ctx.measureText(lab).width; if(o.x+12+lw>W-8){ctx.textAlign='right';ctx.fillText(lab,o.x-10,o.y);ctx.textAlign='left';} else ctx.fillText(lab,o.x+10,o.y);}}}}
-        }
-      }
-      if(readM)readM.textContent=built+' of '+SITES.length;
-      if(readN)readN.textContent=resolved.toLocaleString('en-US'); if(readP)readP.textContent=Math.round(resolved/pts.length*100)+'%';
-    }
-    var raf=0, visible=true, last=0;
-    function loop(ts){ if(ts-last>33){last=ts; draw(ts);} if(visible)raf=requestAnimationFrame(loop);}
-    size();
-    if(reduce){draw(sweepT*0.62);} else raf=requestAnimationFrame(loop);
-    var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){size(); if(reduce)draw(sweepT*0.62);},150);});
-    if('IntersectionObserver' in window){new IntersectionObserver(function(es){visible=es[0].isIntersecting; if(visible&&!reduce&&!raf)raf=requestAnimationFrame(loop); if(!visible){cancelAnimationFrame(raf);raf=0;}}).observe(hero);}
-  })();
-
-  /* Headline: one rise, word by word */
-  (function(){var h=document.getElementById('h1'); if(!h)return; var words=h.textContent.trim().split(/\s+/); h.innerHTML=words.map(function(w,i){return '<span class="w" style="animation-delay:'+(0.15+i*0.09)+'s">'+w+'</span>';}).join(' ');})();
-
-  /* Reading progress */
-  (function(){var prog=document.getElementById('prog'); var tick=false;
-    function upd(){var y=window.scrollY||0; var max=document.documentElement.scrollHeight-window.innerHeight; prog.style.width=(max>0?Math.min(100,y/max*100):0)+'%'; tick=false;}
-    window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true}); upd();})();
-
-  /* Timeline fills when seen */
-  (function(){var tl=document.querySelector('.tl'); if(!tl)return; var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; if(!('IntersectionObserver' in window)||reduce){tl.classList.add('in');return;}
-    new IntersectionObserver(function(es,o){if(es[0].isIntersecting){tl.classList.add('in');o.disconnect();}},{threshold:.4}).observe(tl);})();
-
-  /* ---------- Nav ---------- */
-  var btn=document.getElementById('menuBtn'), idx=document.getElementById('idx');
-  btn.addEventListener('click',function(){var o=idx.classList.toggle('open');btn.setAttribute('aria-expanded',o);});
-  idx.addEventListener('click',function(e){if(e.target.closest('a')){idx.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
-  var links=[].slice.call(idx.querySelectorAll('a:not(.go)')), secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
-  if('IntersectionObserver' in window){
-    var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a,i){a.classList.toggle('on',secs[i]===e.target);});}});},{rootMargin:'-40% 0px -55% 0px'});
-    secs.forEach(function(s){if(s)so.observe(s);});
-  }
-  var rv=[].slice.call(document.querySelectorAll('.rv'));
-  if('IntersectionObserver' in window && !reduce){
-    var io=new IntersectionObserver(function(es){es.filter(function(e){return e.isIntersecting;}).sort(function(a,b){return a.boundingClientRect.top-b.boundingClientRect.top;}).forEach(function(e,i){e.target.style.transitionDelay=(i*60)+'ms';e.target.classList.add('in');io.unobserve(e.target);});},{rootMargin:'0px 0px -6% 0px',threshold:.1});
-    rv.forEach(function(el){io.observe(el);});
-  } else rv.forEach(function(el){el.classList.add('in');});
-})();
-</script>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/scan.js" defer></script>
 </body>
 </html>
