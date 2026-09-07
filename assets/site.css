@@ -340,7 +340,7 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
 }
 @media (max-width:900px){
   .idx{display:none}
-  .idx.open{display:flex;position:absolute;left:0;right:0;width:100%;justify-self:stretch;top:64px;flex-direction:column;align-items:stretch;gap:0;background:var(--void);border-bottom:1px solid var(--line);padding:0 var(--g) 8px}
+  .idx.open{display:flex;position:absolute;left:0;right:0;width:100%;justify-self:stretch;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--void);border-bottom:1px solid var(--line);padding:0 var(--g) 8px}
   .idx.open a{padding:16px 0;border-top:1px solid var(--line);border-bottom:0;font-size:18px}
   .idx.open a.go{margin:12px 0 0;padding:14px;text-align:center}
   .menu{display:inline-flex;grid-column:9/13;justify-self:end}
