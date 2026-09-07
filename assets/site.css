@@ -338,14 +338,16 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
   .tl .bar{grid-template-columns:1fr} .tl .bar span{height:48px} .tl .steps{grid-template-columns:1fr}
   .toc-h{flex-direction:column;gap:2px}
 }
-@media (max-width:720px){
-  .top .grid{height:60px}
+@media (max-width:900px){
   .idx{display:none}
-  .idx.open{display:flex;position:absolute;left:0;right:0;width:100%;justify-self:stretch;top:60px;flex-direction:column;align-items:stretch;gap:0;background:var(--void);border-bottom:1px solid var(--line);padding:0 var(--g) 8px}
+  .idx.open{display:flex;position:absolute;left:0;right:0;width:100%;justify-self:stretch;top:64px;flex-direction:column;align-items:stretch;gap:0;background:var(--void);border-bottom:1px solid var(--line);padding:0 var(--g) 8px}
   .idx.open a{padding:16px 0;border-top:1px solid var(--line);border-bottom:0;font-size:18px}
   .idx.open a.go{margin:12px 0 0;padding:14px;text-align:center}
   .menu{display:inline-flex;grid-column:9/13;justify-self:end}
   .brand{grid-column:1/9}
+}
+@media (max-width:720px){
+  .top .grid{height:60px}
   .hero h1{font-size:clamp(28px,8vw,40px)}
   .inst .row{grid-template-columns:1fr;gap:10px} .inst .seg{width:100%} .inst .seg button{flex:1;min-width:0}
   .inst .prof .prow{grid-template-columns:1fr 72px 44px}
