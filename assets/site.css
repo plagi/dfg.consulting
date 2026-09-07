@@ -326,7 +326,7 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
   .svc{grid-template-columns:1fr}
   .tl .steps{grid-template-columns:1fr;row-gap:22px}
   .form{grid-template-columns:1fr} .form .full,.form .send,.form .ok{grid-column:1}
-  footer .c1,footer .c2,footer .c3,footer .c4,footer .reg{grid-column:1/13}
+  footer .c1,footer .c2,footer .c3,footer .c4,footer .reg{grid-column:1/13} footer .grid{row-gap:22px} footer .reg{margin-top:0}
   .areas{grid-template-columns:1fr 1fr}
   .stage-p{grid-template-columns:1fr} .fig{min-height:280px;border-right:0;border-bottom:1px solid var(--line)} .srow{grid-template-columns:1fr;gap:6px;padding:14px 20px}
   .tabs{grid-template-columns:1fr 1fr}
@@ -335,7 +335,8 @@ footer .reg{grid-column:1/10;margin-top:20px;padding-top:14px;border-top:1px sol
   .card ul{grid-template-columns:1fr}
   .tool-main,.tool-side{grid-column:1/13} .tool-side{position:static;margin-top:28px}
   .next{grid-template-columns:1fr;gap:14px}
-  .tl .bar span{padding:0 10px;font-size:12.5px} .tl .bar span b{font-size:13px}
+  .tl .bar{grid-template-columns:1fr} .tl .bar span{height:48px} .tl .steps{grid-template-columns:1fr}
+  .toc-h{flex-direction:column;gap:2px}
 }
 @media (max-width:720px){
   .top .grid{height:60px}

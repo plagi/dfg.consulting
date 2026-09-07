@@ -38,7 +38,7 @@
       out.x=W*0.5+f*vx/vz2; out.y=H*(W<700?0.42:0.56)-f*vy2/vz2; out.d=vz2; return true;
     }
     function draw(ts){
-      if(t0===null)t0=ts-sweepT*0.42; var el=(ts-t0)%(sweepT+holdT); var s=Math.min(1,el/sweepT); // sweep position 0..1 across x
+      if(t0===null)t0=ts-sweepT*(W<700?0.7:0.42); var el=(ts-t0)%(sweepT+holdT); var s=Math.min(1,el/sweepT); // sweep position 0..1 across x
       var e=s*s*(3-2*s); var sx=X0+(X1-X0)*e;
       if(!reduce) yaw=Math.sin(ts*0.00012)*0.035;
       ctx.fillStyle='#0A0C10'; ctx.fillRect(0,0,W,H);
