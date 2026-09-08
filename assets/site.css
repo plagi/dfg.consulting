@@ -408,6 +408,24 @@ main > section {
 .deliverables {
   margin-top: 32px;
 }
+.mark {
+  display: block;
+  width: 36px;
+  height: 36px;
+  color: var(--signal);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  flex: none;
+}
+.deliverables dt .mark {
+  margin-bottom: 10px;
+}
+.offer .mark {
+  margin-bottom: -4px;
+}
 .deliverables dt a {
   color: inherit;
   text-decoration: none;
