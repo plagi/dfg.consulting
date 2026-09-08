@@ -423,8 +423,16 @@ main > section {
 .deliverables dt .mark {
   margin-bottom: 10px;
 }
-.offer .mark {
-  margin-bottom: -4px;
+.offer-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.deliverables dt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .deliverables dt a {
   color: inherit;
@@ -1280,6 +1288,18 @@ td {
   .sample-rows > div {
     grid-template-columns: 1fr;
     gap: 6px;
+  }
+  .deliverables dt,
+  .offer-head {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  .deliverables dt .mark,
+  .offer-head .mark {
+    width: 30px;
+    height: 30px;
+    margin: 0;
   }
   .output-links {
     gap: 16px;
