@@ -4,10 +4,10 @@
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var tabs=[].slice.call(root.querySelectorAll('.tab')), panels=[].slice.call(root.querySelectorAll('.rows'));
   var cap=document.getElementById('stageCap');
-  var CAP=['The ground is surveyed and the plots are marked. Nothing is built until the plan says what, where and by whom.',
-           'One structure goes up and is made to stand: the first use-case in production, the first partner signed, the first audit passed.',
-           'More structures, streets between them, and the risk moves to vendors, cost and control.',
-           'A city that runs: governance, rehearsed incident plans, and a perimeter that is checked, not assumed.'];
+  var CAP=['No system is running yet. The work is to decide what to build, who is accountable, and what it will cost.',
+           'A pilot works. The work is to make it run in production with an owner, a measure of success, and terms that allow it to be operated.',
+           'Several systems are running. The work is vendor oversight, cost reporting and a defined approval path.',
+           'The business depends on the systems. The work is governance, an exercised incident plan, and assurance from critical third parties.'];
   var CYCLE=9000, timer=null, cur=-1, manual=false;
   var c=document.getElementById('stageCanvas');
   var w=new DFGWorld.World(c,{bx:4,by:3,bg:'#11141A',seed:2026,fit:0.86,tx:0.5,ty:0.5,fitMobile:0.9,txMobile:0.5,tyMobile:0.48,hmax:1.6});
