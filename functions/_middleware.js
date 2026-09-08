@@ -11,5 +11,7 @@ export async function onRequest({ request, next }) {
     url.protocol = 'https:';
     return Response.redirect(url.toString(), 301);
   }
+  var moved={'/bank-onboarding':'/fintech-readiness','/iso-27001':'/security-check'};
+  if(moved[url.pathname]){url.pathname=moved[url.pathname];return Response.redirect(url.toString(),301);}
   return next();
 }

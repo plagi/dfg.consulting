@@ -133,105 +133,122 @@
     }
   };
 
-  /* ================= 02 Bank: an evidence review with a timeline ================= */
-  var TRI=['In place','Partly','Not yet'];
-  var WHEN={id:'when',k:'The date',q:'When does the review expect the file?',o:[O('4','Within 30 days','Thirty days closes nothing that is not already written. It is enough to assemble what exists and to be honest about the rest.','',0),O('8','Within 60 days','Sixty days is one hard stop, if the people are named on day one.','',0),O('13','Within 90 days','Ninety days is a realistic review cycle if the hard stops are started this week.','',0),O('0','No date yet','Then the list is the order of work, and the date is yours to set.','',0)]};
-  var BANK={
-    key:'bank',name:'Bank onboarding review',kind:'list',
-    intake:[{id:'who',k:'The review',q:'Whose review is it?',o:[
-      O('sponsor','A sponsor bank or banking-as-a-service partner','A sponsor bank\'s third-party review runs in the order of this list and opens with the first three groups.','',0),
-      O('network','A card network or scheme','A scheme weighs security and financial standing more heavily; PCI DSS scope and the attestation move to the front.','',0),
-      O('enterprise','An enterprise customer\'s due diligence','A security and privacy review with a procurement wrapper; the information-security and data groups decide it.','',0),
-      O('prep','Nobody yet; preparing','The cheap way to do this. Most of the list takes weeks to produce and days to review.','',0)]},WHEN],
-    title:'Mark each item as it stands today.',
-    intro:'In place means the document exists and is current. Partly means it exists but is out of date or incomplete. The first three groups are the ones a review stops on.',
-    gate:['Entity and ownership','Regulatory and licensing','Financial crime'],
-    groups:[
-      ['Entity and ownership',[['Corporate documents: incorporation, shareholder and UBO chart, directors and their fit-and-proper status, source of funds','',1,'The reviewer wants the shareholder chart down to natural persons, and will screen the directors against sanctions and PEP lists themselves.']]],
-      ['Regulatory and licensing',[['Written confirmation of regulatory status in each market: licence, registration, or a legal opinion on exemption','',4,'A licence number or a dated legal opinion, per market. "We are applying" is not a status.'],['A register of regulatory obligations, with an owner and a change log','',2,'The rules you are subject to, each with an owner and a record of changes. Most fintechs have the policies and not the register.']]],
-      ['Financial crime',[['AML and KYC programme documented, with a named MLRO or compliance officer','',5,'The programme plus the MLRO\'s name and appointment. The reviewer asks whether the MLRO reports to the board.'],['Business-wide risk assessment, customer risk rating, transaction monitoring and suspicious-activity reporting, with records','',4,'The risk assessment dated within the year, the customer risk model, and evidence of alerts handled and reports filed. A policy without alerts is partly.'],['Sanctions and PEP screening in operation, with records of alerts handled','',3,'Screening at onboarding and ongoing, with the log of hits and the decisions taken. The reviewer samples the log, not the policy.']]],
-      ['Information security',[['SOC 2 Type II or ISO 27001 certificate, or a dated audit plan the bank can review','',2,'A certificate, or a signed audit plan with dates. A gap assessment is not an audit plan.'],['PCI DSS scope and attestation, where card data is touched','',6,'The scope statement and the attestation for that scope. If you never touch card data, say so in writing, with the architecture to prove it.'],['Penetration test report from the last twelve months, with remediation status','',4,'The report, the retest, and the status of each finding. A report with open highs is worse than no report.']]],
-      ['Data and privacy',[['Data-flow map and a data-residency position for each market','',2,'Where personal and transaction data is stored and processed, per market, with the residency position in writing.'],['Privacy notices and a data-processing agreement template the bank\'s counsel can mark up','',2,'The public notices and a DPA template. Reviews stall on the DPA, not on the notice.']]],
-      ['Operational resilience',[['Incident-response and business-continuity plans, tested in the last twelve months','',3,'Both plans and the record of the last test, with findings. Tested means a dated exercise with names.'],['Critical third parties listed (cloud, KYC vendor, processors), each with its own assurance on file','',2,'The list, and each provider\'s own assurance: SOC 2, ISO, or a completed questionnaire. The bank\'s outsourcing rules apply to your outsourcing too.']]],
-      ['Financial standing',[['Audited or reviewed accounts, with twelve months of runway shown','',3,'Accounts and a runway statement. Pre-revenue is acceptable; unexplained is not.']]],
-      ['Technology',[['Integration architecture written down: APIs, environments, responsibilities, and the change process','',2,'Diagram, environments, who is responsible for what, and how changes are approved. The bank\'s technology team reads this before anyone else.']]]
-    ],
-    result:function(ans,items){
-      var who=ans.who.v, dl=parseInt(ans.when.v,10);
-      var wk=function(it){return it.s===1?Math.ceil(it.wk/2):it.s===2?it.wk:it.s<0?it.wk:0;};
-      var hard=items.filter(function(it){return BANK.gate.indexOf(it.g)>=0&&it.s!==0;});
-      var rest=items.filter(function(it){return BANK.gate.indexOf(it.g)<0&&it.s!==0;});
-      var byG={};hard.forEach(function(it){byG[it.g]=(byG[it.g]||0)+wk(it);});
-      var open=hard.length?Math.max.apply(null,Object.keys(byG).map(function(g){return byG[g];})):0;
-      var restW=rest.length?Math.max.apply(null,rest.map(wk)):0;
-      var total=open+Math.max(restW,1)+4;
-      var crit=hard.length?hard.slice().sort(function(a,b){return wk(b)-wk(a);})[0]:(rest.length?rest.slice().sort(function(a,b){return wk(b)-wk(a);})[0]:null);
-      var title=hard.length?(hard.length===1?'The file does not open yet. One hard stop.':'The file does not open yet. '+hard.length+' hard stops.'):rest.length?'The file opens. About '+total+' weeks to onboard.':'Ready. The review can start today.';
-      var lead=hard.length?'A bank\'s review opens with who you are, your regulatory status and the financial-crime programme, and stops at the first of those it cannot see. On these answers the file opens in about '+open+' weeks, and onboarding completes in about '+total+', counting four for the bank\'s own cycle.'
-        :rest.length?'Who you are, your status and the financial-crime programme are in place, so the review opens. The remaining items decide the timeline: about '+total+' weeks, counting four for the bank\'s own cycle.'
-        :'Everything a third-party review works from exists. What remains is the bank\'s own cycle, usually four to six weeks.';
-      var whoLine={sponsor:'A sponsor bank reads the list in this order and will not read past a hard stop.',network:'A scheme reads security and financial standing first; PCI DSS scope and the attestation carry more weight than in a bank review.',enterprise:'An enterprise customer\'s procurement team will spend most of its time on the information-security and data groups, and will ask for the DPA before the notice.',prep:'Without a counterparty, this list is the order of work, and the weeks are the schedule.'}[who];
-      var findings=[];hard.forEach(function(it){findings.push(it.t.split(':')[0]+': '+(it.s===1?'partly':'not yet')+'. Hard stop, about '+wk(it)+' weeks. '+it.n);});
-      rest.slice(0,4).forEach(function(it){findings.push(it.t.split(':')[0]+': '+(it.s===1?'partly':it.s===2?'not yet':'not marked')+', about '+wk(it)+' weeks. '+it.n);});
-      if(!findings.length)findings.push('Nothing open. Expect the reviewer to sample the logs behind the financial-crime items rather than the documents.');
-      var order=hard.map(function(it){return {w:wk(it)+' wk',t:it.t.split(':')[0]};}).concat(rest.map(function(it){return {w:wk(it)+' wk',t:it.t.split(':')[0]};})).slice(0,7);
-      var date='';if(dl){date=total<=dl?(dl-total>0?'Against your date: on time, with about '+(dl-total)+' weeks of margin.':'Against your date: on time, with no margin.'):'Against your date: about '+(total-dl)+' weeks late on these answers. The compressed route is to start every hard stop in the same week with a named owner each, and to assemble the rest as it exists rather than as it should be.';}
-      var asks=hard.length?['Who is the MLRO, and who do they report to?','Which regulator, and under what status, in each market?','Who are the natural persons behind the shareholding?']:['Which of these documents is dated within the last twelve months?','Who holds our customers\' data, and what assurance do you hold on them?','How do changes to the integration get approved?'];
-      var fit=hard.length?'Do you need us? The hard stops are the work. If nobody in-house has written an AML programme or obtained a regulatory opinion, that is where an adviser earns the fee. The rest of the list you can prepare yourselves, with this as the checklist.'
-        :rest.length?'Do you need us? Probably not for the review itself. Where we add something is sitting alongside it and answering the bank\'s follow-up questions in the order they come.'
-        :'Do you need us? No. Send the file.';
-      var summary='Review: '+ans.who.t+'. Date: '+ans.when.t+'.\n'+BANK.name+': '+title+' File opens ~'+open+' wk; onboarding ~'+total+' wk.\n'+(date?date+'\n':'')+'Findings:\n'+findings.map(function(f){return '- '+f;}).join('\n');
-      return {title:title,lead:lead,lead2:whoLine+(date?' '+date:''),findings:findings,asksLabel:'What the reviewer will ask in the first call',asks:asks,order:order,fit:fit,summary:summary,crit:crit};
+  /* ================= 02 Fintech: product, model, market, licence, providers, partners ================= */
+  var FIN_STEPS={
+    stage:{id:'stage',k:'Where you are',q:'Where is the product?',o:[
+      O('idea','An idea and a deck','Nothing to test yet except the customer. The first evidence to get is that someone will pay, and for what.','No product yet; the first work is customer evidence.',3,'evidence'),
+      O('proto','A prototype, no paying customers','The product exists; the business model does not. Pricing and cost to serve decide whether it ever will.','A prototype without a tested business model.',3,'model'),
+      O('live','Live, with paying customers','Product and model exist. The questions turn to the next market, its licence, and the partners it needs.','A live product; the next decisions are market, licence and partners.',1,'market'),
+      O('scaling','Scaling into new markets or segments','Each market has its own licensing landscape and its own partners. Entering them in the wrong order costs a year.','Scaling into markets with different licensing and partners.',2,'market')]},
+    customer:{id:'customer',k:'Customers',q:'Who pays, and do you know why?',o:[
+      O('none','Nobody yet','Interest is not evidence. Ten conversations with a price on the table are.','No paying customer, and no price has been tested.',4,'evidence'),
+      O('pilots','A few pilots, unpaid','Unpaid pilots test the product, not the model. Put a price on the next one.','Unpaid pilots; the price has not been tested.',3,'evidence'),
+      O('guess','Paying customers, at a price we guessed','A guessed price is a price that will be renegotiated. Cost to serve says where it should sit.','Paying customers at an untested price.',2,'model'),
+      O('tested','Paying customers, at a price we tested','Then the model can be written down and defended.','',0)]},
+    model:{id:'model',k:'The model',q:'Do you know the unit economics?',o:[
+      O('no','No','Without cost to serve and cost to acquire, growth is a guess with a burn rate.','Unit economics are unknown.',4,'model'),
+      O('rough','Roughly, in a spreadsheet','A spreadsheet is fine if the inputs are measured rather than assumed. Check which ones are.','Unit economics are estimated, not measured.',2,'model'),
+      O('yes','Yes: pricing, cost to serve, cost to acquire, payback','That is the page an investor reads first.','',0)]},
+    licence:{id:'licence',k:'Licensing',q:'Does the product need a licence in the market you are entering?',o:[
+      O('unknown','We do not know','Then nothing else is decided. The licensing landscape is the first week of a fintech Diagnosis.','The licensing requirement in the target market is unknown.',4,'licence'),
+      O('lawyer','A lawyer gave a view','A view is not a plan. Which activities fall under which regime, and what can launch unregulated first.','A legal view exists; the licensing path is not planned.',3,'licence'),
+      O('partner','We will operate under a licensed partner','Then the partner is your regulator too, and its onboarding review is the next gate.','The product depends on a licensed partner and its onboarding review.',2,'partners'),
+      O('own','We hold, or are applying for, our own','Applications take longer than products. Sequence the launch around the date, not the hope.','Own licence held or in application; the launch has to be sequenced around it.',1,'licence')]},
+    market:{id:'market',k:'The market',q:'Which market next, and why?',o:[
+      O('undecided','Undecided','A market is chosen on three things: customers you can reach, a licence you can get, and a partner who will onboard you.','The next market is undecided.',3,'market'),
+      O('size','The biggest opportunity','The biggest market is usually the slowest to license. Check the order before the budget.','The next market was chosen on size rather than on licence and partner availability.',3,'market'),
+      O('reach','The one we can license and reach','The right reason. Now the partners.','',0)]},
+    providers:{id:'providers',k:'Providers',q:'How were the providers chosen: KYC, payments, custody, core?',o:[
+      O('first','Whoever answered first','Providers chosen by response time are replaced within two years, at your cost.','Providers were chosen without a comparison.',3,'providers'),
+      O('price','Compared on price','Price is the smallest difference between providers. Exit terms and assurance are the large ones.','Providers were compared on price only.',2,'providers'),
+      O('terms','Compared on terms, exit and assurance','Then the ecosystem is a decision rather than an accident.','',0),
+      O('none','Not needed yet','They will be. Start the comparison before the need.','Providers are not yet selected.',1,'providers')]},
+    partners:{id:'partners',k:'Partners',q:'Where is the bank or card-network partnership?',o:[
+      O('none','Not needed','Check the licence answer. Most fintech products run on someone else\'s rails.','',0),
+      O('notstarted','Needed, not started','A sponsor bank\'s review takes a quarter at best. Start with its evidence list.','A bank or network partnership is needed and has not started.',3,'partners'),
+      O('inreview','In a bank\'s review now','The review runs in the bank\'s order and stops at the first hard stop: entity documents, regulatory status, the financial-crime programme.','A bank\'s review is under way.',2,'partners'),
+      O('signed','Signed','Then the constraint moves to integration and the change process.','',0)]},
+    plan:{id:'plan',k:'The plan',q:'Is there a plan with owners, budget bands and the metrics to watch?',o:[
+      O('no','No','Then the answers above are opinions. A plan is what turns them into a sequence.','There is no plan with owners and metrics.',2,'plan'),
+      O('deck','A deck','Decks persuade; plans get followed. The difference is owners and dates.','A deck stands in for a plan.',2,'plan'),
+      O('yes','Yes','Good. A Diagnosis would test it against the licensing and the partners.','',0)]}
+  };
+  var FIN_BRANCH={idea:['customer','model','licence','plan'],proto:['customer','model','licence','plan'],live:['market','licence','providers','partners','plan'],scaling:['market','licence','providers','partners','plan']};
+  var FWORK={evidence:['Weeks 1-3','Ten customer conversations with a price on the table, written up.'],
+             model:['Weeks 2-4','Unit economics from measured inputs: pricing, cost to serve, cost to acquire, payback.'],
+             licence:['Weeks 1-2','The licensing landscape per market: which activities need a licence, and what can launch first.'],
+             market:['Weeks 2-4','Choose the next market on licence, reach and partner availability, in that order.'],
+             providers:['Weeks 3-6','Compare the providers on terms, exit and assurance, and contract accordingly.'],
+             partners:['Weeks 4-12','Design the partnership and prepare the evidence a bank\'s review will ask for, in its order.'],
+             plan:['Weeks 3-4','The plan: owners, sequence, budget bands, and the metrics that show within a quarter whether it works.']};
+  var FWORK_ORDER=['licence','evidence','model','market','providers','partners','plan'];
+  var FIN={
+    key:'fin',name:'Fintech readiness diagnosis',kind:'flow',
+    steps:function(ans){var s=[FIN_STEPS.stage];var st=ans.stage;if(st)FIN_BRANCH[st.v].forEach(function(id){s.push(FIN_STEPS[id]);});return s;},
+    result:function(ans,steps){
+      var st=ans.stage.v, picks=steps.map(function(x){return ans[x.id];}).filter(Boolean);
+      var findings=picks.filter(function(o){return o.w>0&&o!==ans.stage;}).sort(function(a,b){return b.w-a.w;}).slice(0,5);
+      var tags={};picks.forEach(function(o){if(o.tag)tags[o.tag]=1;});if(!tags.plan&&ans.plan&&ans.plan.w>0)tags.plan=1;
+      var order=FWORK_ORDER.filter(function(k){return tags[k];}).slice(0,5).map(function(k){return {w:FWORK[k][0],t:FWORK[k][1]};});
+      var heavy=findings.reduce(function(a,o){return a+o.w;},0);
+      var title=(st==='idea'||st==='proto')?(tags.evidence?'The product is ahead of the evidence.':tags.licence?'The model is there; the licence is not decided.':'A product with a model behind it.')
+        :(tags.licence||tags.market?'The next market is not yet a decision.':tags.partners?'The rails are the constraint.':tags.providers?'The product runs on providers chosen by accident.':'Ready for the next market.');
+      var lead={idea:'A fintech at this stage is decided by three things: whether anyone will pay, what it costs to serve them, and whether the product needs a licence where it launches. The findings say which of the three is unanswered.',
+        proto:'A prototype proves the product works. It does not prove the business does. The findings are what an investor or a partner bank would find missing in the first meeting.',
+        live:'With customers paying, the questions are where to go next and on whose licence and rails. The order of those decisions decides how long the next year takes.',
+        scaling:'Each new market brings a licensing landscape, providers and partners of its own. The findings are where the plan for the next market is thinner than the plan for the first.'}[st];
+      var asks=(st==='idea'||st==='proto')?['What does one customer pay, and what does it cost to serve them?','Which activity are you performing, and does it need a licence where you launch?','Who are the first ten customers, by name?']:['Under which licence do you operate in each market, and who is your compliance officer?','Which providers hold your customers\' money and data, and what assurance do you hold on them?','Where is the sponsor bank or the card programme, and what is the date?'];
+      var fit=(st==='idea'&&tags.evidence)?'Do you need us? Not yet. The next step is ten conversations with a price on the table, and nobody should be paid to have them for you. When you have the answers and need a model, a market and a licensing path written down, that is a Diagnosis.'
+        :(tags.partners&&ans.partners&&ans.partners.v==='inreview')?'Do you need us? For the review, perhaps. We have sat on the bank\'s side of it; the value is answering the questions in the bank\'s order and knowing which ones stop the file.'
+        :(heavy<=2)?'Do you need us? Probably not for a Diagnosis. The plan holds; what would help is a second reading of the licensing and the partner terms before you sign.'
+        :'Do you need us? This is what the fintech Diagnosis is for: two weeks on the segment, the model, the licensing landscape, the providers and the partners, and a plan with owners and budget bands.';
+      var summary='Stage: '+ans.stage.t+'.\n'+FIN.name+': '+title+'\nFindings:\n'+findings.map(function(o){return '- '+o.f;}).join('\n')+'\nOrder of work:\n'+order.map(function(w){return '- '+w.w+': '+w.t;}).join('\n');
+      return {title:title,lead:lead,findings:findings.map(function(o){return o.f;}),asksLabel:'What an investor, a partner bank or a regulator will ask',asks:asks,order:order,fit:fit,summary:summary};
     }
   };
 
-  /* ================= 03 ISO: an audit dry run ================= */
+  /* ================= 03 Security: what a customer's due-diligence review asks ================= */
+  var TRI=['In place','Partly','Not yet'];
   var SEC={
-    key:'sec',name:'ISO 27001 audit dry run',kind:'list',
-    intake:[{id:'why',k:'Why now',q:'Why now?',o:[
-      O('quest','A customer\'s security questionnaire','A questionnaire is answered from the same evidence an auditor samples. The gap list tells you which answers have dates.','',0),
-      O('first','A first ISO 27001 certification','A first certification runs Stage 1 on the management-system items, then Stage 2 on the controls.','',0),
-      O('soc2','SOC 2, alongside or instead','SOC 2 maps onto most of this list; the differences are the trust services criteria and the observation period.','',0),
-      O('recert','A surveillance or recertification audit','A surveillance audit samples what changed and what was found last time.','',0),
-      O('posture','No audit dated; I want to know where we stand','Then the list is the order of work.','',0)]},
-      {id:'when',k:'The date',q:'When is it due?',o:[O('4','Within 30 days','Thirty days is enough to assemble evidence, not to create controls.','',0),O('13','Within 90 days','Ninety days closes most technical gaps and one or two management-system items.','',0),O('26','Within six months','Six months is a realistic first-certification runway, including the operating evidence.','',0),O('0','Not dated','Then start with the two management-system items; everything else waits on them.','',0)]},
-      {id:'estate',k:'The estate',q:'Where does the estate run?',o:[O('cloud','Cloud-native, no offices with servers','Physical controls fall to the providers; the cloud and supplier items carry the weight.','',0),O('mixed','Mixed cloud and on-premise','Both sets of evidence, and a scope statement that says which is which.','',0),O('onprem','Mostly on-premise','Physical entry and backup restore evidence come back into scope.','',0)]}],
+    key:'sec',name:'Security due-diligence check',kind:'list',
+    intake:[{id:'who',k:'Who is asking',q:'Who is asking?',o:[
+      O('customer','A customer\'s security questionnaire','A customer\'s security team reads the answers, then asks for the evidence behind three or four of them.','',0),
+      O('partner','A bank or partner\'s third-party review','A third-party review is a questionnaire with a deadline and a person who can say no.','',0),
+      O('investor','An investor\'s due diligence','Investors ask fewer questions and want dates on all of them.','',0),
+      O('board','Nobody yet; the board wants to know where we stand','Then this is the order of work, and the date is yours.','',0)]},
+      {id:'when',k:'The date',q:'When is it due?',o:[O('2','Within two weeks','Two weeks is enough to assemble what exists and to be honest about the rest.','',0),O('4','Within 30 days','Thirty days closes the quick items: MFA, the policy, the supplier register.','',0),O('13','Within 90 days','Ninety days closes most of the list if the owners are named this week.','',0),O('0','No date','Then the list is the plan.','',0)]},
+      {id:'estate',k:'The estate',q:'Where does the estate run?',o:[O('cloud','Cloud-native, no servers of our own','The cloud and supplier items carry most of the weight; your customers\' data sits with your providers.','',0),O('mixed','Mixed cloud and on-premise','Both kinds of evidence, and a scope statement that says which system is which.','',0),O('onprem','Mostly on-premise','Backup restores and access reviews are the two a reviewer asks to see performed.','',0)]}],
     title:'Mark each item as it stands today.',
-    intro:'In place means written, operating, and evidenced. Partly means one of those three is missing. The first two items are what a Stage 1 audit opens with; the rest are the Annex A controls sampled first.',
-    majors:['Scope, risk assessment and risk treatment plan, current and approved','Statement of Applicability, with a justification for every included and excluded control','Access control policy, with identity and access-rights procedures for joiners, movers and leavers','Multi-factor authentication on email, cloud consoles and remote access','Backups taken, tested by restore, and stored separately','Privileged access restricted, logged and reviewed quarterly'],
+    intro:'In place means it is written, it operates, and there is evidence. Partly means one of the three is missing. The list is in the order a reviewer works through it.',
     groups:[
-      ['Management system',[['Scope, risk assessment and risk treatment plan, current and approved','Cl. 4.3, 6.1.2',3,'The auditor reads the scope first and the risk assessment second. A risk register without treatment decisions and dates is partly.'],['Statement of Applicability, with a justification for every included and excluded control','Cl. 6.1.3',2,'Every control included or excluded with a reason. "Not applicable" without a reason is a finding on day one.']]],
-      ['Organisational controls',[['Information security policy approved by management and reviewed within the last year','A.5.1',1,'Approved with a date, and reviewed within the year. The auditor asks who approved it and when it was last read.'],['Inventory of information and associated assets, each with a named owner','A.5.9',3,'Systems, data and devices, each with a named owner. The auditor picks three at random and asks the owners.'],['Access control policy, with identity and access-rights procedures for joiners, movers and leavers','A.5.15, A.5.18',2,'The policy, plus evidence of a leaver removed on time. One leaver with access still open is a major.'],['Supplier security requirements in agreements, with a supplier register','A.5.19, A.5.20',3,'Security clauses in the contracts and a register of who holds your data. The auditor asks for the contract of your largest cloud or SaaS provider.'],['Cloud services: security requirements, and the responsibilities split with each provider','A.5.23',2,'What you are responsible for and what the provider is, per service. A shared-responsibility diagram is evidence; the provider\'s marketing page is not.'],['Incident management plan with roles, escalation and a contact list','A.5.24',2,'Roles, escalation, contacts, and the record of the last incident or exercise. The auditor asks what happened the last time something went wrong.']]],
-      ['People controls',[['Security awareness training for all staff in the last year, with attendance records','A.6.3',1,'Who attended, when, and what. A slide deck without an attendance list is partly.']]],
-      ['Technological controls',[['Privileged access restricted, logged and reviewed quarterly','A.8.2',2,'The list of privileged accounts and the record of the last quarterly review. The auditor samples the review, not the list.'],['Multi-factor authentication on email, cloud consoles and remote access','A.8.5',1,'Everywhere, including the console of every cloud provider and every remote path. One admin without MFA is a finding.'],['Vulnerability management with defined patch windows and evidence of closure','A.8.8',3,'Patch windows defined, and evidence of a critical patched within the window. Scanner output alone is not closure.'],['Backups taken, tested by restore, and stored separately','A.8.13',2,'The date of the last restore test and who signed it. A backup job log is not evidence of restore.'],['Logging enabled on critical systems, protected from change and reviewed','A.8.15',3,'Which systems log, where the logs go, who reviews them, and that they cannot be edited. The auditor asks for a review record.']]]
+      ['Governance',[['A security policy approved by management, with a named owner, reviewed within the year','ISO 27001 A.5.1',1,'The reviewer asks who approved it, when, and who owns it now.'],['A risk assessment with treatment decisions: what is accepted, what is being fixed, by whom','ISO 27001 6.1.2',3,'A register of risks with no decisions is a list. The reviewer wants the decisions and the dates.']]],
+      ['Access',[['Multi-factor authentication on email, cloud consoles and remote access, with no exceptions','A.8.5 · SOC 2 CC6.1',1,'Everywhere, including every cloud console and every remote path. One admin without it is the finding.'],['Joiner, mover and leaver procedures, with evidence that the last leaver was removed on time','A.5.18 · CC6.2',2,'The reviewer asks for the last leaver and the date access was removed.'],['Privileged accounts listed and reviewed quarterly, with the review record','A.8.2 · CC6.3',2,'The list, and the record of the last review. The reviewer samples the review, not the list.']]],
+      ['Data',[['An inventory of the systems and data that hold customer information, each with an owner','A.5.9 · CC3',3,'Which systems hold customer data, where, and who owns each. The reviewer picks three and asks the owners.'],['Encryption in transit and at rest, and who holds the keys','A.8.24 · CC6.7',2,'Encryption is assumed; key management is asked about. Who can decrypt, and how is that reviewed?']]],
+      ['Suppliers and cloud',[['A register of the suppliers that hold your data, each with its own assurance on file','A.5.19 · CC9.2',3,'The register, and for each supplier a SOC 2 report, an ISO certificate, or a completed questionnaire.'],['The split of responsibilities with each cloud provider, written down per service','A.5.23',2,'What the provider secures and what you do, per service. A shared-responsibility diagram is evidence; their marketing page is not.']]],
+      ['Operations',[['Vulnerability management with defined patch windows, and evidence that a critical was closed inside one','A.8.8 · CC7.1',3,'Patch windows defined, and one example of a critical closed within the window. Scanner output alone is not closure.'],['Change management for production, with approvals recorded','A.8.32 · CC8.1',2,'Who approves a production change, and the record of the last ten.'],['Logging on critical systems, protected from change, with a review record','A.8.15 · CC7.2',3,'Which systems log, where the logs go, who reviews them, and that they cannot be edited.']]],
+      ['Resilience',[['Backups taken, tested by restore, and stored separately from production','A.8.13 · A1.2',2,'The date of the last restore test and who signed it. A backup job log is not evidence of a restore.'],['An incident-response plan with roles, escalation and customer notification, rehearsed within the year','A.5.24 · CC7.4',2,'The plan, the record of the last rehearsal, and how customers would be told. The reviewer asks about the last real incident.']]]
     ],
     result:function(ans,items){
-      var why=ans.why.v, dl=parseInt(ans.when.v,10);
-      var wk=function(it){return it.s===1?Math.ceil(it.wk/2):it.s===2||it.s<0?it.wk:0;};
-      var mg=items.filter(function(it){return it.g==='Management system'&&it.s!==0;});
-      var majors=items.filter(function(it){return SEC.majors.indexOf(it.t)>=0&&(it.s===2||it.s<0)&&it.g!=='Management system';});
-      var minors=items.filter(function(it){return it.s!==0&&mg.indexOf(it)<0&&majors.indexOf(it)<0;});
-      var inPlace=items.filter(function(it){return it.s===0;}).length;
-      var mgW=mg.length?Math.max.apply(null,mg.map(wk)):0, otherW=items.filter(function(it){return it.s!==0&&it.g!=='Management system';}).map(wk);
-      var total=mgW+(otherW.length?Math.max.apply(null,otherW):0);
-      var title=mg.length?'Stage 1 would stop at the management system.':majors.length?'Stage 1 passes. '+majors.length+(majors.length===1?' likely major':' likely majors')+' at Stage 2.':minors.length?'Stage 1 and Stage 2 pass on paper, with minors.':'Audit-ready on paper. What remains is evidence over time.';
-      var lead=mg.length?'An auditor reads the scope and the risk assessment before any control. Without them the visit ends at Stage 1, whatever the technical controls look like. About '+mgW+' weeks to close the management system, then '+(otherW.length?Math.max.apply(null,otherW):0)+' for the rest: about '+total+' weeks to a Stage 1 with confidence, plus one to three months of operating evidence before Stage 2.'
-        :majors.length?'The management system exists, so Stage 1 opens. The items below are the ones an auditor writes up as major nonconformities: not policies, but controls that are not operating. About '+total+' weeks to close them, then the operating evidence.'
-        :'The controls sampled first are in place. Expect minor findings on evidence quality; the aim is no majors at Stage 2. About '+total+' weeks to tidy what is partly.';
-      var whyLine={quest:'For the questionnaire: you can answer '+inPlace+' of '+items.length+' with evidence today; the rest need a date, and an honest date beats a hopeful yes.',first:'For a first certification, the order is the management system, then access and privileged accounts, then everything the auditor samples with a log.',soc2:'For SOC 2, the same evidence serves; add the observation period to the timeline and map the controls to the trust services criteria.',recert:'For a surveillance audit, closed findings from last time come first; the auditor opens with them.',posture:'Without a date, treat the order below as the plan; the first two items are decisions, not documents.'}[why];
-      var estLine={cloud:'Cloud-native: the supplier and cloud items carry your customers\' data; they matter more than the physical ones.',mixed:'Mixed estate: the scope statement has to say which systems are which, or the audit samples the wrong ones.',onprem:'On-premise: restore tests and privileged-access reviews are the two the auditor asks to see performed, not described.'}[ans.estate.v];
-      var findings=[];mg.forEach(function(it){findings.push('Stage 1 stop: '+it.t.split(',')[0]+' ('+it.c+'). '+it.n);});
-      majors.forEach(function(it){findings.push('Likely major: '+it.t.split(',')[0]+' ('+it.c+'). '+it.n);});
-      minors.slice(0,3).forEach(function(it){findings.push('Minor: '+it.t.split(',')[0]+' ('+it.c+'). '+it.n);});
-      if(!findings.length)findings.push('Nothing open on paper. The auditor will now ask for records that show each control operating over time.');
-      var order=mg.concat(majors,minors).map(function(it){return {w:wk(it)+' wk',t:it.t.split(',')[0]+' ('+it.c+')'};}).slice(0,7);
-      var date='';if(dl){date=total<=dl?(dl-total>0?'Against your date: on time, with about '+(dl-total)+' weeks of margin before the operating evidence.':'Against your date: on time, with no margin before the operating evidence.'):'Against your date: about '+(total-dl)+' weeks late on these answers. What can be done by the date is the management system and the technical controls; the operating evidence cannot be compressed.';}
-      var asks=mg.length?['What is in scope, and what is deliberately out?','Show me the risk assessment and the date it was last reviewed.','Which controls did you exclude, and why?']:['Show me the last leaver and when their access was removed.','When was the last restore test, and who signed it?','Which privileged accounts exist, and who reviewed them last quarter?'];
-      var fit=mg.length?'Do you need us? Not for the first items. Scope, the risk assessment and the Statement of Applicability are management decisions; an adviser can draft them, but the decisions are yours. A Diagnosis makes sense once they exist.'
-        :majors.length?'Do you need us? For the order and the evidence standard. The gaps are known; what stalls audits is closing items in the wrong order and calling a document in place.'
-        :'Do you need us? Probably not for the audit. A two-week pre-audit review of the evidence is the most we would suggest.';
-      var summary='Why: '+ans.why.t+'. Date: '+ans.when.t+'. Estate: '+ans.estate.t+'.\n'+SEC.name+': '+title+' ~'+total+' weeks to close.\n'+(date?date+'\n':'')+'Findings:\n'+findings.map(function(f){return '- '+f;}).join('\n');
-      return {title:title,lead:lead,lead2:whyLine+' '+estLine+(date?' '+date:''),findings:findings,asksLabel:'What the auditor will ask first',asks:asks,order:order,fit:fit,summary:summary};
+      var who=ans.who.v, dl=parseInt(ans.when.v,10);
+      var wk=function(it){return it.s===1?Math.ceil(it.wk/2):it.wk;};
+      var ok=items.filter(function(it){return it.s===0;}), open=items.filter(function(it){return it.s!==0;});
+      var total=open.length?Math.max.apply(null,open.map(wk)):0;
+      var weakest=open.slice().sort(function(a,b){return wk(b)-wk(a);});
+      var title='You can answer '+ok.length+' of '+items.length+' with evidence today.';
+      var lead=open.length?'A reviewer accepts an honest date more readily than a hopeful yes. The '+open.length+' open items below take about '+total+' weeks if their owners are named this week and the work runs in parallel; the longest single item sets the date.'
+        :'Everything a due-diligence review asks about is in place with evidence. What remains is answering the questionnaire in the reviewer\'s language, and having the evidence ready before it is asked for.';
+      var whoLine={customer:'A customer\'s security team will read the answers and ask for the evidence behind three or four of them, usually access, suppliers and incident response.',partner:'A bank or partner review has a deadline and a person who can say no. Send the honest answers early and the evidence as it exists.',investor:'An investor asks fewer questions and wants dates on all of them; the order of work below is the answer.',board:'For the board, the list below is the plan, and the weeks are the schedule.'}[who];
+      var estLine={cloud:'Cloud-native: the supplier and cloud items carry your customers\' data; they matter more than anything physical.',mixed:'Mixed estate: say which systems are which, or the reviewer samples the wrong ones.',onprem:'On-premise: the restore test and the access review are the two things a reviewer asks to see done, not described.'}[ans.estate.v];
+      var findings=weakest.slice(0,5).map(function(it){return it.t.split(',')[0]+': '+(it.s===1?'partly':it.s===2?'not yet':'not marked')+', about '+wk(it)+' weeks. '+it.n;});
+      if(!findings.length)findings.push('Nothing open. Expect the reviewer to sample the records behind access, suppliers and incident response rather than the documents.');
+      var order=open.map(function(it){return {w:wk(it)+' wk',t:it.t.split(',')[0]};}).slice(0,7);
+      var date='';if(dl){date=total<=dl?(dl-total>0?'Against your date: on time, with about '+(dl-total)+(dl-total===1?' week':' weeks')+' of margin.':'Against your date: on time, with no margin.'):'Against your date: about '+(total-dl)+(total-dl===1?' week':' weeks')+' short on these answers. What can be done by the date is the quick items and honest dates on the rest; reviewers accept dates, not silence.';}
+      var asks=['Show me the last leaver and when their access was removed.','Which suppliers hold our data, and what assurance do you hold on each?','When was the last restore test, and what happened in the last incident?'];
+      var fit=open.length>=8?'Do you need us? For the posture assessment and the order of remediation, yes. The list is known; what takes time is deciding what to accept, what to fix, and proving it with evidence. We prepare you for the review and, if there is one, for the audit; we do not perform audits.'
+        :open.length?'Do you need us? Perhaps for the questionnaire itself and the two or three items with the longest weeks. The rest your team can close with this as the list.'
+        :'Do you need us? No. Answer the questionnaire and have the evidence ready.';
+      var summary='Asking: '+ans.who.t+'. Date: '+ans.when.t+'. Estate: '+ans.estate.t+'.\n'+SEC.name+': '+title+' About '+total+' weeks to close the rest.\n'+(date?date+'\n':'')+'Open items:\n'+open.map(function(it){return '- '+it.t.split(',')[0]+' ['+(it.s===1?'partly':it.s===2?'not yet':'not marked')+']';}).join('\n');
+      return {title:title,lead:lead,lead2:whoLine+' '+estLine+(date?' '+date:''),findings:findings,asksLabel:'What the reviewer will ask on the call',asks:asks,order:order,fit:fit,summary:summary};
     }
   };
 
@@ -275,7 +292,7 @@
     function render(){removeBar();var steps=def.steps(ans);
       if(i>=steps.length){var R=def.result(ans,steps);return resultView(root,def,R,function(){ans={};i=0;render();});}
       var st=steps[i];
-      question(root,def,st,ans[st.id],function(o){var prev=ans[st.id];ans[st.id]=o;if(st.id==='situation'&&prev&&prev.v!==o.v){var keep={};keep.situation=o;ans=keep;}},
+      question(root,def,st,ans[st.id],function(o){var prev=ans[st.id];ans[st.id]=o;if(i===0&&prev&&prev.v!==o.v){var keep={};keep[st.id]=o;ans=keep;}},
         function(){if(!ans[st.id])return;i++;render();root.scrollIntoView({behavior:'auto',block:'nearest'});},i>0?function(){i--;render();}:null,
         'Question '+(i+1)+' of '+steps.length,i/steps.length,i===steps.length-1);}
     render();
@@ -309,6 +326,6 @@
     render();
   }
 
-  var DEFS={ai:AI,bank:BANK,sec:SEC};
+  var DEFS={ai:AI,fin:FIN,sec:SEC};
   document.querySelectorAll('[data-check]').forEach(function(root){var def=DEFS[root.getAttribute('data-check')];if(!def)return;if(def.kind==='flow')mountFlow(root,def);else mountList(root,def);});
 })();

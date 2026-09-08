@@ -97,6 +97,10 @@ section{padding:clamp(56px,7vw,96px) 0 clamp(48px,6vw,80px);border-top:1px solid
 .svc h3{font-family:var(--d);font-weight:500;font-size:clamp(20px,1.8vw,25px);letter-spacing:-.01em;line-height:1.15;text-wrap:balance}
 .svc .txt p{color:var(--bone-70);font-size:15.5px;text-wrap:pretty;max-width:46ch}
 .svc .txt .for{font-size:14.5px;color:var(--bone-70);border-top:1px solid var(--line);padding-top:12px;max-width:46ch}
+.svc .lead-s{color:var(--bone)!important;font-size:16.5px!important}
+.svc .get{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;border-top:1px solid var(--line);max-width:46ch;width:100%}
+.svc .get li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--bone-70);display:grid;grid-template-columns:14px 1fr;gap:10px} .svc .get li::before{content:"";width:6px;height:6px;background:var(--signal);margin-top:7px}
+.tl .prod{margin-top:10px;font-size:13.5px;color:var(--bone-45)}
 .toc{border:1px solid var(--line-2);background:var(--panel);font-size:14.5px}
 .toc-h,.toc-f{display:flex;justify-content:space-between;gap:12px;padding:12px 20px;font-family:var(--m);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-70)}
 .toc-h{border-bottom:1px solid var(--line)} .toc-f{border-top:1px solid var(--line);text-transform:none;letter-spacing:0;font-family:var(--t);font-size:13.5px;color:var(--bone-70)}

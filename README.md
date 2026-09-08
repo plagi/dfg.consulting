@@ -7,7 +7,7 @@ Static site, no build step. Six HTML pages sharing one stylesheet and three smal
 ## Files
 
 - `index.html` — homepage
-- `ai-readiness.html`, `bank-onboarding.html`, `iso-27001.html` — the three checks, one page each (served at clean URLs without `.html`)
+- `ai-readiness.html`, `fintech-readiness.html`, `security-check.html` — the three checks, one page each (served at clean URLs without `.html`)
 - `privacy.html`, `terms.html` — legal pages
 - `404.html` — not-found page
 - `assets/site.css` — all styles; `assets/site.js` — header, contact form; `assets/tools.js` — the three diagnostics (branching questions, computed findings and timelines); `assets/city.js` — the axonometric district (hero story and stage scenes); `assets/stage.js` — the stage switch
