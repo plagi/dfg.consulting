@@ -28,9 +28,9 @@ async function createPreview(port = 8080) {
       }
       const redirect = await onRequest({
         request: new Request("https://dfg.consulting" + req.url),
-        next: () => null,
+        next: () => new Response(null, { status: 204 }),
       });
-      if (redirect) {
+      if (redirect?.headers.has("location")) {
         const to = new URL(redirect.headers.get("location"));
         res.writeHead(redirect.status, {
           Location: to.pathname + to.search + to.hash,

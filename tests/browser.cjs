@@ -87,7 +87,7 @@ const { createPreview } = require("../scripts/preview.cjs");
         .locator("main > section")
         .evaluateAll((nodes) => nodes.map((n) => n.id)),
       ["outputs", "services", "method", "checks", "contact"],
-      "Homepage presents the work sample before services, process, tools and enquiry",
+      "Homepage presents deliverables before services, process, tools and enquiry",
     );
     await page.screenshot({
       path: path.join(artifacts, "homepage-desktop.png"),

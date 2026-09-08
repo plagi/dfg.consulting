@@ -2,6 +2,10 @@
 
 Date: 8 September 2026. Status: implementation specification; no website implementation or deployment is included in this planning task.
 
+## Confirmed delivery-model update
+
+The owner subsequently confirmed that DFG performs implementation both directly and through partners, depending on the task. This supersedes advisory-only restrictions in this original plan. Present assessment, planning, implementation and oversight as available engagement options. Define delivery responsibilities, acceptance criteria and handover per scope; do not imply that every capability is in-house. ISO certification remains excluded.
+
 ## Objective
 
 Make the website explain what a customer hires DFG to accomplish, what DFG actually does, what the customer receives and why the team is credible. Rebuild the assessment reasoning around those offers. Professionalism means concrete scope and defensible claims, not more formal synonyms.
