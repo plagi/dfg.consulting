@@ -24,5 +24,30 @@ export async function onRequest({ request, next }) {
     target.search = url.search;
     return Response.redirect(target.toString(), 301);
   }
-  return next();
+  const response = await next();
+  const type = response.headers.get("content-type") || "";
+  if (!type.includes("text/html")) return response;
+
+  /* Content Security Policy with a per-request nonce. Cloudflare reads the nonce from this
+     header and applies it to the scripts it injects (bot detection, analytics beacon), so
+     the policy can stay strict without 'unsafe-inline'. Our own scripts are external files. */
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  const nonce = btoa(String.fromCharCode(...bytes));
+  const csp = [
+    "default-src 'self'",
+    `script-src 'self' 'nonce-${nonce}' https://static.cloudflareinsights.com`,
+    "style-src 'self' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
+    "img-src 'self' data:",
+    "connect-src 'self' https://cloudflareinsights.com",
+    "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "object-src 'none'",
+    "upgrade-insecure-requests",
+  ].join("; ");
+  const out = new Response(response.body, response);
+  out.headers.set("Content-Security-Policy", csp);
+  return out;
 }
