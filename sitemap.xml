@@ -5,11 +5,9 @@
   <url><loc>https://dfg.consulting/fintech-readiness</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://dfg.consulting/security-check</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://dfg.consulting/expertise/ai-strategy</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dfg.consulting/expertise/data-and-it</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dfg.consulting/expertise/fintech-product</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dfg.consulting/expertise/partnerships</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dfg.consulting/expertise/security-posture</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dfg.consulting/expertise/incident-response</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://dfg.consulting/privacy</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://dfg.consulting/terms</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>

@@ -109,16 +109,11 @@
     w.buildings.forEach(function(b,i){var bb=Object.assign({},b);bb.t0=1300+(b.x0+b.y0)/w.DMAX*2600+300+r()*500;bb.rise=1100+r()*500;bb.fillAt=7400+i*45;bb.shopAt=9800+(i%7)*180;B.push(bb);pl.push({b:bb,t0:bb.t0-800});});
     for(var k=0;k<(mobile?10:26);k++)P2.push({});
     return {sweepT:2600,buildings:B,plots:pl,people:P2,ring:null,peopleAt:11200,parksAt:7000};}
-  /* the four stage scenes: surveyed plots; one structure rising; several built and more rising; the city running */
-  function stageScript(w,k){var r=rng(20+k),B=[],pl=[],P2=[];var all=w.buildings;
-    if(k===0){all.slice(0,3).forEach(function(b,i){var bb=Object.assign({},b);bb.t0=1e9;bb.rise=1;B.push(bb);pl.push({b:bb,t0:500+i*450});});}
-    if(k===1){var one=Object.assign({},all[Math.floor(all.length/2)]);one.t0=500;one.rise=1700;one.fillAt=2500;one.shopAt=1e9;B.push(one);pl.push({b:one,t0:0});
-      all.slice(0,2).forEach(function(b,i){var bb=Object.assign({},b);bb.t0=1e9;bb.rise=1;B.push(bb);pl.push({b:bb,t0:1500+i*500});});}
-    if(k===2){all.forEach(function(b,i){if(i%2)return;var bb=Object.assign({},b);var late=i%3===0;bb.t0=late?300+(i%5)*400:-4000;bb.rise=1300;bb.fillAt=late?bb.t0+1600:-2000;bb.shopAt=1e9;B.push(bb);if(late)pl.push({b:bb,t0:bb.t0-600});});}
-    if(k===3){all.forEach(function(b,i){var bb=Object.assign({},b);bb.t0=-5000;bb.rise=1000;bb.fillAt=-3000;bb.shopAt=200+(i%6)*150;B.push(bb);});for(var q=0;q<12;q++)P2.push({});}
-    return {sweepT:1,buildings:B,plots:pl,people:P2,ring:k===3?{t0:400}:null,peopleAt:k===3?800:1e9,parksAt:k>=2?0:1e9};}
-  window.DFGWorld={World:World,heroScript:heroScript,stageScript:stageScript};
+  window.DFGWorld={World:World,heroScript:heroScript};
 
   var hero=document.getElementById('scan');
-  if(hero){var mob=hero.clientWidth<700;var w=new World(hero,{bx:mob?5:7,by:mob?4:5,seed:7});w.setScript(heroScript(w,mob));w.play();window.__heroWorld=w;}
+  if(hero){var mob=hero.clientWidth<700;var w=new World(hero,{bx:mob?5:7,by:mob?4:5,seed:7});w.setScript(heroScript(w,mob));w.play();window.__heroWorld=w;
+    var toggle=document.getElementById('motion-toggle');
+    if(toggle){toggle.addEventListener('click',function(){var paused=toggle.getAttribute('aria-pressed')==='true';if(paused)w.play();else w.stop();toggle.setAttribute('aria-pressed',String(!paused));toggle.textContent=paused?'Pause illustration':'Play illustration';});}
+  }
 })();

@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 DIST="$(mktemp -d)"
 trap 'rm -rf "$DIST"' EXIT
-rsync -a --exclude .git --exclude .claude --exclude README.md --exclude .gitignore --exclude deploy.sh ./ "$DIST"/
+rsync -a --exclude .git --exclude .claude --exclude .agents --exclude .codex --exclude docs --exclude tests --exclude scripts --exclude node_modules --exclude package.json --exclude package-lock.json --exclude README.md --exclude .gitignore --exclude deploy.sh ./ "$DIST"/
 # Cache-busting: stamp every /assets/*.css|js reference with a version so the CDN never serves a stale file.
 VER="$(git rev-parse --short HEAD 2>/dev/null || date +%s)"
 if [ -n "$(git status --porcelain 2>/dev/null)" ]; then VER="${VER}-$(date +%s)"; fi
