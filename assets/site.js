@@ -81,17 +81,15 @@
     var h = document.getElementById("h1");
     if (!h || reduce) return;
     var words = h.textContent.trim().split(/\s+/);
-    h.innerHTML = words
-      .map(function (w, i) {
-        return (
-          '<span class="w" style="animation-delay:' +
-          (0.15 + i * 0.09) +
-          's">' +
-          w +
-          "</span>"
-        );
-      })
-      .join(" ");
+    h.textContent = "";
+    words.forEach(function (w, i) {
+      var span = document.createElement("span");
+      span.className = "w";
+      span.style.animationDelay = 0.15 + i * 0.09 + "s";
+      span.textContent = w;
+      if (i) h.appendChild(document.createTextNode(" "));
+      h.appendChild(span);
+    });
   })();
 
   /* Contact form: posts to /api/contact; falls back to composing an email if the endpoint is unavailable */

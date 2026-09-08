@@ -4,7 +4,7 @@ Implemented locally on 8 September 2026 against [the consolidated plan](DFG-WEBS
 
 ## Story and disclosure
 
-The homepage first locates the visitor's decision, then shows the outputs they can expect, explains engagement choices, offers an optional way to prepare and finally invites an enquiry. The same logic continues within service pages: situation → work → deliverable → client inputs and responsibilities → next step.
+The homepage introduces the offer, immediately shows an illustrative work sample, then presents services and engagement choices, offers optional self-assessments and finally invites an enquiry. Navigation and the hero's next-section link follow that order. The sample demonstrates the deliverable format; it is not presented as verified client evidence. The same logic continues within service pages: situation → work → deliverable → client inputs and responsibilities → next step.
 
 Four service pages contain the five agreed initial engagements. AI investment and pilot review are distinct offers on one page. Data and architecture reviews are scoped workstreams rather than a broad standalone product. Incident preparedness is within the security page, explicitly distinct from emergency response. The old URLs redirect to those subsections, including HTML and trailing-slash forms; their previous content remains recoverable from Git history.
 

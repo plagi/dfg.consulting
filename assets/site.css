@@ -1097,8 +1097,10 @@ td {
   .hero {
     min-height: 0;
     padding-top: 120px;
-    padding-bottom: 80px;
-    display: block;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
   .hero .copy {
     grid-column: 1/-1;
@@ -1107,15 +1109,27 @@ td {
   .hero h1 {
     font-size: 44px;
   }
+  /* On phones the district gets its own band under the copy instead of hiding behind it. */
   .hero canvas {
-    opacity: 0.3;
+    position: relative;
+    inset: auto;
+    order: 2;
+    display: block;
+    width: 100%;
+    height: clamp(240px, 76vw, 380px);
+    margin-top: 4px;
+    opacity: 1;
   }
   .hero .copy::before {
+    inset: -70px -120px -24px -80px;
     background: radial-gradient(
       ellipse at 35% 50%,
       rgba(10, 12, 16, 0.94) 25%,
       rgba(10, 12, 16, 0.3) 80%
     );
+  }
+  .motion-toggle {
+    display: none;
   }
   .sh {
     grid-column: 1/-1;
@@ -1196,7 +1210,7 @@ td {
   }
   .hero {
     padding-top: 120px;
-    padding-bottom: 80px;
+    padding-bottom: 0;
   }
   .hero h1 {
     font-size: clamp(32px, 8vw, 44px);
@@ -1209,9 +1223,6 @@ td {
   }
   .hero-actions {
     gap: 20px;
-  }
-  .motion-toggle {
-    bottom: 16px;
   }
   main > section {
     padding-block: 48px;

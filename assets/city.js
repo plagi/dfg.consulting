@@ -38,7 +38,7 @@
     var W=0,H=0,dpr=1,K=1,OX=0,OY=0;
     function P(wx,wy,wz){return {x:OX+(wx-wy)*K*0.8660254,y:OY+(wx+wy)*K*0.5-wz*K};}
     function size(){dpr=Math.min(2,window.devicePixelRatio||1);W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-      var mob=W<700, fit=mob?(opt.fitMobile||1.05):(opt.fit||0.62), tx=mob?(opt.txMobile||0.5):(opt.tx||0.66), ty=mob?(opt.tyMobile||0.5):(opt.ty||0.54);
+      var mob=W<700, fit=mob?(opt.fitMobile||0.96):(opt.fit||0.62), tx=mob?(opt.txMobile||0.5):(opt.tx||0.66), ty=mob?(opt.tyMobile||0.5):(opt.ty||0.54);
       var ww=(XW+YW+2*M)*0.8660254; K=fit*W/ww;
       var top=-(hmax)*K-M*K*0.5, bot=(XW+YW+2*M)*K*0.5; /* screen extents with OX=OY=0 around ground */
       OX=tx*W-((XW-YW))*K*0.8660254/2; OY=ty*H-(top+bot)/2-(-M)*K*0.5;}
