@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DFG | Independent advisory that helps your business grow</title>
+    <meta name="description" content="Independent advisory for AI, fintech and cybersecurity. DFG helps banks, fintechs and technology companies fund what pays back, launch products and answer customer security reviews." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css" />
+    <style>
+      /* Design read: B2B advisory landing for bank, fintech and technology leadership.
+         Studio card language after elaya.design, Swiss scale type and numbers, one cobalt accent.
+         Dials: variance 7, motion 5, density 4. Light theme only, locked page wide.
+         Shape lock: cards 20px, buttons and inner panels 12px, tabs fully round. */
+      :root {
+        --canvas: #ebebeb;
+        --card: #ffffff;
+        --ink: #141414;
+        --muted: #5c5c5c;
+        --line: #e2e2e2;
+        --dark: #161616;
+        --accent: #2f55e4;
+        --accent-soft: #e9eefd;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --font: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; }
+      [hidden] { display: none !important; }
+      html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+      body { background: var(--canvas); color: var(--ink); font: 400 16px/24px var(--font); -webkit-font-smoothing: antialiased; }
+      a { color: inherit; text-decoration: none; }
+      button, input, textarea { font: inherit; color: inherit; }
+      h1, h2, h3 { font-weight: 600; text-wrap: balance; letter-spacing: -0.02em; }
+      p, li, dd { text-wrap: pretty; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
+      ::selection { background: var(--accent); color: #fff; }
+      .skip { position: fixed; left: 12px; top: -64px; z-index: 30; background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 12px; }
+      .skip:focus { top: 12px; }
+      .page { max-width: 1400px; margin-inline: auto; padding: 12px; display: grid; gap: 12px; }
+      .card { background: var(--card); border-radius: 20px; padding: 40px; }
+      .ph-asterisk { color: var(--accent); }
+
+      /* buttons */
+      .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 12px; background: var(--accent); color: #fff; font-weight: 600; border: 0; cursor: pointer; transition: background-color 300ms var(--ease), transform 300ms var(--ease); white-space: nowrap; }
+      .btn:hover { background: #2445c4; }
+      .btn:active { transform: scale(0.98); }
+      .btn .ph { transition: transform 500ms var(--ease); }
+      .btn:hover .ph { transform: translateX(4px); }
+      .btn[disabled] { background: #d6d6d6; color: #555; cursor: progress; }
+      .link { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; border-bottom: 1px solid currentColor; padding-bottom: 2px; transition: color 300ms var(--ease); }
+      .link:hover { color: var(--accent); }
+
+      /* hero */
+      .hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 12px; min-height: min(680px, calc(100dvh - 24px)); }
+      .hero-copy { display: flex; flex-direction: column; justify-content: space-between; gap: 48px; }
+      .nav { display: flex; align-items: center; gap: 32px; }
+      .wordmark { font-weight: 700; font-size: 24px; letter-spacing: -0.02em; }
+      .nav-links { display: flex; gap: 24px; margin-left: auto; color: var(--muted); font-size: 15px; }
+      .nav-links a:hover { color: var(--ink); }
+      .eyebrow { display: flex; align-items: center; gap: 8px; color: var(--muted); font-weight: 500; }
+      .hero h1 { margin-top: 24px; font-size: 56px; line-height: 1.02; letter-spacing: -0.04em; max-width: 13em; }
+      .hero .sub { margin-top: 24px; font-size: 20px; line-height: 30px; color: var(--muted); max-width: 32em; }
+      .hero-actions { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+      .visual { position: relative; border-radius: 20px; overflow: hidden; background: var(--accent); min-height: 420px; }
+      .visual canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+      /* stage picker */
+      .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 32px; margin-bottom: 32px; }
+      .h2 { font-size: 40px; line-height: 1.05; letter-spacing: -0.035em; max-width: 16em; }
+      .lede { color: var(--muted); max-width: 40em; margin-top: 12px; font-size: 18px; line-height: 28px; }
+      .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+      .pill { border: 1px solid var(--line); background: #f6f6f6; border-radius: 999px; padding: 10px 16px; font-weight: 500; cursor: pointer; transition: background-color 300ms var(--ease), color 300ms var(--ease), border-color 300ms var(--ease), transform 300ms var(--ease); }
+      .pill:hover { border-color: #c9c9c9; }
+      .pill:active { transform: scale(0.98); }
+      .pill[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .stage { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: center; }
+      .stage + .stage { margin-top: 32px; }
+      .tabs-on .stage { margin-top: 0; }
+      .stage-art { background: #f6f6f6; border-radius: 12px; padding: 24px; }
+      .stage-svg { width: 100%; height: auto; display: block; }
+      .stage-svg .plot { fill: none; stroke: #cfcfcf; stroke-width: 1; }
+      .stage-svg .plot.dash { stroke-dasharray: 3 3; }
+      .stage-svg .plot.sel { stroke: var(--accent); fill: var(--accent-soft); }
+      .stage-svg .scan { stroke: var(--accent); stroke-dasharray: 2 4; opacity: 0.7; }
+      .stage-svg .pin { stroke: var(--accent); stroke-width: 1.2; }
+      .stage-svg .pin-head { fill: var(--accent); }
+      .stage-svg .wire polygon { fill: rgba(255, 255, 255, 0.86); }
+      .stage-svg .wire polygon, .stage-svg .wire .hid { stroke: var(--accent); stroke-width: 1; stroke-linejoin: round; }
+      .stage-svg .wire .hid { fill: none; stroke-dasharray: 2 3; opacity: 0.5; }
+      .stage-svg .solid polygon { stroke: #8e8e8e; stroke-width: 1; stroke-linejoin: round; }
+      .stage-svg .f-top { fill: #ffffff; }
+      .stage-svg .f-left { fill: #e4e4e4; }
+      .stage-svg .f-right { fill: #d2d2d2; }
+      .stage-svg .solid .win { fill: #c4c4c4; stroke: none; }
+      .stage-svg .solid .win.on { fill: var(--accent); }
+      .stage-svg .ring { fill: none; stroke: var(--accent); stroke-dasharray: 4 4; stroke-width: 1; }
+      .stage-lead { font-size: 22px; line-height: 30px; font-weight: 500; letter-spacing: -0.01em; max-width: 26em; }
+      .svc-list { list-style: none; padding: 0; margin-top: 24px; }
+      .svc-list li + li { border-top: 1px solid var(--line); }
+      .svc-list a { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 16px; padding-block: 14px; }
+      .svc-name { font-weight: 600; }
+      .svc-area { color: var(--muted); font-size: 14px; }
+      .svc-list .ph { color: var(--muted); transition: transform 500ms var(--ease), color 300ms var(--ease); }
+      .svc-list a:hover .svc-name, .svc-list a:hover .ph { color: var(--accent); }
+      .svc-list a:hover .ph { transform: translate(2px, -2px); }
+
+      /* bento of outcomes */
+      .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+      .bento-head { grid-column: 1 / -1; padding: 40px 40px 8px; }
+      .tile { border-radius: 20px; padding: 32px; min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; grid-column: span 2; transition: transform 500ms var(--ease); }
+      .tile.wide { grid-column: span 4; }
+      .tile:hover { transform: translateY(-4px); }
+      .tile .num { font-size: 96px; line-height: 0.85; font-weight: 600; letter-spacing: -0.06em; }
+      .tile h3 { font-size: 26px; line-height: 1.15; letter-spacing: -0.025em; max-width: 16em; }
+      .tile p { margin-top: 10px; max-width: 34em; }
+      .tile .area { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+      .tile .area .ph { transition: transform 500ms var(--ease); }
+      .tile:hover .area .ph { transform: translateX(4px); }
+      .t-accent { background: var(--accent); color: #fff; }
+      .t-accent p { color: rgba(255, 255, 255, 0.86); }
+      .t-white { background: var(--card); }
+      .t-white .num { color: var(--accent); }
+      .t-white p { color: var(--muted); }
+      .t-dark { background: var(--dark); color: #fff; }
+      .t-dark .num { color: #fff; }
+      .t-dark p { color: rgba(255, 255, 255, 0.72); }
+
+      /* tagline reveal */
+      .tagline { padding: 96px 40px; }
+      .tagline p { font-size: 72px; line-height: 1; font-weight: 600; letter-spacing: -0.05em; max-width: 12em; }
+      .tagline .w { opacity: 0.22; transition: opacity 700ms var(--ease); }
+      .tagline .w.on { opacity: 1; }
+
+      /* steps */
+      .steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; counter-reset: s; }
+      .steps li { counter-increment: s; border-top: 2px solid var(--ink); padding-top: 20px; }
+      .steps li::before { content: counter(s, decimal-leading-zero); display: block; font-size: 48px; line-height: 1; font-weight: 600; letter-spacing: -0.05em; color: var(--accent); margin-bottom: 24px; }
+      .steps h3 { font-size: 22px; line-height: 28px; }
+      .steps p { color: var(--muted); margin-top: 8px; }
+
+      /* sample deliverable */
+      .sample { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: start; }
+      .sample .links { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 32px; }
+      .doc { background: #f6f6f6; border-radius: 12px; padding: 32px; }
+      .doc-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+      .doc h3 { font-size: 22px; line-height: 28px; }
+      .tag { font-size: 13px; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; }
+      .doc dl { margin-top: 24px; }
+      .doc dl div { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 24px; padding-block: 14px; }
+      .doc dl div + div { border-top: 1px solid var(--line); }
+      .doc dt { font-weight: 600; }
+      .doc dd { color: var(--muted); }
+
+      /* questions */
+      .faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 64px; }
+      .faq dt { font-weight: 600; font-size: 18px; line-height: 26px; }
+      .faq dd { color: var(--muted); margin-top: 8px; }
+
+      /* commitment and enquiry, a light and a dark card side by side */
+      .close { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 12px; }
+      .dark-card { background: var(--dark); color: #fff; border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 32px; }
+      .dark-card .h2 { font-size: 36px; }
+      .checks { list-style: none; padding: 0; display: grid; gap: 20px; }
+      .checks li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; }
+      .checks .ph { font-size: 22px; color: #fff; margin-top: 2px; }
+      .checks b { display: block; font-weight: 600; }
+      .checks span { color: rgba(255, 255, 255, 0.72); }
+      .free { margin-top: auto; color: rgba(255, 255, 255, 0.72); font-size: 15px; }
+      .free a { color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+      form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+      .field { display: flex; flex-direction: column; gap: 8px; }
+      .field.full, form .actions, form .status { grid-column: 1 / -1; }
+      label { font-weight: 500; font-size: 14px; }
+      input, textarea { background: #f6f6f6; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-width: 0; transition: border-color 300ms var(--ease), background-color 300ms var(--ease); }
+      textarea { min-height: 132px; resize: vertical; }
+      input:hover, textarea:hover { border-color: #c9c9c9; }
+      input:focus, textarea:focus { outline: none; border-color: var(--accent); background: #fff; }
+      [aria-invalid="true"] { border-color: #c4281c; }
+      .err { color: #b3261e; font-size: 14px; }
+      .err:empty { display: none; }
+      .hint { color: var(--muted); font-size: 14px; }
+      .hp { position: absolute; left: -9999px; }
+      .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 8px; }
+      .actions small { color: var(--muted); font-size: 14px; }
+      .actions small a { border-bottom: 1px solid currentColor; }
+      .status { background: var(--accent-soft); border-radius: 12px; padding: 12px 14px; font-size: 15px; }
+      .status:empty { display: none; }
+
+      footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; padding: 24px 40px 40px; color: var(--muted); font-size: 14px; }
+      footer nav { display: flex; flex-wrap: wrap; gap: 20px; }
+      footer a:hover { color: var(--ink); }
+      footer .reg { flex-basis: 100%; max-width: 60em; font-size: 13px; }
+
+      /* reveals */
+      .rv [data-r] { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+      .rv [data-r].in { opacity: 1; transform: none; }
+      .rv .tile[data-r].in:hover { transform: translateY(-4px); }
+
+      @media (max-width: 1100px) {
+        .hero { grid-template-columns: 1fr; min-height: 0; }
+        .visual { min-height: 380px; }
+        .hero h1 { font-size: 48px; }
+        .tagline p { font-size: 60px; }
+      }
+      @media (max-width: 900px) {
+        .stage, .sample, .close { grid-template-columns: 1fr; gap: 24px; }
+        .stage-art { max-width: 420px; }
+        .bento { grid-template-columns: 1fr 1fr; }
+        .tile, .tile.wide { grid-column: span 2; min-height: 0; }
+        .steps { grid-template-columns: 1fr; gap: 32px; }
+        .faq { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 640px) {
+        .page { padding: 8px; gap: 8px; }
+        .card, .dark-card { padding: 24px; }
+        .nav-links { display: none; }
+        .nav .btn { margin-left: auto; padding: 8px 12px; font-size: 14px; }
+        .hero h1 { font-size: 36px; line-height: 40px; }
+        .hero .sub { font-size: 18px; line-height: 28px; }
+        .visual { min-height: 300px; }
+        .h2, .dark-card .h2 { font-size: 30px; }
+        .bento-head { padding: 24px 24px 0; }
+        .tile { padding: 24px; }
+        .tile .num { font-size: 64px; }
+        .tagline { padding: 64px 16px; }
+        .tagline p { font-size: 30px; line-height: 1.05; }
+        .svc-list a { grid-template-columns: minmax(0, 1fr) auto; }
+        .svc-area { grid-row: 2; }
+        .doc { padding: 20px; }
+        .doc dl div { grid-template-columns: 1fr; gap: 4px; }
+        form { grid-template-columns: 1fr; }
+        footer { padding: 16px 24px 32px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .rv [data-r] { transform: none !important; }
+        .tile:hover, .btn:hover .ph, .tile:hover .area .ph, .svc-list a:hover .ph { transform: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <main id="main" class="page">
+      <section class="hero" aria-labelledby="hero-h">
+        <div class="card hero-copy">
+          <nav class="nav" aria-label="Site">
+            <a class="wordmark" href="#main" aria-label="DFG, top of page">DFG</a>
+            <div class="nav-links"><a href="#stages">Stages</a><a href="#outcomes">Services</a><a href="#questions">Questions</a></div>
+            <a class="btn" href="#contact">Request a consultation</a>
+          </nav>
+          <div>
+            <p class="eyebrow"><i class="ph-bold ph-asterisk" aria-hidden="true"></i> Independent advisory for AI, fintech and cybersecurity</p>
+            <h1 id="hero-h">Technology decisions that grow your business.</h1>
+            <p class="sub">We help banks, fintechs and technology companies fund what pays back, launch products and answer security reviews.</p>
+            <div class="hero-actions">
+              <a class="btn" href="#contact">Request a consultation <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+              <a class="link" href="#stages">Which stage are you at?</a>
+            </div>
+          </div>
+        </div>
+        <div class="visual" aria-hidden="true"><canvas id="district"></canvas></div>
+      </section>
+
+      <section class="card" id="stages" aria-labelledby="stages-h">
+        <div class="head">
+          <div>
+            <h2 class="h2" id="stages-h">Which stage are you at?</h2>
+            <p class="lede">Pick the stage closest to your project to see the services that apply.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Project stage" hidden><button class="pill" type="button" role="tab" id="t-decide" aria-controls="p-decide" aria-selected="true">Idea <span aria-hidden="true">→</span> Decision</button><button class="pill" type="button" role="tab" id="t-plan" aria-controls="p-plan" aria-selected="false" tabindex="-1">Decision <span aria-hidden="true">→</span> Plan</button><button class="pill" type="button" role="tab" id="t-scale" aria-controls="p-scale" aria-selected="false" tabindex="-1">Pilot <span aria-hidden="true">→</span> Scale</button><button class="pill" type="button" role="tab" id="t-secure" aria-controls="p-secure" aria-selected="false" tabindex="-1">Scale <span aria-hidden="true">→</span> Secure</button></div>
+        </div>
+        <div class="stage" id="p-decide" role="tabpanel" aria-labelledby="t-decide">
+          <div class="stage-art"><svg class="stage-svg" viewBox="0 0 320 300" aria-hidden="true" focusable="false"><g class="ground"><polygon class="plot dash" points="160,70 199.84,93 160,116 120.16,93"/><polygon class="plot dash" points="214.18,101.28 254.02,124.28 214.18,147.28 174.34,124.28"/><polygon class="plot dash" points="105.82,101.28 145.66,124.28 105.82,147.28 65.98,124.28"/><polygon class="plot dash" points="268.36,132.56 308.19,155.56 268.36,178.56 228.52,155.56"/><polygon class="plot sel" points="160,132.56 199.84,155.56 160,178.56 120.16,155.56"/><polygon class="plot dash" points="51.64,132.56 91.48,155.56 51.64,178.56 11.81,155.56"/><polygon class="plot dash" points="214.18,163.84 254.02,186.84 214.18,209.84 174.34,186.84"/><polygon class="plot dash" points="105.82,163.84 145.66,186.84 105.82,209.84 65.98,186.84"/><polygon class="plot dash" points="160,195.12 199.84,218.12 160,241.12 120.16,218.12"/></g><path class="scan" d="M-20.06,155.56 L340.06,155.56"/><path class="pin" d="M160,155.56 L160,102.66"/><circle class="pin-head" cx="160" cy="102.66" r="4"/></svg></div>
+          <div>
+            <p class="stage-lead">You have an opportunity and need to know whether it is worth funding.</p>
+            <ul class="svc-list">
+              <li><a href="/expertise/ai-strategy#investment"><span class="svc-name">AI investment assessment</span><span class="svc-area">AI strategy</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/fintech-product#commercial-model"><span class="svc-name">Business and commercial model</span><span class="svc-area">Fintech and payments</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/fintech-product#market-entry"><span class="svc-name">Market entry assessment</span><span class="svc-area">Fintech and payments</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="stage" id="p-plan" role="tabpanel" aria-labelledby="t-plan">
+          <div class="stage-art"><svg class="stage-svg" viewBox="0 0 320 300" aria-hidden="true" focusable="false"><g class="ground"><polygon class="plot" points="160,70 199.84,93 160,116 120.16,93"/><polygon class="plot" points="214.18,101.28 254.02,124.28 214.18,147.28 174.34,124.28"/><polygon class="plot" points="105.82,101.28 145.66,124.28 105.82,147.28 65.98,124.28"/><polygon class="plot" points="268.36,132.56 308.19,155.56 268.36,178.56 228.52,155.56"/><polygon class="plot" points="160,132.56 199.84,155.56 160,178.56 120.16,155.56"/><polygon class="plot" points="51.64,132.56 91.48,155.56 51.64,178.56 11.81,155.56"/><polygon class="plot" points="214.18,163.84 254.02,186.84 214.18,209.84 174.34,186.84"/><polygon class="plot" points="105.82,163.84 145.66,186.84 105.82,209.84 65.98,186.84"/><polygon class="plot" points="160,195.12 199.84,218.12 160,241.12 120.16,218.12"/></g><g class="wire"><path class="hid" d="M214.18,106.8 L244.45,124.28 M214.18,106.8 L183.9,124.28 M214.18,106.8 L214.18,44.24"/><polygon points="214.18,44.24 244.45,61.72 214.18,79.2 183.9,61.72"/><polygon points="183.9,61.72 214.18,79.2 214.18,141.76 183.9,124.28"/><polygon points="214.18,79.2 244.45,61.72 244.45,124.28 214.18,141.76"/></g><g class="wire"><path class="hid" d="M105.82,106.8 L136.1,124.28 M105.82,106.8 L75.55,124.28 M105.82,106.8 L105.82,55.28"/><polygon points="105.82,55.28 136.1,72.76 105.82,90.24 75.55,72.76"/><polygon points="75.55,72.76 105.82,90.24 105.82,141.76 75.55,124.28"/><polygon points="105.82,90.24 136.1,72.76 136.1,124.28 105.82,141.76"/></g><g class="wire"><path class="hid" d="M160,138.08 L190.28,155.56 M160,138.08 L129.72,155.56 M160,138.08 L160,53.44"/><polygon points="160,53.44 190.28,70.92 160,88.4 129.72,70.92"/><polygon points="129.72,70.92 160,88.4 160,173.04 129.72,155.56"/><polygon points="160,88.4 190.28,70.92 190.28,155.56 160,173.04"/></g><g class="wire"><path class="hid" d="M214.18,169.36 L244.45,186.84 M214.18,169.36 L183.9,186.84 M214.18,169.36 L214.18,125.2"/><polygon points="214.18,125.2 244.45,142.68 214.18,160.16 183.9,142.68"/><polygon points="183.9,142.68 214.18,160.16 214.18,204.32 183.9,186.84"/><polygon points="214.18,160.16 244.45,142.68 244.45,186.84 214.18,204.32"/></g><g class="wire"><path class="hid" d="M105.82,169.36 L136.1,186.84 M105.82,169.36 L75.55,186.84 M105.82,169.36 L105.82,114.16"/><polygon points="105.82,114.16 136.1,131.64 105.82,149.12 75.55,131.64"/><polygon points="75.55,131.64 105.82,149.12 105.82,204.32 75.55,186.84"/><polygon points="105.82,149.12 136.1,131.64 136.1,186.84 105.82,204.32"/></g></svg></div>
+          <div>
+            <p class="stage-lead">The direction is agreed. Now the systems, partners and plan have to support it.</p>
+            <ul class="svc-list">
+              <li><a href="/expertise/it-strategy#architecture"><span class="svc-name">Architecture and platform review</span><span class="svc-area">IT strategy</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/it-strategy#vendor-selection"><span class="svc-name">Technology vendor selection</span><span class="svc-area">IT strategy</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/fintech-product#partners"><span class="svc-name">Banking and provider partner selection</span><span class="svc-area">Fintech and payments</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/ai-strategy#data-readiness"><span class="svc-name">Data readiness review</span><span class="svc-area">AI strategy</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/it-strategy#execution-planning"><span class="svc-name">Execution planning</span><span class="svc-area">IT strategy</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="stage" id="p-scale" role="tabpanel" aria-labelledby="t-scale">
+          <div class="stage-art"><svg class="stage-svg" viewBox="0 0 320 300" aria-hidden="true" focusable="false"><g class="ground"><polygon class="plot" points="160,70 199.84,93 160,116 120.16,93"/><polygon class="plot" points="214.18,101.28 254.02,124.28 214.18,147.28 174.34,124.28"/><polygon class="plot" points="105.82,101.28 145.66,124.28 105.82,147.28 65.98,124.28"/><polygon class="plot" points="268.36,132.56 308.19,155.56 268.36,178.56 228.52,155.56"/><polygon class="plot" points="160,132.56 199.84,155.56 160,178.56 120.16,155.56"/><polygon class="plot" points="51.64,132.56 91.48,155.56 51.64,178.56 11.81,155.56"/><polygon class="plot" points="214.18,163.84 254.02,186.84 214.18,209.84 174.34,186.84"/><polygon class="plot" points="105.82,163.84 145.66,186.84 105.82,209.84 65.98,186.84"/><polygon class="plot" points="160,195.12 199.84,218.12 160,241.12 120.16,218.12"/></g><g class="wire"><path class="hid" d="M214.18,106.8 L244.45,124.28 M214.18,106.8 L183.9,124.28 M214.18,106.8 L214.18,69.26"/><polygon points="214.18,69.26 244.45,86.74 214.18,104.22 183.9,86.74"/><polygon points="183.9,86.74 214.18,104.22 214.18,141.76 183.9,124.28"/><polygon points="214.18,104.22 244.45,86.74 244.45,124.28 214.18,141.76"/></g><g class="solid"><polygon class="f-top" points="105.82,55.28 136.1,72.76 105.82,90.24 75.55,72.76"/><polygon class="f-left" points="75.55,72.76 105.82,90.24 105.82,141.76 75.55,124.28"/><polygon class="f-right" points="105.82,90.24 136.1,72.76 136.1,124.28 105.82,141.76"/><polygon class="win" points="80.33,113.24 85.11,116 85.11,122.44 80.33,119.68"/><polygon class="win" points="110.6,125.2 115.38,122.44 115.38,128.88 110.6,131.64"/><polygon class="win on" points="89.89,118.76 94.67,121.52 94.67,127.96 89.89,125.2"/><polygon class="win" points="120.16,119.68 124.94,116.92 124.94,123.36 120.16,126.12"/><polygon class="win" points="99.45,124.28 104.23,127.04 104.23,133.48 99.45,130.72"/><polygon class="win" points="129.72,114.16 134.5,111.4 134.5,117.84 129.72,120.6"/><polygon class="win" points="80.33,98.52 85.11,101.28 85.11,107.72 80.33,104.96"/><polygon class="win" points="110.6,110.48 115.38,107.72 115.38,114.16 110.6,116.92"/><polygon class="win" points="89.89,104.04 94.67,106.8 94.67,113.24 89.89,110.48"/><polygon class="win" points="120.16,104.96 124.94,102.2 124.94,108.64 120.16,111.4"/><polygon class="win" points="99.45,109.56 104.23,112.32 104.23,118.76 99.45,116"/><polygon class="win on" points="129.72,99.44 134.5,96.68 134.5,103.12 129.72,105.88"/><polygon class="win" points="80.33,83.8 85.11,86.56 85.11,93 80.33,90.24"/><polygon class="win" points="110.6,95.76 115.38,93 115.38,99.44 110.6,102.2"/><polygon class="win" points="89.89,89.32 94.67,92.08 94.67,98.52 89.89,95.76"/><polygon class="win" points="120.16,90.24 124.94,87.48 124.94,93.92 120.16,96.68"/><polygon class="win" points="99.45,94.84 104.23,97.6 104.23,104.04 99.45,101.28"/><polygon class="win" points="129.72,84.72 134.5,81.96 134.5,88.4 129.72,91.16"/></g><g class="solid"><polygon class="f-top" points="160,53.44 190.28,70.92 160,88.4 129.72,70.92"/><polygon class="f-left" points="129.72,70.92 160,88.4 160,173.04 129.72,155.56"/><polygon class="f-right" points="160,88.4 190.28,70.92 190.28,155.56 160,173.04"/><polygon class="win" points="134.5,144.52 139.28,147.28 139.28,153.72 134.5,150.96"/><polygon class="win" points="164.78,156.48 169.56,153.72 169.56,160.16 164.78,162.92"/><polygon class="win" points="144.07,150.04 148.85,152.8 148.85,159.24 144.07,156.48"/><polygon class="win on" points="174.34,150.96 179.12,148.2 179.12,154.64 174.34,157.4"/><polygon class="win" points="153.63,155.56 158.41,158.32 158.41,164.76 153.63,162"/><polygon class="win" points="183.9,145.44 188.68,142.68 188.68,149.12 183.9,151.88"/><polygon class="win on" points="134.5,129.8 139.28,132.56 139.28,139 134.5,136.24"/><polygon class="win on" points="164.78,141.76 169.56,139 169.56,145.44 164.78,148.2"/><polygon class="win" points="144.07,135.32 148.85,138.08 148.85,144.52 144.07,141.76"/><polygon class="win" points="174.34,136.24 179.12,133.48 179.12,139.92 174.34,142.68"/><polygon class="win on" points="153.63,140.84 158.41,143.6 158.41,150.04 153.63,147.28"/><polygon class="win" points="183.9,130.72 188.68,127.96 188.68,134.4 183.9,137.16"/><polygon class="win" points="134.5,115.08 139.28,117.84 139.28,124.28 134.5,121.52"/><polygon class="win" points="164.78,127.04 169.56,124.28 169.56,130.72 164.78,133.48"/><polygon class="win on" points="144.07,120.6 148.85,123.36 148.85,129.8 144.07,127.04"/><polygon class="win" points="174.34,121.52 179.12,118.76 179.12,125.2 174.34,127.96"/><polygon class="win" points="153.63,126.12 158.41,128.88 158.41,135.32 153.63,132.56"/><polygon class="win" points="183.9,116 188.68,113.24 188.68,119.68 183.9,122.44"/><polygon class="win" points="134.5,100.36 139.28,103.12 139.28,109.56 134.5,106.8"/><polygon class="win on" points="164.78,112.32 169.56,109.56 169.56,116 164.78,118.76"/><polygon class="win" points="144.07,105.88 148.85,108.64 148.85,115.08 144.07,112.32"/><polygon class="win on" points="174.34,106.8 179.12,104.04 179.12,110.48 174.34,113.24"/><polygon class="win" points="153.63,111.4 158.41,114.16 158.41,120.6 153.63,117.84"/><polygon class="win" points="183.9,101.28 188.68,98.52 188.68,104.96 183.9,107.72"/><polygon class="win" points="134.5,85.64 139.28,88.4 139.28,94.84 134.5,92.08"/><polygon class="win" points="164.78,97.6 169.56,94.84 169.56,101.28 164.78,104.04"/><polygon class="win on" points="144.07,91.16 148.85,93.92 148.85,100.36 144.07,97.6"/><polygon class="win on" points="174.34,92.08 179.12,89.32 179.12,95.76 174.34,98.52"/><polygon class="win" points="153.63,96.68 158.41,99.44 158.41,105.88 153.63,103.12"/><polygon class="win" points="183.9,86.56 188.68,83.8 188.68,90.24 183.9,93"/></g><g class="wire"><path class="hid" d="M214.18,169.36 L244.45,186.84 M214.18,169.36 L183.9,186.84 M214.18,169.36 L214.18,142.86"/><polygon points="214.18,142.86 244.45,160.34 214.18,177.82 183.9,160.34"/><polygon points="183.9,160.34 214.18,177.82 214.18,204.32 183.9,186.84"/><polygon points="214.18,177.82 244.45,160.34 244.45,186.84 214.18,204.32"/></g><g class="wire"><path class="hid" d="M105.82,169.36 L136.1,186.84 M105.82,169.36 L75.55,186.84 M105.82,169.36 L105.82,136.24"/><polygon points="105.82,136.24 136.1,153.72 105.82,171.2 75.55,153.72"/><polygon points="75.55,153.72 105.82,171.2 105.82,204.32 75.55,186.84"/><polygon points="105.82,171.2 136.1,153.72 136.1,186.84 105.82,204.32"/></g></svg></div>
+          <div>
+            <p class="stage-lead">Something is running. You need to decide how to grow it and keep delivery honest.</p>
+            <ul class="svc-list">
+              <li><a href="/expertise/ai-strategy#pilot-review"><span class="svc-name">AI pilot review</span><span class="svc-area">AI strategy</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/fintech-product#launch-planning"><span class="svc-name">Launch planning</span><span class="svc-area">Fintech and payments</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/it-strategy#delivery-oversight"><span class="svc-name">Delivery oversight</span><span class="svc-area">IT strategy</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="stage" id="p-secure" role="tabpanel" aria-labelledby="t-secure">
+          <div class="stage-art"><svg class="stage-svg" viewBox="0 0 320 300" aria-hidden="true" focusable="false"><g class="ground"><polygon class="plot" points="160,70 199.84,93 160,116 120.16,93"/><polygon class="plot" points="214.18,101.28 254.02,124.28 214.18,147.28 174.34,124.28"/><polygon class="plot" points="105.82,101.28 145.66,124.28 105.82,147.28 65.98,124.28"/><polygon class="plot" points="268.36,132.56 308.19,155.56 268.36,178.56 228.52,155.56"/><polygon class="plot" points="160,132.56 199.84,155.56 160,178.56 120.16,155.56"/><polygon class="plot" points="51.64,132.56 91.48,155.56 51.64,178.56 11.81,155.56"/><polygon class="plot" points="214.18,163.84 254.02,186.84 214.18,209.84 174.34,186.84"/><polygon class="plot" points="105.82,163.84 145.66,186.84 105.82,209.84 65.98,186.84"/><polygon class="plot" points="160,195.12 199.84,218.12 160,241.12 120.16,218.12"/></g><polygon class="ring" points="160,52.52 338.47,155.56 160,258.6 -18.47,155.56"/><g class="solid"><polygon class="f-top" points="160,35.04 190.28,52.52 160,70 129.72,52.52"/><polygon class="f-left" points="129.72,52.52 160,70 160,110.48 129.72,93"/><polygon class="f-right" points="160,70 190.28,52.52 190.28,93 160,110.48"/><polygon class="win on" points="134.5,81.96 139.28,84.72 139.28,91.16 134.5,88.4"/><polygon class="win" points="164.78,93.92 169.56,91.16 169.56,97.6 164.78,100.36"/><polygon class="win" points="144.07,87.48 148.85,90.24 148.85,96.68 144.07,93.92"/><polygon class="win" points="174.34,88.4 179.12,85.64 179.12,92.08 174.34,94.84"/><polygon class="win" points="153.63,93 158.41,95.76 158.41,102.2 153.63,99.44"/><polygon class="win on" points="183.9,82.88 188.68,80.12 188.68,86.56 183.9,89.32"/><polygon class="win" points="134.5,67.24 139.28,70 139.28,76.44 134.5,73.68"/><polygon class="win" points="164.78,79.2 169.56,76.44 169.56,82.88 164.78,85.64"/><polygon class="win" points="144.07,72.76 148.85,75.52 148.85,81.96 144.07,79.2"/><polygon class="win" points="174.34,73.68 179.12,70.92 179.12,77.36 174.34,80.12"/><polygon class="win" points="153.63,78.28 158.41,81.04 158.41,87.48 153.63,84.72"/><polygon class="win" points="183.9,68.16 188.68,65.4 188.68,71.84 183.9,74.6"/></g><g class="solid"><polygon class="f-top" points="214.18,44.24 244.45,61.72 214.18,79.2 183.9,61.72"/><polygon class="f-left" points="183.9,61.72 214.18,79.2 214.18,141.76 183.9,124.28"/><polygon class="f-right" points="214.18,79.2 244.45,61.72 244.45,124.28 214.18,141.76"/><polygon class="win on" points="188.68,113.24 193.46,116 193.46,122.44 188.68,119.68"/><polygon class="win" points="218.96,125.2 223.74,122.44 223.74,128.88 218.96,131.64"/><polygon class="win on" points="198.24,118.76 203.02,121.52 203.02,127.96 198.24,125.2"/><polygon class="win on" points="228.52,119.68 233.3,116.92 233.3,123.36 228.52,126.12"/><polygon class="win" points="207.8,124.28 212.59,127.04 212.59,133.48 207.8,130.72"/><polygon class="win on" points="238.08,114.16 242.86,111.4 242.86,117.84 238.08,120.6"/><polygon class="win on" points="188.68,98.52 193.46,101.28 193.46,107.72 188.68,104.96"/><polygon class="win" points="218.96,110.48 223.74,107.72 223.74,114.16 218.96,116.92"/><polygon class="win on" points="198.24,104.04 203.02,106.8 203.02,113.24 198.24,110.48"/><polygon class="win" points="228.52,104.96 233.3,102.2 233.3,108.64 228.52,111.4"/><polygon class="win on" points="207.8,109.56 212.59,112.32 212.59,118.76 207.8,116"/><polygon class="win" points="238.08,99.44 242.86,96.68 242.86,103.12 238.08,105.88"/><polygon class="win" points="188.68,83.8 193.46,86.56 193.46,93 188.68,90.24"/><polygon class="win" points="218.96,95.76 223.74,93 223.74,99.44 218.96,102.2"/><polygon class="win" points="198.24,89.32 203.02,92.08 203.02,98.52 198.24,95.76"/><polygon class="win on" points="228.52,90.24 233.3,87.48 233.3,93.92 228.52,96.68"/><polygon class="win" points="207.8,94.84 212.59,97.6 212.59,104.04 207.8,101.28"/><polygon class="win" points="238.08,84.72 242.86,81.96 242.86,88.4 238.08,91.16"/><polygon class="win on" points="188.68,69.08 193.46,71.84 193.46,78.28 188.68,75.52"/><polygon class="win on" points="218.96,81.04 223.74,78.28 223.74,84.72 218.96,87.48"/><polygon class="win" points="198.24,74.6 203.02,77.36 203.02,83.8 198.24,81.04"/><polygon class="win" points="228.52,75.52 233.3,72.76 233.3,79.2 228.52,81.96"/><polygon class="win on" points="207.8,80.12 212.59,82.88 212.59,89.32 207.8,86.56"/><polygon class="win" points="238.08,70 242.86,67.24 242.86,73.68 238.08,76.44"/></g><g class="solid"><polygon class="f-top" points="105.82,55.28 136.1,72.76 105.82,90.24 75.55,72.76"/><polygon class="f-left" points="75.55,72.76 105.82,90.24 105.82,141.76 75.55,124.28"/><polygon class="f-right" points="105.82,90.24 136.1,72.76 136.1,124.28 105.82,141.76"/><polygon class="win" points="80.33,113.24 85.11,116 85.11,122.44 80.33,119.68"/><polygon class="win" points="110.6,125.2 115.38,122.44 115.38,128.88 110.6,131.64"/><polygon class="win on" points="89.89,118.76 94.67,121.52 94.67,127.96 89.89,125.2"/><polygon class="win" points="120.16,119.68 124.94,116.92 124.94,123.36 120.16,126.12"/><polygon class="win" points="99.45,124.28 104.23,127.04 104.23,133.48 99.45,130.72"/><polygon class="win" points="129.72,114.16 134.5,111.4 134.5,117.84 129.72,120.6"/><polygon class="win" points="80.33,98.52 85.11,101.28 85.11,107.72 80.33,104.96"/><polygon class="win" points="110.6,110.48 115.38,107.72 115.38,114.16 110.6,116.92"/><polygon class="win" points="89.89,104.04 94.67,106.8 94.67,113.24 89.89,110.48"/><polygon class="win" points="120.16,104.96 124.94,102.2 124.94,108.64 120.16,111.4"/><polygon class="win" points="99.45,109.56 104.23,112.32 104.23,118.76 99.45,116"/><polygon class="win on" points="129.72,99.44 134.5,96.68 134.5,103.12 129.72,105.88"/><polygon class="win" points="80.33,83.8 85.11,86.56 85.11,93 80.33,90.24"/><polygon class="win" points="110.6,95.76 115.38,93 115.38,99.44 110.6,102.2"/><polygon class="win" points="89.89,89.32 94.67,92.08 94.67,98.52 89.89,95.76"/><polygon class="win" points="120.16,90.24 124.94,87.48 124.94,93.92 120.16,96.68"/><polygon class="win" points="99.45,94.84 104.23,97.6 104.23,104.04 99.45,101.28"/><polygon class="win" points="129.72,84.72 134.5,81.96 134.5,88.4 129.72,91.16"/></g><g class="solid"><polygon class="f-top" points="268.36,104.96 298.63,122.44 268.36,139.92 238.08,122.44"/><polygon class="f-left" points="238.08,122.44 268.36,139.92 268.36,173.04 238.08,155.56"/><polygon class="f-right" points="268.36,139.92 298.63,122.44 298.63,155.56 268.36,173.04"/><polygon class="win" points="242.86,144.52 247.64,147.28 247.64,153.72 242.86,150.96"/><polygon class="win" points="273.14,156.48 277.92,153.72 277.92,160.16 273.14,162.92"/><polygon class="win" points="252.42,150.04 257.2,152.8 257.2,159.24 252.42,156.48"/><polygon class="win" points="282.7,150.96 287.48,148.2 287.48,154.64 282.7,157.4"/><polygon class="win" points="261.98,155.56 266.76,158.32 266.76,164.76 261.98,162"/><polygon class="win" points="292.26,145.44 297.04,142.68 297.04,149.12 292.26,151.88"/><polygon class="win" points="242.86,129.8 247.64,132.56 247.64,139 242.86,136.24"/><polygon class="win" points="273.14,141.76 277.92,139 277.92,145.44 273.14,148.2"/><polygon class="win" points="252.42,135.32 257.2,138.08 257.2,144.52 252.42,141.76"/><polygon class="win on" points="282.7,136.24 287.48,133.48 287.48,139.92 282.7,142.68"/><polygon class="win" points="261.98,140.84 266.76,143.6 266.76,150.04 261.98,147.28"/><polygon class="win" points="292.26,130.72 297.04,127.96 297.04,134.4 292.26,137.16"/></g><g class="solid"><polygon class="f-top" points="160,53.44 190.28,70.92 160,88.4 129.72,70.92"/><polygon class="f-left" points="129.72,70.92 160,88.4 160,173.04 129.72,155.56"/><polygon class="f-right" points="160,88.4 190.28,70.92 190.28,155.56 160,173.04"/><polygon class="win" points="134.5,144.52 139.28,147.28 139.28,153.72 134.5,150.96"/><polygon class="win" points="164.78,156.48 169.56,153.72 169.56,160.16 164.78,162.92"/><polygon class="win" points="144.07,150.04 148.85,152.8 148.85,159.24 144.07,156.48"/><polygon class="win on" points="174.34,150.96 179.12,148.2 179.12,154.64 174.34,157.4"/><polygon class="win" points="153.63,155.56 158.41,158.32 158.41,164.76 153.63,162"/><polygon class="win" points="183.9,145.44 188.68,142.68 188.68,149.12 183.9,151.88"/><polygon class="win on" points="134.5,129.8 139.28,132.56 139.28,139 134.5,136.24"/><polygon class="win on" points="164.78,141.76 169.56,139 169.56,145.44 164.78,148.2"/><polygon class="win" points="144.07,135.32 148.85,138.08 148.85,144.52 144.07,141.76"/><polygon class="win" points="174.34,136.24 179.12,133.48 179.12,139.92 174.34,142.68"/><polygon class="win on" points="153.63,140.84 158.41,143.6 158.41,150.04 153.63,147.28"/><polygon class="win" points="183.9,130.72 188.68,127.96 188.68,134.4 183.9,137.16"/><polygon class="win" points="134.5,115.08 139.28,117.84 139.28,124.28 134.5,121.52"/><polygon class="win" points="164.78,127.04 169.56,124.28 169.56,130.72 164.78,133.48"/><polygon class="win on" points="144.07,120.6 148.85,123.36 148.85,129.8 144.07,127.04"/><polygon class="win" points="174.34,121.52 179.12,118.76 179.12,125.2 174.34,127.96"/><polygon class="win" points="153.63,126.12 158.41,128.88 158.41,135.32 153.63,132.56"/><polygon class="win" points="183.9,116 188.68,113.24 188.68,119.68 183.9,122.44"/><polygon class="win" points="134.5,100.36 139.28,103.12 139.28,109.56 134.5,106.8"/><polygon class="win on" points="164.78,112.32 169.56,109.56 169.56,116 164.78,118.76"/><polygon class="win" points="144.07,105.88 148.85,108.64 148.85,115.08 144.07,112.32"/><polygon class="win on" points="174.34,106.8 179.12,104.04 179.12,110.48 174.34,113.24"/><polygon class="win" points="153.63,111.4 158.41,114.16 158.41,120.6 153.63,117.84"/><polygon class="win" points="183.9,101.28 188.68,98.52 188.68,104.96 183.9,107.72"/><polygon class="win" points="134.5,85.64 139.28,88.4 139.28,94.84 134.5,92.08"/><polygon class="win" points="164.78,97.6 169.56,94.84 169.56,101.28 164.78,104.04"/><polygon class="win on" points="144.07,91.16 148.85,93.92 148.85,100.36 144.07,97.6"/><polygon class="win on" points="174.34,92.08 179.12,89.32 179.12,95.76 174.34,98.52"/><polygon class="win" points="153.63,96.68 158.41,99.44 158.41,105.88 153.63,103.12"/><polygon class="win" points="183.9,86.56 188.68,83.8 188.68,90.24 183.9,93"/></g><g class="solid"><polygon class="f-top" points="214.18,125.2 244.45,142.68 214.18,160.16 183.9,142.68"/><polygon class="f-left" points="183.9,142.68 214.18,160.16 214.18,204.32 183.9,186.84"/><polygon class="f-right" points="214.18,160.16 244.45,142.68 244.45,186.84 214.18,204.32"/><polygon class="win on" points="188.68,175.8 193.46,178.56 193.46,185 188.68,182.24"/><polygon class="win" points="218.96,187.76 223.74,185 223.74,191.44 218.96,194.2"/><polygon class="win on" points="198.24,181.32 203.02,184.08 203.02,190.52 198.24,187.76"/><polygon class="win" points="228.52,182.24 233.3,179.48 233.3,185.92 228.52,188.68"/><polygon class="win" points="207.8,186.84 212.59,189.6 212.59,196.04 207.8,193.28"/><polygon class="win" points="238.08,176.72 242.86,173.96 242.86,180.4 238.08,183.16"/><polygon class="win" points="188.68,161.08 193.46,163.84 193.46,170.28 188.68,167.52"/><polygon class="win" points="218.96,173.04 223.74,170.28 223.74,176.72 218.96,179.48"/><polygon class="win on" points="198.24,166.6 203.02,169.36 203.02,175.8 198.24,173.04"/><polygon class="win" points="228.52,167.52 233.3,164.76 233.3,171.2 228.52,173.96"/><polygon class="win" points="207.8,172.12 212.59,174.88 212.59,181.32 207.8,178.56"/><polygon class="win" points="238.08,162 242.86,159.24 242.86,165.68 238.08,168.44"/><polygon class="win" points="188.68,146.36 193.46,149.12 193.46,155.56 188.68,152.8"/><polygon class="win" points="218.96,158.32 223.74,155.56 223.74,162 218.96,164.76"/><polygon class="win on" points="198.24,151.88 203.02,154.64 203.02,161.08 198.24,158.32"/><polygon class="win" points="228.52,152.8 233.3,150.04 233.3,156.48 228.52,159.24"/><polygon class="win on" points="207.8,157.4 212.59,160.16 212.59,166.6 207.8,163.84"/><polygon class="win" points="238.08,147.28 242.86,144.52 242.86,150.96 238.08,153.72"/></g><g class="solid"><polygon class="f-top" points="105.82,114.16 136.1,131.64 105.82,149.12 75.55,131.64"/><polygon class="f-left" points="75.55,131.64 105.82,149.12 105.82,204.32 75.55,186.84"/><polygon class="f-right" points="105.82,149.12 136.1,131.64 136.1,186.84 105.82,204.32"/><polygon class="win" points="80.33,175.8 85.11,178.56 85.11,185 80.33,182.24"/><polygon class="win" points="110.6,187.76 115.38,185 115.38,191.44 110.6,194.2"/><polygon class="win" points="89.89,181.32 94.67,184.08 94.67,190.52 89.89,187.76"/><polygon class="win on" points="120.16,182.24 124.94,179.48 124.94,185.92 120.16,188.68"/><polygon class="win" points="99.45,186.84 104.23,189.6 104.23,196.04 99.45,193.28"/><polygon class="win on" points="129.72,176.72 134.5,173.96 134.5,180.4 129.72,183.16"/><polygon class="win on" points="80.33,161.08 85.11,163.84 85.11,170.28 80.33,167.52"/><polygon class="win on" points="110.6,173.04 115.38,170.28 115.38,176.72 110.6,179.48"/><polygon class="win" points="89.89,166.6 94.67,169.36 94.67,175.8 89.89,173.04"/><polygon class="win" points="120.16,167.52 124.94,164.76 124.94,171.2 120.16,173.96"/><polygon class="win on" points="99.45,172.12 104.23,174.88 104.23,181.32 99.45,178.56"/><polygon class="win" points="129.72,162 134.5,159.24 134.5,165.68 129.72,168.44"/><polygon class="win" points="80.33,146.36 85.11,149.12 85.11,155.56 80.33,152.8"/><polygon class="win" points="110.6,158.32 115.38,155.56 115.38,162 110.6,164.76"/><polygon class="win" points="89.89,151.88 94.67,154.64 94.67,161.08 89.89,158.32"/><polygon class="win" points="120.16,152.8 124.94,150.04 124.94,156.48 120.16,159.24"/><polygon class="win on" points="99.45,157.4 104.23,160.16 104.23,166.6 99.45,163.84"/><polygon class="win on" points="129.72,147.28 134.5,144.52 134.5,150.96 129.72,153.72"/></g><g class="solid"><polygon class="f-top" points="160,163.84 190.28,181.32 160,198.8 129.72,181.32"/><polygon class="f-left" points="129.72,181.32 160,198.8 160,235.6 129.72,218.12"/><polygon class="f-right" points="160,198.8 190.28,181.32 190.28,218.12 160,235.6"/><polygon class="win" points="134.5,207.08 139.28,209.84 139.28,216.28 134.5,213.52"/><polygon class="win" points="164.78,219.04 169.56,216.28 169.56,222.72 164.78,225.48"/><polygon class="win" points="144.07,212.6 148.85,215.36 148.85,221.8 144.07,219.04"/><polygon class="win" points="174.34,213.52 179.12,210.76 179.12,217.2 174.34,219.96"/><polygon class="win" points="153.63,218.12 158.41,220.88 158.41,227.32 153.63,224.56"/><polygon class="win on" points="183.9,208 188.68,205.24 188.68,211.68 183.9,214.44"/><polygon class="win" points="134.5,192.36 139.28,195.12 139.28,201.56 134.5,198.8"/><polygon class="win" points="164.78,204.32 169.56,201.56 169.56,208 164.78,210.76"/><polygon class="win on" points="144.07,197.88 148.85,200.64 148.85,207.08 144.07,204.32"/><polygon class="win" points="174.34,198.8 179.12,196.04 179.12,202.48 174.34,205.24"/><polygon class="win" points="153.63,203.4 158.41,206.16 158.41,212.6 153.63,209.84"/><polygon class="win on" points="183.9,193.28 188.68,190.52 188.68,196.96 183.9,199.72"/></g></svg></div>
+          <div>
+            <p class="stage-lead">Customers and partners now ask how you protect the service they rely on.</p>
+            <ul class="svc-list">
+              <li><a href="/expertise/security-posture#posture-review"><span class="svc-name">Security posture review</span><span class="svc-area">Cybersecurity</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/security-posture#customer-reviews"><span class="svc-name">Customer security review support</span><span class="svc-area">Cybersecurity</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+              <li><a href="/expertise/security-posture#incident-preparedness"><span class="svc-name">Incident preparedness</span><span class="svc-area">Cybersecurity</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="bento" id="outcomes" aria-labelledby="outcomes-h">
+        <div class="bento-head"><h2 class="h2" id="outcomes-h">What changes for your business</h2></div>
+        <a class="tile t-accent wide" href="/expertise/ai-strategy" data-r>
+          <span class="num">01</span>
+          <div><h3>Invest where the return is</h3><p>Find out whether an AI initiative is likely to pay back before the budget is committed.</p></div>
+          <span class="area">AI strategy <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+        </a>
+        <a class="tile t-white" href="/expertise/it-strategy" data-r>
+          <span class="num">02</span>
+          <div><h3>Choose suppliers on cost and fit</h3><p>Total cost, delivery risk and exit terms compared before you sign.</p></div>
+          <span class="area">IT strategy <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+        </a>
+        <a class="tile t-dark" href="/expertise/fintech-product" data-r>
+          <span class="num">03</span>
+          <div><h3>Bring new products to market</h3><p>Test the commercial model and line up the banking and payment partners your launch depends on.</p></div>
+          <span class="area">Fintech and payments <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+        </a>
+        <a class="tile t-white wide" href="/expertise/security-posture" data-r>
+          <span class="num">04</span>
+          <div><h3>Answer customers’ security questions</h3><p>Prepare answers to customer and partner security reviews from the evidence you hold, and know which gaps to close first.</p></div>
+          <span class="area">Cybersecurity <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+        </a>
+      </section>
+
+      <section class="tagline" aria-label="Our promise">
+        <p id="tagline">Our advice comes<br />with a business case.</p>
+      </section>
+
+      <section class="card" id="how" aria-labelledby="how-h" data-r>
+        <div class="head"><h2 class="h2" id="how-h">From goal to decision in three steps</h2></div>
+        <ol class="steps">
+          <li><h3>Tell us the goal</h3><p>Describe what you want to achieve, where things stand and any deadline. A free online check can help you prepare.</p></li>
+          <li><h3>Agree the scope in writing</h3><p>We send a written proposal. Work starts only when you accept it.</p></li>
+          <li><h3>Decide with the evidence</h3><p>A business case, a launch or implementation plan, or monthly delivery reports, reviewed with your leadership team.</p></li>
+        </ol>
+      </section>
+
+      <section class="card sample" aria-labelledby="sample-h" data-r>
+        <div>
+          <h2 class="h2" id="sample-h">See the format before you commit</h2>
+          <p class="lede">The structure of an AI business case. The example is invented to show the format.</p>
+          <div class="links">
+            <a class="link" href="/expertise/it-strategy#example">A vendor comparison <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            <a class="link" href="/expertise/fintech-product#example">A market comparison <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            <a class="link" href="/expertise/security-posture#example">An evidence register <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <article class="doc" aria-label="Illustrative AI business case">
+          <div class="doc-head"><h3>AI business case</h3><span class="tag">Illustrative example</span></div>
+          <dl>
+            <div><dt>Business goal</dt><dd>Reduce the cost and delay of handling payment exceptions.</dd></div>
+            <div><dt>Evidence available</dt><dd>Historical volumes. The handling time baseline is still to be established.</dd></div>
+            <div><dt>Decision to resolve</dt><dd>Will assisted triage save more than it costs to integrate and run?</dd></div>
+            <div><dt>Next evidence</dt><dd>Agree the baseline, review a representative dataset and compare with automation based on rules.</dd></div>
+            <div><dt>Recommendation</dt><dd>Test before funding: a scoped trial on one exception type, with the baseline measured first.</dd></div>
+          </dl>
+        </article>
+      </section>
+
+      <section class="card" id="questions" aria-labelledby="faq-h" data-r>
+        <div class="head"><h2 class="h2" id="faq-h">Questions before the first call</h2></div>
+        <dl class="faq">
+          <div><dt>What does DFG do?</dt><dd>We help leadership teams make business decisions about technology: where to invest in AI, which vendors and partners to choose, how to launch financial products and how to answer customer security reviews.</dd></div>
+          <div><dt>Who do you work with?</dt><dd>Banks, fintechs, payment businesses and technology companies with a technology decision that affects revenue, cost or customer trust.</dd></div>
+          <div><dt>Do you build or implement the solution?</dt><dd>No. We advise on the decision and the plan. Your team or the providers you appoint build and run the solution, and we can oversee that work against the agreed plan.</dd></div>
+          <div><dt>How does an engagement start?</dt><dd>You tell us the goal and the decision in front of you. We discuss whether DFG is a fit and what information is needed, then send a written proposal.</dd></div>
+          <div><dt>Who works on the engagement?</dt><dd>The advisor who scopes the engagement stays involved until it is complete. Any specialists and their responsibilities are named in the scope.</dd></div>
+          <div><dt>Can we commission one service on its own?</dt><dd>Yes. Every service can be commissioned on its own, and an assessment never obliges you to buy further work from DFG.</dd></div>
+          <div><dt>Do you provide ISO certification, audits or legal opinions?</dt><dd>No. DFG does not provide ISO certification, independent audit opinions, legal opinions or regulated financial services.</dd></div>
+          <div><dt>How do you handle confidential information?</dt><dd>Confidentiality arrangements are agreed before sensitive documents are exchanged. Please leave confidential material out of your first enquiry.</dd></div>
+        </dl>
+      </section>
+
+      <section class="close" id="contact" aria-labelledby="contact-h">
+        <div class="dark-card" data-r>
+          <h2 class="h2">Start small, with the cost agreed in advance</h2>
+          <ul class="checks">
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i><p><b>Fixed scope and fee</b><span>The written proposal states the outputs, responsibilities, fee and completion criteria.</span></p></li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i><p><b>Senior advisor throughout</b><span>The advisor who scopes the work stays on it until it is complete.</span></p></li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i><p><b>No referral fees</b><span>We take nothing from the vendors or providers we recommend.</span></p></li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i><p><b>One service at a time</b><span>Commission an assessment on its own. Further work is never a condition.</span></p></li>
+          </ul>
+          <p class="free">Not ready to talk? Try the free <a href="/ai-readiness">AI</a>, <a href="/fintech-readiness">fintech</a> or <a href="/security-check">security</a> check. No email required.</p>
+        </div>
+        <div class="card" data-r>
+          <h2 class="h2" id="contact-h">Request a consultation</h2>
+          <p class="lede">Describe the decision in a few sentences. We reply by email to arrange a first conversation.</p>
+          <form id="enquiry" novalidate>
+            <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required maxlength="120" aria-describedby="e-name" /><p class="err" id="e-name"></p></div>
+            <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" autocomplete="organization" required maxlength="160" aria-describedby="e-company" /><p class="err" id="e-company"></p></div>
+            <div class="field full"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" spellcheck="false" required maxlength="200" aria-describedby="e-email" /><p class="err" id="e-email"></p></div>
+            <div class="field full"><label for="f-problem">What decision are you facing?</label><textarea id="f-problem" name="problem" required maxlength="20000" aria-describedby="h-problem e-problem"></textarea><p class="hint" id="h-problem">The goal, where things stand and any deadline are enough.</p><p class="err" id="e-problem"></p></div>
+            <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+            <div class="actions"><button class="btn" type="submit">Request a consultation <i class="ph ph-arrow-right" aria-hidden="true"></i></button><small>Or email <a href="mailto:hello@dfg.consulting">hello@dfg.consulting</a>. See our <a href="/privacy">privacy notice</a>.</small></div>
+            <p class="status" id="status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        <span>DFG Digital Frontiers FZ-LLC, United Arab Emirates</span>
+        <nav aria-label="Footer"><a href="/expertise/ai-strategy">AI strategy</a><a href="/expertise/it-strategy">IT strategy</a><a href="/expertise/fintech-product">Fintech and payments</a><a href="/expertise/security-posture">Cybersecurity</a><a href="/privacy">Privacy notice</a><a href="/terms">Terms of use</a></nav>
+        <p class="reg">DFG provides independent technology and business advisory services. DFG does not provide regulated financial services, legal opinions, audit opinions or ISO certification. © 2026 DFG Digital Frontiers FZ-LLC.</p>
+      </footer>
+    </main>
+
+    <script src="/assets/city.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* hero visual: DFG's district, drawn on the cobalt tile */
+        var c = document.getElementById("district");
+        if (c && window.DFGWorld) {
+          var mob = c.clientWidth < 520;
+          var w = new DFGWorld.World(c, { bx: mob ? 5 : 6, by: mob ? 4 : 5, seed: 7, bg: "#2f55e4", fit: 0.92, tx: 0.5, ty: 0.52, fitMobile: 0.92 });
+          w.setScript(DFGWorld.heroScript(w, mob));
+          w.play();
+        }
+
+        /* stage picker: tabs, arrow keys; every stage listed when scripts are off */
+        var list = document.querySelector('[role="tablist"]');
+        var tabs = [].slice.call(list.querySelectorAll('[role="tab"]'));
+        var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+        function select(i, focus) {
+          tabs.forEach(function (t, j) { t.setAttribute("aria-selected", String(i === j)); t.tabIndex = i === j ? 0 : -1; panels[j].hidden = i !== j; });
+          if (focus) tabs[i].focus();
+        }
+        tabs.forEach(function (t, i) {
+          t.addEventListener("click", function () { select(i, false); });
+          t.addEventListener("keydown", function (e) {
+            var k = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+            if (k === undefined) return;
+            e.preventDefault();
+            select((i + k + tabs.length) % tabs.length, true);
+          });
+        });
+        list.hidden = false;
+        list.closest("section").classList.add("tabs-on");
+        select(0, false);
+
+        /* reveals once, as sections enter */
+        if (!reduce && "IntersectionObserver" in window) {
+          document.documentElement.classList.add("rv");
+          var io = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+          }, { rootMargin: "0px 0px -8% 0px" });
+          document.querySelectorAll("[data-r]").forEach(function (n) { io.observe(n); });
+        }
+
+        /* tagline: words light up as they cross a line at 60% of the viewport */
+        var tag = document.getElementById("tagline");
+        var lines = tag.innerHTML.split(/<br\s*\/?>/i);
+        tag.textContent = "";
+        lines.forEach(function (line, li) {
+          line.trim().split(/\s+/).forEach(function (word, wi) {
+            var s = document.createElement("span"); s.className = "w"; s.textContent = word;
+            if (wi) tag.appendChild(document.createTextNode(" "));
+            tag.appendChild(s);
+          });
+          if (li < lines.length - 1) tag.appendChild(document.createElement("br"));
+        });
+        var wio = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("on"); wio.unobserve(e.target); } });
+        }, { rootMargin: "0px 0px -40% 0px", threshold: 1 });
+        tag.querySelectorAll(".w").forEach(function (s) { wio.observe(s); });
+
+        /* enquiry: inline validation, sending state, email fallback */
+        var f = document.getElementById("enquiry"), status = document.getElementById("status");
+        var rules = {
+          name: function (v) { return v ? "" : "Enter your name."; },
+          company: function (v) { return v ? "" : "Enter your company."; },
+          email: function (v) { return !v ? "Enter your work email." : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "Enter an email address like name@company.com."; },
+          problem: function (v) { return v ? "" : "Describe the decision you are facing."; },
+        };
+        function check(el) {
+          var msg = rules[el.name](el.value.trim());
+          el.setAttribute("aria-invalid", msg ? "true" : "false");
+          document.getElementById("e-" + el.name).textContent = msg;
+          return !msg;
+        }
+        Object.keys(rules).forEach(function (n) { f.elements[n].addEventListener("blur", function () { if (this.value) check(this); }); });
+        f.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var bad = Object.keys(rules).filter(function (n) { return !check(f.elements[n]); });
+          if (bad.length) { f.elements[bad[0]].focus(); return; }
+          var data = {};
+          ["name", "company", "email", "problem", "website"].forEach(function (n) { data[n] = f.elements[n].value.trim(); });
+          var btn = f.querySelector("button[type=submit]"), label = btn.innerHTML;
+          btn.disabled = true; btn.textContent = "Sending your request"; status.textContent = "";
+          fetch("/api/contact", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(data) })
+            .then(function (r) { if (!r.ok) throw new Error(String(r.status)); })
+            .then(function () { f.reset(); status.textContent = "Request sent. We will reply to " + data.email + " to arrange a first conversation."; })
+            .catch(function () {
+              status.textContent = "The form could not send your request. Your email app will open with it filled in; send it to hello@dfg.consulting.";
+              location.href = "mailto:hello@dfg.consulting?subject=" + encodeURIComponent("Consultation request from " + data.company) + "&body=" + encodeURIComponent(data.problem + "\n\n" + data.name + ", " + data.company + "\n" + data.email);
+            })
+            .finally(function () { btn.disabled = false; btn.innerHTML = label; });
+        });
+      });
+    </script>
+  </body>
+</html>

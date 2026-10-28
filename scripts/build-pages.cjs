@@ -1083,4 +1083,4 @@ if (require.main === module) {
   console.log("Built index, " + DOMAINS.length + " expertise pages; refreshed 6 pages and the sitemap.");
 }
 
-module.exports = { DOMAINS, STAGES };
+module.exports = { DOMAINS, STAGES, stageArt, markSymbols };

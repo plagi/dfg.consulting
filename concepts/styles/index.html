@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DFG style directions</title>
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist:wght@400;500;600&family=Archivo:wght@500;700;800;900&family=Golos+Text:wght@400;500;600;700;800&display=swap"
+    />
+    <style>
+      * { box-sizing: border-box; margin: 0; }
+      body { background: #d9d9d4; font: 16px/1.5 "Geist", system-ui, sans-serif; color: #111; padding: 32px 16px 64px; }
+      .tag { max-width: 1200px; margin: 48px auto 12px; display: flex; gap: 12px; align-items: baseline; font: 600 14px/1.4 "Geist", sans-serif; color: #333; }
+      .tag b { font-size: 24px; color: #111; }
+      .frame { max-width: 1200px; margin-inline: auto; border-radius: 12px; overflow: hidden; box-shadow: 0 24px 48px rgba(0,0,0,.12); }
+      a { color: inherit; text-decoration: none; }
+
+      /* A — editorial, like a strategy firm's annual review */
+      .a { background: #f5f2ea; color: #16181b; }
+      .a nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; border-bottom: 1px solid #d8d2c4; font-size: 14px; }
+      .a nav .logo { font: 400 28px/1 "Instrument Serif", serif; letter-spacing: .01em; }
+      .a nav .links { display: flex; gap: 32px; color: #4b4f55; }
+      .a nav .cta { border: 1px solid #16181b; padding: 8px 16px; border-radius: 999px; font-weight: 500; }
+      .a .hero { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; padding: 80px 48px 64px; }
+      .a .kicker { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #1f4d3a; font-weight: 600; }
+      .a h1 { font: 400 76px/0.98 "Instrument Serif", serif; letter-spacing: -.01em; margin-top: 24px; }
+      .a h1 em { font-style: italic; color: #1f4d3a; }
+      .a .sub { margin-top: 28px; font-size: 19px; line-height: 1.55; color: #3d4148; max-width: 34em; }
+      .a .btn { display: inline-block; margin-top: 32px; background: #1f4d3a; color: #f5f2ea; padding: 14px 24px; border-radius: 999px; font-weight: 500; }
+      .a aside { border-left: 1px solid #d8d2c4; padding-left: 40px; align-self: end; }
+      .a aside .n { font: 400 64px/1 "Instrument Serif", serif; color: #1f4d3a; }
+      .a aside p { color: #3d4148; margin-top: 8px; }
+      .a aside hr { border: 0; border-top: 1px solid #d8d2c4; margin: 24px 0; }
+      .a .areas { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #d8d2c4; }
+      .a .areas div { padding: 28px 48px 40px 24px; border-right: 1px solid #d8d2c4; }
+      .a .areas div:first-child { padding-left: 48px; }
+      .a .areas div:last-child { border-right: 0; }
+      .a .areas span { font: 400 15px "Instrument Serif", serif; color: #1f4d3a; }
+      .a .areas h3 { font: 400 28px/1.1 "Instrument Serif", serif; margin: 8px 0; }
+      .a .areas p { font-size: 14px; color: #4b4f55; }
+
+      /* B — bold and illustrated, in the spirit of advix */
+      .b { background: #2d5bff; color: #fff; position: relative; overflow: hidden; }
+      .b nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; font-weight: 600; position: relative; z-index: 2; }
+      .b nav .logo { font: 900 26px/1 "Archivo", sans-serif; letter-spacing: -.02em; }
+      .b nav .links { display: flex; gap: 32px; font-size: 15px; opacity: .9; }
+      .b .hero { position: relative; z-index: 2; padding: 56px 48px 0; max-width: 760px; }
+      .b .pill { display: inline-block; background: #fff; color: #2d5bff; font: 800 12px/1 "Archivo", sans-serif; letter-spacing: .08em; text-transform: uppercase; padding: 8px 12px; border-radius: 999px; }
+      .b h1 { font: 900 72px/0.95 "Archivo", sans-serif; text-transform: uppercase; letter-spacing: -.02em; margin-top: 20px; }
+      .b h1 span { color: #ff7a45; }
+      .b .sub { margin-top: 20px; font-size: 19px; line-height: 1.5; max-width: 30em; opacity: .95; }
+      .b .btn { display: inline-block; margin-top: 28px; background: #fff; color: #111; padding: 14px 26px; border-radius: 999px; font: 800 16px "Archivo", sans-serif; }
+      .b .stairs { position: absolute; right: 48px; top: 240px; width: 440px; height: 390px; }
+      .b .stages { position: relative; z-index: 2; display: flex; gap: 12px; padding: 48px 48px 40px; flex-wrap: wrap; }
+      .b .stages a { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 10px 18px; font: 700 14px "Archivo", sans-serif; }
+      .b .stages a:first-child { background: #fff; color: #2d5bff; }
+      .b .cards { background: #fff; color: #111; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 32px 48px 40px; }
+      .b .cards div { background: #f1f4ff; border-radius: 20px; padding: 24px; }
+      .b .cards i { display: block; width: 48px; height: 48px; border-radius: 14px; margin-bottom: 16px; }
+      .b .cards h3 { font: 800 18px/1.2 "Archivo", sans-serif; }
+      .b .cards p { font-size: 14px; color: #4a5068; margin-top: 6px; }
+
+      /* C — strict Swiss typography with one red accent, Lebedev school */
+      .c { background: #fff; color: #000; font-family: "Golos Text", sans-serif; }
+      .c nav { display: grid; grid-template-columns: 1fr auto auto; gap: 40px; align-items: center; padding: 28px 48px; font-size: 15px; }
+      .c nav .logo { font-weight: 800; font-size: 22px; }
+      .c nav .logo i { font-style: normal; color: #e30613; }
+      .c nav .links { display: flex; gap: 28px; }
+      .c nav .cta { color: #e30613; font-weight: 700; border-bottom: 2px solid #e30613; }
+      .c .hero { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 24px; padding: 72px 48px 56px; }
+      .c h1 { grid-column: 1 / 11; font: 800 88px/0.95 "Golos Text", sans-serif; letter-spacing: -.045em; }
+      .c h1 i { font-style: normal; color: #e30613; }
+      .c .sub { grid-column: 1 / 7; margin-top: 32px; font-size: 20px; line-height: 1.5; }
+      .c .side { grid-column: 8 / 13; margin-top: 32px; font-size: 15px; color: #555; border-top: 3px solid #000; padding-top: 16px; }
+      .c .side b { color: #000; }
+      .c .btn { display: inline-block; margin-top: 28px; background: #e30613; color: #fff; padding: 16px 28px; font-weight: 700; }
+      .c .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 3px solid #000; margin: 0 48px; }
+      .c .grid4 div { padding: 24px 24px 48px 0; }
+      .c .grid4 .num { font: 800 64px/1 "Golos Text", sans-serif; letter-spacing: -.04em; color: #e30613; }
+      .c .grid4 h3 { font-size: 20px; font-weight: 700; margin-top: 12px; }
+      .c .grid4 p { font-size: 14px; color: #555; margin-top: 6px; max-width: 22em; }
+      .c .strip { display: flex; justify-content: space-between; padding: 20px 48px; background: #000; color: #fff; font-size: 14px; margin-top: 8px; }
+      .c .strip span::before { content: "■ "; color: #e30613; }
+    </style>
+  </head>
+  <body>
+    <p class="tag"><b>A</b> Editorial. Warm paper, serif headlines, a deep green accent. Reads like a strategy firm's annual review.</p>
+    <section class="frame a">
+      <nav><span class="logo">DFG</span><span class="links"><a>Expertise</a><a>How we work</a><a>Questions</a></span><a class="cta">Request a consultation</a></nav>
+      <div class="hero">
+        <div>
+          <p class="kicker">Independent advisory · AI, fintech, cybersecurity</p>
+          <h1>Technology decisions that grow your business.</h1>
+          <p class="sub">For leadership teams at banks, fintechs and technology companies. We help you put budget into what pays back, bring new products to market and answer customers' security questions with evidence.</p>
+          <a class="btn">Request a consultation</a>
+        </div>
+        <aside>
+          <p class="n">01</p><p>Senior advisor on every engagement, from scope to completion.</p>
+          <hr /><p class="n">02</p><p>No referral fees from the vendors or providers we recommend.</p>
+          <hr /><p class="n">03</p><p>Scope and fee agreed in writing before any work begins.</p>
+        </aside>
+      </div>
+      <div class="areas">
+        <div><span>I.</span><h3>AI strategy</h3><p>Invest where the return is.</p></div>
+        <div><span>II.</span><h3>IT strategy</h3><p>Choose suppliers on cost and fit.</p></div>
+        <div><span>III.</span><h3>Fintech and payments</h3><p>Bring new products to market.</p></div>
+        <div><span>IV.</span><h3>Cybersecurity</h3><p>Answer customers' security questions.</p></div>
+      </div>
+    </section>
+
+    <p class="tag"><b>B</b> Bold and illustrated. Saturated blue, heavy uppercase type, orange accent, a stage picker up front. Closest to advix.</p>
+    <section class="frame b">
+      <svg class="stairs" viewBox="0 0 520 460" aria-hidden="true">
+        <rect x="40" y="340" width="120" height="120" fill="#ff7a45" />
+        <rect x="160" y="260" width="120" height="200" fill="#1a3fd6" />
+        <rect x="280" y="170" width="120" height="290" fill="#ff7a45" />
+        <rect x="400" y="70" width="120" height="390" fill="#1a3fd6" />
+        <circle cx="455" cy="40" r="26" fill="#fff" />
+        <path d="M100 330 L220 250 L340 160 L455 70" stroke="#fff" stroke-width="4" stroke-dasharray="10 10" fill="none" />
+      </svg>
+      <nav><span class="logo">DFG</span><span class="links"><a>Services</a><a>Stages</a><a>Contact</a></span></nav>
+      <div class="hero">
+        <span class="pill">Independent advisory</span>
+        <h1>Technology decisions that <span>grow</span> your business</h1>
+        <p class="sub">For leadership teams at banks, fintechs and technology companies, from the first investment decision to a secure, scaled operation.</p>
+        <a class="btn">Let's talk →</a>
+      </div>
+      <div class="stages"><a>Idea → Decision</a><a>Decision → Plan</a><a>Pilot → Scale</a><a>Scale → Secure</a></div>
+      <div class="cards">
+        <div><i style="background:#2d5bff"></i><h3>AI strategy</h3><p>Invest where the return is.</p></div>
+        <div><i style="background:#ff7a45"></i><h3>IT strategy</h3><p>Choose suppliers on cost and fit.</p></div>
+        <div><i style="background:#11c28b"></i><h3>Fintech and payments</h3><p>Bring new products to market.</p></div>
+        <div><i style="background:#111"></i><h3>Cybersecurity</h3><p>Answer customers' security questions.</p></div>
+      </div>
+    </section>
+
+    <p class="tag"><b>C</b> Strict Swiss typography. White, very large black type, one red accent, numbers as the visual. Lebedev school.</p>
+    <section class="frame c">
+      <nav><span class="logo">DFG<i>.</i></span><span class="links"><a>Expertise</a><a>How we work</a><a>Questions</a></span><a class="cta">Request a consultation</a></nav>
+      <div class="hero">
+        <h1>Technology decisions that grow your business<i>.</i></h1>
+        <p class="sub">For leadership teams at banks, fintechs and technology companies. We help you put budget into what pays back, bring new products to market and answer customers' security questions with evidence.<br /><a class="btn">Request a consultation</a></p>
+        <p class="side"><b>Independent advisory for AI, fintech and cybersecurity.</b> Senior advisor on every engagement. No referral fees. Scope and fee agreed in writing.</p>
+      </div>
+      <div class="grid4">
+        <div><p class="num">01</p><h3>AI strategy</h3><p>Invest where the return is.</p></div>
+        <div><p class="num">02</p><h3>IT strategy</h3><p>Choose suppliers on cost and fit.</p></div>
+        <div><p class="num">03</p><h3>Fintech and payments</h3><p>Bring new products to market.</p></div>
+        <div><p class="num">04</p><h3>Cybersecurity</h3><p>Answer customers' security questions.</p></div>
+      </div>
+      <div class="strip"><span>Senior advisors</span><span>No referral fees</span><span>Fixed scope and fee</span><span>hello@dfg.consulting</span></div>
+    </section>
+  </body>
+</html>
