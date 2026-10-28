@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DFG | Independent advisory for AI, fintech and cybersecurity</title>
+    <meta
+      name="description"
+      content="Senior advisors for banks, fintechs and technology companies on AI strategy, IT strategy, fintech and payments, and cybersecurity."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="DFG | Independent advisory for AI, fintech and cybersecurity" />
+    <meta
+      property="og:description"
+      content="Senior advisors for banks, fintechs and technology companies on AI strategy, IT strategy, fintech and payments, and cybersecurity."
+    />
+    <meta property="og:image" content="https://dfg.consulting/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"
+    />
+    <style>
+      /* Values come only from the landing-page-design skill: Tailwind type scale,
+         the closed spacing table, Tailwind radii, the approved dark surfaces, one accent. */
+      :root {
+        --bg: #000000;
+        --s1: #181818;
+        --s2: #1f1f1f;
+        --line: #272727;
+        --line2: #313131;
+        --ink: #ffffff;
+        --muted: #9b9b9b;
+        --accent: #f2b441;
+        --on-accent: #131209;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --font: "Geist", ui-sans-serif, system-ui, sans-serif;
+        --mono: "Geist Mono", ui-monospace, monospace;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 96px;
+        color-scheme: dark;
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font: 400 16px/24px var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button,
+      input,
+      textarea {
+        font: inherit;
+        color: inherit;
+      }
+      h1,
+      h2,
+      h3 {
+        font-weight: 600;
+        text-wrap: balance;
+      }
+      p,
+      li,
+      dd {
+        text-wrap: pretty;
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+        border-radius: 4px;
+      }
+      ::selection {
+        background: var(--accent);
+        color: var(--on-accent);
+      }
+      .sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      .skip {
+        position: fixed;
+        left: 16px;
+        top: -64px;
+        z-index: 60;
+        background: var(--ink);
+        color: var(--bg);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+      }
+      .skip:focus {
+        top: 16px;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin-inline: auto;
+        padding-inline: 32px;
+      }
+
+      /* buttons: main 16px semibold, 8px by 12px padding */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font: 600 16px/24px var(--font);
+        background: var(--accent);
+        color: var(--on-accent);
+        border: 1px solid var(--accent);
+        cursor: pointer;
+        transition:
+          background-color 300ms var(--ease),
+          border-color 300ms var(--ease),
+          transform 500ms var(--ease);
+      }
+      .btn:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .btn .ph {
+        transition: transform 500ms var(--ease);
+      }
+      .btn:hover .ph {
+        transform: translateX(4px);
+      }
+      .btn-sm {
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .btn[disabled] {
+        background: var(--s2);
+        border-color: var(--line2);
+        color: var(--muted);
+        cursor: progress;
+      }
+      .link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+        color: var(--ink);
+        transition: color 300ms var(--ease);
+      }
+      .link:hover {
+        color: var(--accent);
+      }
+      .link .ph {
+        transition: transform 500ms var(--ease);
+      }
+      .link:hover .ph {
+        transform: translateX(4px);
+      }
+      .link:active {
+        transform: translateY(1px);
+      }
+
+      /* floating navigation */
+      .nav {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 8px 8px 8px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(24, 24, 24, 0.72);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        width: max-content;
+        max-width: calc(100% - 32px);
+      }
+      .logo {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: 0.04em;
+      }
+      .nav-links {
+        display: flex;
+        gap: 24px;
+      }
+      .nav-links a {
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--muted);
+        transition: color 300ms var(--ease);
+      }
+      .nav-links a:hover,
+      .nav-links a[aria-current="true"] {
+        color: var(--ink);
+      }
+      .toggle {
+        display: none;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        background: none;
+        border-radius: 8px;
+        position: relative;
+        cursor: pointer;
+      }
+      .toggle span[aria-hidden] {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--ink);
+        transition: transform 500ms var(--ease);
+      }
+      .toggle span:nth-child(1) {
+        top: 15px;
+      }
+      .toggle span:nth-child(2) {
+        top: 23px;
+      }
+      .toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(4px) rotate(45deg);
+      }
+      .toggle[aria-expanded="true"] span:nth-child(2) {
+        transform: translateY(-4px) rotate(-45deg);
+      }
+      .panel {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        padding: 96px 24px 48px;
+        background: rgba(0, 0, 0, 0.86);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 300ms var(--ease),
+          visibility 0s linear 300ms;
+      }
+      .panel.open {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 300ms var(--ease);
+      }
+      .panel a {
+        font-size: 30px;
+        line-height: 36px;
+        font-weight: 600;
+        padding-block: 12px;
+        border-bottom: 1px solid var(--line);
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 500ms var(--ease),
+          transform 500ms var(--ease);
+      }
+      .panel .btn {
+        margin-top: 24px;
+        justify-content: center;
+        font-size: 16px;
+        line-height: 24px;
+        border-bottom: 1px solid var(--accent);
+      }
+      .panel.open a {
+        opacity: 1;
+        transform: none;
+      }
+      .panel.open a:nth-child(2) {
+        transition-delay: 60ms;
+      }
+      .panel.open a:nth-child(3) {
+        transition-delay: 120ms;
+      }
+      .panel.open a:nth-child(4) {
+        transition-delay: 180ms;
+      }
+      .panel.open a:nth-child(5) {
+        transition-delay: 240ms;
+      }
+      body.locked {
+        overflow: hidden;
+      }
+
+      /* hero */
+      .hero {
+        padding-top: 96px;
+        padding-bottom: 64px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+        gap: 32px;
+        align-items: center;
+        margin-top: 64px;
+      }
+      .kicker {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+        color: var(--accent);
+        margin-bottom: 24px;
+      }
+      .hero h1 {
+        max-width: 680px;
+        font-size: 60px;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        background: linear-gradient(90deg, #ffffff, #9b9b9b);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        padding-bottom: 4px;
+      }
+      .hero .sub {
+        max-width: 680px;
+        margin-top: 24px;
+        font-size: 18px;
+        line-height: 28px;
+        color: var(--muted);
+      }
+      .hero .btn {
+        margin-top: 32px;
+      }
+      .proof-line {
+        list-style: none;
+        padding: 0;
+        margin-top: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--muted);
+      }
+      .proof-line li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .proof-line .ph {
+        color: var(--accent);
+        font-size: 16px;
+      }
+      #district {
+        display: block;
+        width: 100%;
+        height: 480px;
+      }
+
+      /* sections */
+      section.block {
+        padding-block: 96px;
+        border-top: 1px solid var(--line);
+      }
+      .eyebrow {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+      .h2 {
+        font-size: 36px;
+        line-height: 40px;
+        letter-spacing: -0.02em;
+        max-width: 680px;
+      }
+      .lede {
+        margin-top: 16px;
+        max-width: 680px;
+        font-size: 18px;
+        line-height: 28px;
+        color: var(--muted);
+      }
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: 48px;
+        align-items: start;
+      }
+      .problem p:not(.eyebrow) {
+        font-size: 18px;
+        line-height: 28px;
+        color: var(--muted);
+      }
+      .problem p:not(.eyebrow) + p {
+        margin-top: 16px;
+      }
+      .problem p.answer {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        margin-top: 48px;
+      }
+      .card {
+        background: var(--s1);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        transition:
+          border-color 300ms var(--ease),
+          transform 500ms var(--ease);
+      }
+      .card:hover {
+        border-color: var(--line2);
+        transform: translateY(-2px);
+      }
+      .card .ph {
+        font-size: 24px;
+        color: var(--accent);
+      }
+      .card h3 {
+        font-size: 20px;
+        line-height: 28px;
+        margin-top: 4px;
+      }
+      .card p {
+        color: var(--muted);
+      }
+      .card .link {
+        margin-top: auto;
+        padding-top: 12px;
+      }
+
+      /* tagline reveal */
+      .tagline {
+        padding-block: 96px;
+        border-top: 1px solid var(--line);
+      }
+      .tagline p {
+        max-width: 680px;
+        font-size: 48px;
+        line-height: 1;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+      .tagline .w {
+        opacity: 0.3;
+        transition: opacity 700ms var(--ease);
+      }
+      .tagline .w.on {
+        opacity: 1;
+      }
+
+      /* steps */
+      .steps {
+        list-style: none;
+        padding: 0;
+        border-top: 1px solid var(--line);
+      }
+      .steps li {
+        display: grid;
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 16px;
+        padding-block: 32px;
+        border-bottom: 1px solid var(--line);
+      }
+      .num {
+        font: 500 14px/20px var(--mono);
+        color: var(--accent);
+        padding-top: 4px;
+      }
+      .steps h3 {
+        font-size: 20px;
+        line-height: 28px;
+      }
+      .steps p {
+        margin-top: 8px;
+        color: var(--muted);
+        max-width: 560px;
+      }
+
+      /* proof */
+      .sample {
+        margin-top: 48px;
+        background: var(--s1);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 32px;
+      }
+      .sample-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .sample h3 {
+        font-size: 24px;
+        line-height: 32px;
+      }
+      .label {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 500;
+        color: var(--muted);
+        border: 1px solid var(--line2);
+        border-radius: 4px;
+        padding: 4px 8px;
+      }
+      .rows {
+        margin-top: 24px;
+        border-top: 1px solid var(--line);
+      }
+      .rows div {
+        display: grid;
+        grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+        gap: 24px;
+        padding-block: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+      .rows dt {
+        font-weight: 500;
+      }
+      .rows dd {
+        color: var(--muted);
+      }
+      .sample-foot {
+        margin-top: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+      }
+
+      /* FAQ: every answer visible, two columns */
+      .faq {
+        margin-top: 48px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px 48px;
+      }
+      .faq dt {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+      }
+      .faq dd {
+        margin-top: 8px;
+        color: var(--muted);
+      }
+
+      /* risk reversal */
+      .assure {
+        margin-top: 48px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+        background: var(--s1);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 32px;
+      }
+      .assure div {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .assure .ph {
+        color: var(--accent);
+        font-size: 24px;
+        flex: none;
+      }
+      .assure b {
+        display: block;
+        font-weight: 600;
+      }
+      .assure span {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .assure a {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-color: var(--line2);
+      }
+
+      /* final CTA and form */
+      .cta-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: 48px;
+      }
+      .form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        background: var(--s1);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 32px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .field.full,
+      .form .actions,
+      .form .status {
+        grid-column: 1 / -1;
+      }
+      .field label {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+      }
+      .field input,
+      .field textarea {
+        background: var(--s2);
+        border: 1px solid var(--line2);
+        border-radius: 8px;
+        padding: 12px;
+        min-width: 0;
+        transition: border-color 300ms var(--ease);
+      }
+      .field textarea {
+        min-height: 128px;
+        resize: vertical;
+      }
+      .field input:hover,
+      .field textarea:hover {
+        border-color: var(--muted);
+      }
+      .field input:focus,
+      .field textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+      .field [aria-invalid="true"] {
+        border-color: #e5484d;
+      }
+      .err {
+        font-size: 14px;
+        line-height: 20px;
+        color: #ff8589;
+      }
+      .err:empty {
+        display: none;
+      }
+      .hint {
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--muted);
+      }
+      .hp {
+        position: absolute;
+        left: -9999px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        margin-top: 8px;
+      }
+      .actions small {
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--muted);
+      }
+      .actions small a {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .status {
+        font-size: 14px;
+        line-height: 20px;
+        border-radius: 8px;
+        padding: 12px;
+        border: 1px solid var(--line2);
+        background: var(--s2);
+      }
+      .status:empty {
+        display: none;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding-block: 48px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .foot {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .foot nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .foot a:hover {
+        color: var(--ink);
+      }
+      .reg {
+        margin-top: 24px;
+        max-width: 680px;
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      /* scroll reveals: rise 32px and fade in once */
+      .rv [data-r] {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 700ms var(--ease),
+          transform 700ms var(--ease);
+      }
+      .rv [data-r].in {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (max-width: 900px) {
+        .nav-links,
+        .nav > .btn {
+          display: none;
+        }
+        .toggle {
+          display: block;
+        }
+        .nav {
+          width: calc(100% - 32px);
+          justify-content: space-between;
+        }
+        .hero-grid,
+        .split,
+        .cta-grid {
+          grid-template-columns: 1fr;
+        }
+        #district {
+          height: 320px;
+        }
+        .assure {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .wrap {
+          padding-inline: 16px;
+        }
+        .hero-grid {
+          margin-top: 32px;
+        }
+        .hero h1 {
+          font-size: 36px;
+          line-height: 40px;
+        }
+        .hero .sub,
+        .lede,
+        .problem p:not(.eyebrow) {
+          font-size: 16px;
+          line-height: 24px;
+        }
+        section.block,
+        .tagline {
+          padding-block: 64px;
+        }
+        .h2 {
+          font-size: 30px;
+          line-height: 36px;
+        }
+        .tagline p {
+          font-size: 36px;
+          line-height: 40px;
+        }
+        .cards,
+        .faq,
+        .form {
+          grid-template-columns: 1fr;
+        }
+        .card,
+        .sample,
+        .form,
+        .assure {
+          padding: 24px;
+        }
+        .rows div {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+        .steps li {
+          grid-template-columns: 48px minmax(0, 1fr);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .rv [data-r],
+        .panel a {
+          transform: none !important;
+        }
+        .btn:hover .ph,
+        .link:hover .ph,
+        .card:hover {
+          transform: none;
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What does DFG do?", "acceptedAnswer": { "@type": "Answer", "text": "DFG gives independent advice to banks, fintechs and technology companies on AI strategy, IT strategy, fintech and payments, and cybersecurity: assessment, implementation planning and delivery oversight." } },
+          { "@type": "Question", "name": "Do you build or implement the solution?", "acceptedAnswer": { "@type": "Answer", "text": "No. We advise on the decision and the plan. Your team or the providers you appoint build and run the solution, and we can oversee that work against the agreed plan." } },
+          { "@type": "Question", "name": "How are fees agreed?", "acceptedAnswer": { "@type": "Answer", "text": "Outputs, responsibilities, fees and completion criteria are agreed in a written proposal before any work begins." } },
+          { "@type": "Question", "name": "Do you take referral fees from vendors or providers?", "acceptedAnswer": { "@type": "Answer", "text": "No. We take no referral fees from the vendors or providers we recommend." } }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <nav class="nav" aria-label="Site">
+      <a class="logo" href="#top" aria-label="DFG, back to top">DFG</a>
+      <div class="nav-links">
+        <a href="#benefits">What we do</a><a href="#how">How it works</a><a href="#proof">Deliverables</a><a href="#faq">Questions</a>
+      </div>
+      <a class="btn btn-sm" href="#contact">Request a consultation</a>
+      <button class="toggle" type="button" aria-expanded="false" aria-controls="panel">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span class="sr">Menu</span>
+      </button>
+    </nav>
+    <div class="panel" id="panel">
+      <a href="#benefits">What we do</a><a href="#how">How it works</a><a href="#proof">Deliverables</a><a href="#faq">Questions</a><a class="btn" href="#contact">Request a consultation</a>
+    </div>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="kicker">Digital Frontiers Group · Technology advisory</p>
+            <h1>Independent advisory<br />for AI, fintech<br />and cybersecurity.</h1>
+            <p class="sub">
+              Senior advisors for banks, fintechs and technology companies. We help you
+              decide what to fund, choose the right partners and answer security reviews
+              with evidence.
+            </p>
+            <a class="btn" href="#contact">Request a consultation <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            <ul class="proof-line" aria-label="Our commitments">
+              <li><i class="ph ph-seal-check" aria-hidden="true"></i>Senior advisor on every engagement</li>
+              <li><i class="ph ph-scales" aria-hidden="true"></i>No referral fees</li>
+              <li><i class="ph ph-file-text" aria-hidden="true"></i>Scope and fee agreed in writing</li>
+            </ul>
+          </div>
+          <canvas id="district" aria-hidden="true"></canvas>
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="problem-h">
+        <div class="wrap split problem" data-r>
+          <div>
+            <p class="eyebrow">The problem</p>
+            <h2 class="h2" id="problem-h">Budgets get committed before the evidence is in.</h2>
+          </div>
+          <div>
+            <p>
+              A promising demonstration becomes a funded programme. A banking partner is
+              chosen on a sales call. A customer security questionnaire is answered from
+              memory. Each of these decisions is expensive to reverse.
+            </p>
+            <p class="answer">
+              DFG puts the evidence, the options and the full cost in front of the people
+              deciding, before the commitment is made.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="benefits" aria-labelledby="benefits-h">
+        <div class="wrap">
+          <div data-r>
+            <p class="eyebrow">What we do</p>
+            <h2 class="h2" id="benefits-h">Four decisions we help you get right</h2>
+          </div>
+          <div class="cards">
+            <article class="card" data-r>
+              <i class="ph ph-chart-line-up" aria-hidden="true"></i>
+              <h3>Fund the AI work that pays back</h3>
+              <p>
+                An investment brief separates measured value from assumptions and
+                recommends whether to pursue, test, defer or stop.
+              </p>
+              <a class="link" href="/expertise/ai-strategy">Explore AI strategy <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </article>
+            <article class="card" data-r>
+              <i class="ph ph-tree-structure" aria-hidden="true"></i>
+              <h3>Choose vendors on evidence, not demonstrations</h3>
+              <p>
+                Your requirements become evaluation criteria, vendor claims are checked
+                against references, and exit terms are compared before you sign.
+              </p>
+              <a class="link" href="/expertise/it-strategy">Explore IT strategy <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </article>
+            <article class="card" data-r>
+              <i class="ph ph-handshake" aria-hidden="true"></i>
+              <h3>Launch with partners that fit</h3>
+              <p>
+                A working commercial model, a comparison of target markets and a partner
+                selection matrix with onboarding requirements.
+              </p>
+              <a class="link" href="/expertise/fintech-product">Explore fintech and payments <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </article>
+            <article class="card" data-r>
+              <i class="ph ph-fingerprint" aria-hidden="true"></i>
+              <h3>Answer security reviews with evidence</h3>
+              <p>
+                An evidence register and supported questionnaire responses, with the
+                remaining gaps prioritised by impact.
+              </p>
+              <a class="link" href="/expertise/security-posture">Explore cybersecurity <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="tagline" aria-label="Our promise">
+        <div class="wrap">
+          <p id="tagline">Know what to fund,<br />who to work with<br />and what you can prove.</p>
+        </div>
+      </section>
+
+      <section class="block" id="how" aria-labelledby="how-h">
+        <div class="wrap split">
+          <div data-r>
+            <p class="eyebrow">How it works</p>
+            <h2 class="h2" id="how-h">From first conversation to deliverable in three steps</h2>
+          </div>
+          <ol class="steps" data-r>
+            <li>
+              <span class="num">01</span>
+              <div>
+                <h3>Tell us the decision</h3>
+                <p>Share the objective, where things stand and any deadline. A free online check can help you prepare.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">02</span>
+              <div>
+                <h3>Agree the scope in writing</h3>
+                <p>A written proposal sets out the outputs, responsibilities, fees and completion criteria before any work begins.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">03</span>
+              <div>
+                <h3>Receive the deliverable</h3>
+                <p>Findings and a recommendation, an implementation plan or monthly delivery reports, reviewed with your sponsor.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="block" id="proof" aria-labelledby="proof-h">
+        <div class="wrap">
+          <div data-r>
+            <p class="eyebrow">Deliverables</p>
+            <h2 class="h2" id="proof-h">See the format before you commit</h2>
+            <p class="lede">Every recommendation shows its reasoning: what is known, what is assumed and what has to happen next.</p>
+          </div>
+          <div class="sample" data-r>
+            <div class="sample-head">
+              <h3>An AI investment decision with its assumptions visible</h3>
+              <span class="label">Illustrative example</span>
+            </div>
+            <dl class="rows">
+              <div><dt>Proposed use</dt><dd>Help an operations team triage payment exceptions.</dd></div>
+              <div><dt>Evidence available</dt><dd>Historical volumes. The handling time baseline is still to be established.</dd></div>
+              <div><dt>Decision to resolve</dt><dd>Would assisted triage improve the process enough to justify integration and operating costs?</dd></div>
+              <div><dt>Next evidence</dt><dd>Agree the baseline, review a representative dataset and compare with automation based on rules.</dd></div>
+            </dl>
+            <div class="sample-foot">
+              <a class="link" href="/expertise/it-strategy#example">A vendor comparison <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+              <a class="link" href="/expertise/fintech-product#example">A market comparison <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+              <a class="link" href="/expertise/security-posture#example">An evidence register <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="faq" aria-labelledby="faq-h">
+        <div class="wrap">
+          <div data-r>
+            <p class="eyebrow">Questions</p>
+            <h2 class="h2" id="faq-h">What clients ask before the first call</h2>
+          </div>
+          <dl class="faq" data-r>
+            <div><dt>What does DFG do?</dt><dd>We give independent advice on AI strategy, IT strategy, fintech and payments, and cybersecurity: assessment, implementation planning and delivery oversight.</dd></div>
+            <div><dt>Do you build or implement the solution?</dt><dd>No. We advise on the decision and the plan. Your team or the providers you appoint build and run the solution, and we can oversee that work against the agreed plan.</dd></div>
+            <div><dt>How does an engagement start?</dt><dd>You tell us the decision in front of you. We discuss whether DFG is a fit and what information is needed, then send a written proposal.</dd></div>
+            <div><dt>How are fees agreed?</dt><dd>Outputs, responsibilities, fees and completion criteria are agreed in writing before any work begins.</dd></div>
+            <div><dt>Do you take referral fees?</dt><dd>No. We take no referral fees from the vendors or providers we recommend, and existing tools and internal options are considered alongside new ones.</dd></div>
+            <div><dt>Who works on the engagement?</dt><dd>The advisor who scopes the engagement stays involved until it is complete. Any specialists and their responsibilities are named in the scope.</dd></div>
+            <div><dt>Can we commission one service on its own?</dt><dd>Yes. Every service can be commissioned on its own, and an assessment never obliges you to buy further work from DFG.</dd></div>
+            <div><dt>Do you provide ISO certification, audits or legal opinions?</dt><dd>No. DFG does not provide ISO certification, independent audit opinions, legal opinions or regulated financial services.</dd></div>
+            <div><dt>How do you handle confidential information?</dt><dd>Confidentiality arrangements are agreed before sensitive documents are exchanged. Please leave confidential material out of your first enquiry.</dd></div>
+            <div><dt>Where is DFG based?</dt><dd>DFG is DFG Digital Frontiers FZ-LLC, a company registered in the United Arab Emirates.</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="assure-h">
+        <div class="wrap">
+          <div data-r>
+            <p class="eyebrow">No surprises</p>
+            <h2 class="h2" id="assure-h">You know the scope and the fee before anything starts</h2>
+          </div>
+          <div class="assure" data-r>
+            <div><i class="ph ph-file-text" aria-hidden="true"></i><p><b>Written proposal first</b><span>Outputs, responsibilities, fees and completion criteria are agreed before work begins.</span></p></div>
+            <div><i class="ph ph-stack" aria-hidden="true"></i><p><b>One service at a time</b><span>Commission an assessment on its own. Further work is never a condition.</span></p></div>
+            <div><i class="ph ph-list-checks" aria-hidden="true"></i><p><b>Free online checks</b><span>Prepare with the <a href="/ai-readiness">AI</a>, <a href="/fintech-readiness">fintech</a> or <a href="/security-check">security</a> check. No email required.</span></p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="contact" aria-labelledby="contact-h">
+        <div class="wrap cta-grid">
+          <div data-r>
+            <p class="eyebrow">Next step</p>
+            <h2 class="h2" id="contact-h">Request a consultation</h2>
+            <p class="lede">Tell us what you want to achieve, where things stand and any important deadline. You receive a written proposal before any work begins.</p>
+          </div>
+          <form class="form" id="enquiry" novalidate data-r>
+            <div class="field">
+              <label for="f-name">Name</label>
+              <input id="f-name" name="name" autocomplete="name" required maxlength="120" aria-describedby="e-name" />
+              <p class="err" id="e-name"></p>
+            </div>
+            <div class="field">
+              <label for="f-company">Company</label>
+              <input id="f-company" name="company" autocomplete="organization" required maxlength="160" aria-describedby="e-company" />
+              <p class="err" id="e-company"></p>
+            </div>
+            <div class="field full">
+              <label for="f-email">Work email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" spellcheck="false" required maxlength="200" aria-describedby="e-email" />
+              <p class="err" id="e-email"></p>
+            </div>
+            <div class="field full">
+              <label for="f-problem">What are you planning or trying to improve?</label>
+              <textarea id="f-problem" name="problem" required maxlength="20000" aria-describedby="h-problem e-problem"></textarea>
+              <p class="hint" id="h-problem">An objective, current stage and deadline are enough.</p>
+              <p class="err" id="e-problem"></p>
+            </div>
+            <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+            <div class="actions">
+              <button class="btn" type="submit">Request a consultation <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+              <small>Or <a href="mailto:hello@dfg.consulting">email hello@dfg.consulting</a>. See our <a href="/privacy">privacy notice</a>.</small>
+            </div>
+            <p class="status" id="status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <p><span class="logo">DFG</span> · Independent advisory for AI, fintech and cybersecurity.</p>
+          <nav aria-label="Footer">
+            <a href="/expertise/ai-strategy">AI strategy</a><a href="/expertise/it-strategy">IT strategy</a><a href="/expertise/fintech-product">Fintech and payments</a><a href="/expertise/security-posture">Cybersecurity</a><a href="/privacy">Privacy notice</a><a href="/terms">Terms of use</a>
+          </nav>
+        </div>
+        <p class="reg">DFG Digital Frontiers FZ-LLC provides independent technology and business advisory services. DFG does not provide regulated financial services, legal opinions, audit opinions or ISO certification. © 2026 DFG Digital Frontiers FZ-LLC.</p>
+      </div>
+    </footer>
+
+    <script src="/assets/city.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* hero district, drawn by the live site's renderer on the approved black */
+        var c = document.getElementById("district");
+        if (c && window.DFGWorld) {
+          var mob = c.clientWidth < 700;
+          var w = new DFGWorld.World(c, { bx: mob ? 5 : 6, by: mob ? 4 : 5, seed: 7, bg: "#000000", fit: 0.96, tx: 0.5, ty: 0.5, fitMobile: 0.96 });
+          w.setScript(DFGWorld.heroScript(w, mob));
+          w.play();
+        }
+
+        /* menu: animated toggle, full height panel, Escape closes */
+        var t = document.querySelector(".toggle"), p = document.getElementById("panel");
+        function setMenu(open) {
+          t.setAttribute("aria-expanded", String(open));
+          t.querySelector(".sr").textContent = open ? "Close menu" : "Menu";
+          p.classList.toggle("open", open);
+          document.body.classList.toggle("locked", open);
+        }
+        t.addEventListener("click", function () { setMenu(t.getAttribute("aria-expanded") !== "true"); });
+        p.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+
+        /* current section in the navigation */
+        var navLinks = [].slice.call(document.querySelectorAll(".nav-links a"));
+        var navIO = new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            navLinks.forEach(function (a) { a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + e.target.id)); });
+          });
+        }, { rootMargin: "-45% 0px -50% 0px" });
+        ["benefits", "how", "proof", "faq"].forEach(function (id) { navIO.observe(document.getElementById(id)); });
+
+        /* scroll reveals: once, rise 32px; movement removed under reduced motion */
+        document.documentElement.classList.add("rv");
+        var rIO = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); rIO.unobserve(e.target); } });
+        }, { rootMargin: "0px 0px -10% 0px" });
+        document.querySelectorAll("[data-r]").forEach(function (n) { rIO.observe(n); });
+
+        /* tagline: each word lights up as it crosses a line at 60% of the viewport */
+        var tag = document.getElementById("tagline");
+        var lines = tag.innerHTML.split(/<br\s*\/?>/i);
+        tag.textContent = "";
+        lines.forEach(function (line, li) {
+          line.trim().split(/\s+/).forEach(function (word, wi) {
+            var s = document.createElement("span");
+            s.className = "w";
+            s.textContent = word;
+            if (wi) tag.appendChild(document.createTextNode(" "));
+            tag.appendChild(s);
+          });
+          if (li < lines.length - 1) tag.appendChild(document.createElement("br"));
+        });
+        var wIO = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("on"); wIO.unobserve(e.target); } });
+        }, { rootMargin: "0px 0px -40% 0px", threshold: 1 });
+        tag.querySelectorAll(".w").forEach(function (s) { wIO.observe(s); });
+
+        /* enquiry form: inline validation, sending state, mailto fallback */
+        var f = document.getElementById("enquiry"), status = document.getElementById("status");
+        var rules = {
+          name: function (v) { return v ? "" : "Enter your name."; },
+          company: function (v) { return v ? "" : "Enter your company."; },
+          email: function (v) { return !v ? "Enter your work email." : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "Enter an email address like name@company.com."; },
+          problem: function (v) { return v ? "" : "Describe what you are planning or trying to improve."; },
+        };
+        function check(el) {
+          var msg = rules[el.name](el.value.trim());
+          el.setAttribute("aria-invalid", msg ? "true" : "false");
+          document.getElementById("e-" + el.name).textContent = msg;
+          return !msg;
+        }
+        Object.keys(rules).forEach(function (n) {
+          f.elements[n].addEventListener("blur", function () { if (this.value) check(this); });
+        });
+        f.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var bad = Object.keys(rules).map(function (n) { return check(f.elements[n]) ? null : f.elements[n]; }).filter(Boolean);
+          if (bad.length) { bad[0].focus(); return; }
+          var data = {};
+          ["name", "company", "email", "problem", "website"].forEach(function (n) { data[n] = f.elements[n].value.trim(); });
+          var btn = f.querySelector("button[type=submit]"), label = btn.innerHTML;
+          btn.disabled = true;
+          btn.textContent = "Sending your request";
+          status.textContent = "";
+          fetch("/api/contact", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(data) })
+            .then(function (r) { if (!r.ok) throw new Error(String(r.status)); })
+            .then(function () {
+              f.reset();
+              status.textContent = "Request sent. We will reply to " + data.email + " to arrange a first conversation.";
+            })
+            .catch(function () {
+              status.textContent = "The form could not send your request. Your email app will open with it filled in; send it to hello@dfg.consulting.";
+              location.href = "mailto:hello@dfg.consulting?subject=" + encodeURIComponent("Consultation request from " + data.company) + "&body=" + encodeURIComponent(data.problem + "\n\n" + data.name + ", " + data.company + "\n" + data.email);
+            })
+            .finally(function () { btn.disabled = false; btn.innerHTML = label; });
+        });
+      });
+    </script>
+  </body>
+</html>
