@@ -31,7 +31,7 @@ const { createPreview } = require("../scripts/preview.cjs");
       "/",
       "/expertise/ai-strategy",
       "/expertise/fintech-product",
-      "/expertise/partnerships",
+      "/expertise/it-strategy",
       "/expertise/security-posture",
       "/ai-readiness",
       "/fintech-readiness",
@@ -86,8 +86,8 @@ const { createPreview } = require("../scripts/preview.cjs");
       await page
         .locator("main > section")
         .evaluateAll((nodes) => nodes.map((n) => n.id)),
-      ["outputs", "services", "method", "checks", "contact"],
-      "Homepage presents deliverables before services, process, tools and enquiry",
+      ["stages", "expertise", "approach", "checks", "contact"],
+      "Homepage moves from stage to expertise, way of working, self-assessments and enquiry",
     );
     await page.screenshot({
       path: path.join(artifacts, "homepage-desktop.png"),
@@ -98,6 +98,28 @@ const { createPreview } = require("../scripts/preview.cjs");
       path: path.join(artifacts, "homepage-mobile.png"),
       fullPage: true,
     });
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.getByRole("tab", { name: /Scale Secure/ }).click();
+    assert.equal(
+      await page.locator("#stage-secure").isVisible(),
+      true,
+      "Choosing a stage shows its services",
+    );
+    assert.equal(await page.locator("#stage-decide").isVisible(), false);
+    await page.keyboard.press("ArrowLeft");
+    assert.equal(
+      await page.locator("#tab-scale").getAttribute("aria-selected"),
+      "true",
+      "Arrow keys move between stages",
+    );
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByRole("button", { name: "Menu", exact: true }).click();
+    await page.keyboard.press("Escape");
+    assert.equal(
+      await page.locator("#menuBtn").getAttribute("aria-expanded"),
+      "false",
+      "Escape closes the menu",
+    );
     await page.getByRole("button", { name: "Menu", exact: true }).click();
     await page
       .getByRole("navigation", { name: "Site" })

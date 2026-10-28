@@ -12,8 +12,10 @@ async function middleware() {
   );
 }
 for (const [from, to] of [
-  ["/expertise/data-and-it", "/expertise/ai-strategy#data-readiness"],
-  ["/expertise/data-and-it.html", "/expertise/ai-strategy#data-readiness"],
+  ["/expertise/data-and-it", "/expertise/it-strategy"],
+  ["/expertise/data-and-it.html", "/expertise/it-strategy"],
+  ["/expertise/partnerships", "/expertise/fintech-product#partners"],
+  ["/expertise/partnerships/", "/expertise/fintech-product#partners"],
   [
     "/expertise/incident-response/",
     "/expertise/security-posture#incident-preparedness",

@@ -9,44 +9,91 @@
     return e;
   }
 
-  /* Menu */
+  /* Menu: full-height panel on phones. Escape or a link closes it; the page does not scroll behind it. */
   var btn = document.getElementById("menuBtn"),
     idx = document.getElementById("idx");
   if (btn && idx) {
+    var setMenu = function (open) {
+      idx.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? "Close" : "Menu";
+      document.body.classList.toggle("menu-open", open);
+    };
     btn.addEventListener("click", function () {
-      var o = idx.classList.toggle("open");
-      btn.setAttribute("aria-expanded", o);
+      setMenu(!idx.classList.contains("open"));
     });
     idx.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
-        idx.classList.remove("open");
-        btn.setAttribute("aria-expanded", "false");
+      if (e.target.closest("a")) setMenu(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && idx.classList.contains("open")) {
+        setMenu(false);
+        btn.focus();
       }
+    });
+    matchMedia("(min-width: 701px)").addEventListener("change", function (m) {
+      if (m.matches) setMenu(false);
     });
   }
 
-  /* Reading progress line */
+  /* Stage picker: tabs with arrow-key support. Without JavaScript every stage is listed in full. */
   (function () {
-    var prog = document.getElementById("prog");
-    if (!prog) return;
-    var tick = false;
-    function upd() {
-      var y = window.scrollY || 0;
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      prog.style.width = (max > 0 ? Math.min(100, (y / max) * 100) : 0) + "%";
-      tick = false;
+    var list = document.querySelector(".stage-tabs");
+    if (!list) return;
+    var tabs = [].slice.call(list.querySelectorAll('[role="tab"]'));
+    var panels = tabs.map(function (t) {
+      return document.getElementById(t.getAttribute("aria-controls"));
+    });
+    function select(i, focus) {
+      tabs.forEach(function (t, j) {
+        var on = i === j;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      if (focus) tabs[i].focus();
+      tabs[i].scrollIntoView({ block: "nearest", inline: "nearest" });
     }
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (!tick) {
-          tick = true;
-          requestAnimationFrame(upd);
-        }
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () {
+        select(i, false);
+      });
+      t.addEventListener("keydown", function (e) {
+        var k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+        if (e.key === "Home") k = -i;
+        if (e.key === "End") k = tabs.length - 1 - i;
+        if (k === undefined) return;
+        e.preventDefault();
+        select((i + k + tabs.length) % tabs.length, true);
+      });
+    });
+    list.hidden = false;
+    list.parentNode.classList.add("tabs-on");
+    panels.forEach(function (p, j) {
+      p.hidden = j !== 0;
+      p.tabIndex = 0;
+    });
+  })();
+
+  /* Sections rise into view once. Skipped entirely when the visitor prefers less motion. */
+  (function () {
+    var items = document.querySelectorAll("[data-reveal]");
+    if (reduce || !items.length || !("IntersectionObserver" in window)) return;
+    document.documentElement.classList.add("reveal-on");
+    var io = new IntersectionObserver(
+      function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
       },
-      { passive: true },
+      { rootMargin: "0px 0px -8% 0px" },
     );
-    upd();
+    [].forEach.call(items, function (n) {
+      io.observe(n);
+    });
   })();
 
   /* Active section in the nav (home only) */

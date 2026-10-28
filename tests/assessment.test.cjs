@@ -101,7 +101,7 @@ test("avoids expansion questions when the decision concerns current operations",
 test("routes provider selection to the focused partner engagement", () => {
   assert.equal(
     model.result("fin", { fin_goal: a("partners") }).service,
-    "/expertise/partnerships",
+    "/expertise/fintech-product#partners",
   );
 });
 test("separates missing information from confirmed security gaps", () => {

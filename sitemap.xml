@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://dfg.consulting/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://dfg.consulting/ai-readiness</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dfg.consulting/fintech-readiness</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dfg.consulting/security-check</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dfg.consulting/expertise/ai-strategy</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dfg.consulting/expertise/fintech-product</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dfg.consulting/expertise/partnerships</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dfg.consulting/expertise/security-posture</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dfg.consulting/privacy</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://dfg.consulting/terms</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://dfg.consulting/</loc></url>
+  <url><loc>https://dfg.consulting/expertise/ai-strategy</loc></url>
+  <url><loc>https://dfg.consulting/expertise/it-strategy</loc></url>
+  <url><loc>https://dfg.consulting/expertise/fintech-product</loc></url>
+  <url><loc>https://dfg.consulting/expertise/security-posture</loc></url>
+  <url><loc>https://dfg.consulting/ai-readiness</loc></url>
+  <url><loc>https://dfg.consulting/fintech-readiness</loc></url>
+  <url><loc>https://dfg.consulting/security-check</loc></url>
+  <url><loc>https://dfg.consulting/privacy</loc></url>
+  <url><loc>https://dfg.consulting/terms</loc></url>
 </urlset>

@@ -2,22 +2,34 @@
 
 Public website for DFG. Digital Frontiers Group.
 
-Static site with no production build step. Four service pages explain five engagements; three self-assessments run locally in the visitor's browser. Google Fonts supplies the typefaces. Node dependencies are for development and verification only.
+Static site with no production build step. DFG is positioned as an independent advisory firm for AI, fintech and cybersecurity. The homepage follows the advix.com pattern: a "Which stage are you at?" picker, four areas of expertise, how we work, self-assessments and an enquiry form. Google Fonts supplies the typefaces. Node dependencies are for development and verification only.
+
+## Editing pages
+
+Service names, stages, expertise pages and the shared header, footer and enquiry block live in one place: `scripts/build-pages.cjs`. Edit the registry there, then run:
+
+```bash
+npm run build:pages
+```
+
+The script writes `index.html` and `expertise/*.html`, refreshes the header, footer and enquiry block on the other pages and regenerates `sitemap.xml`. Do not hand-edit those generated parts; the next build overwrites them.
 
 ## Files
 
-- `index.html` — customer decision → service → illustrative output → engagement options → self-assessment → enquiry
-- `expertise/ai-strategy.html`, `expertise/fintech-product.html`, `expertise/partnerships.html`, `expertise/security-posture.html` — retained service pages
+- `index.html` — hero, stage picker, expertise, how we work, self-assessments, enquiry (generated)
+- `expertise/ai-strategy.html`, `expertise/it-strategy.html`, `expertise/fintech-product.html`, `expertise/security-posture.html` — AI strategy, IT strategy, Fintech and payments, Cybersecurity (generated)
 - `ai-readiness.html`, `fintech-readiness.html`, `security-check.html` — self-assessments, served at clean URLs without `.html`
 - `privacy.html`, `terms.html` — legal pages
 - `404.html` — not-found page
-- `assets/site.css` — shared visual system; `assets/site.js` — navigation and contact form
+- `assets/site.css` — shared visual system; `assets/site.js` — menu, stage tabs, scroll reveals and contact form
 - `assets/assessment-model.js` — questions, branching, directly supported findings and editable summary serialization; also importable in Node tests
 - `assets/tools.js` — accessible question, answer-review and result views; no answer persistence or network calls
-- `assets/city.js` — the retained hero illustration, with reduced-motion support and a pause control
+- `assets/city.js` — the hero illustration, with reduced-motion support and a pause control
 - `favicon.svg`, `robots.txt`, `sitemap.xml`, `og.png`
+- `_headers` — security headers and long-lived caching for versioned assets
 - `functions/api/contact.js` — enquiry delivery; messages over 20,000 characters are rejected rather than truncated
-- `functions/_middleware.js` — canonical host and legacy-path redirects; retired Data and IT and Incident Response URLs lead to the relevant retained subsections
+- `functions/_middleware.js` — canonical host, Content Security Policy with a per-request nonce, and legacy-path redirects (`/expertise/partnerships` to Fintech and payments, `/expertise/data-and-it` to IT strategy)
+- `scripts/build-pages.cjs` — page generator and single source of service names
 - `scripts/preview.cjs` — local server with clean URLs and production legacy-path rules; no email delivery
 - `scripts/social-card.html` — source layout for the 1200 × 630 social image
 - `tests/` — assessment-rule, route and enquiry-boundary tests; browser journeys with intercepted email delivery

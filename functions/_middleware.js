@@ -14,7 +14,8 @@ export async function onRequest({ request, next }) {
   const moved = {
     "/bank-onboarding": "/fintech-readiness",
     "/iso-27001": "/expertise/security-posture#scope",
-    "/expertise/data-and-it": "/expertise/ai-strategy#data-readiness",
+    "/expertise/data-and-it": "/expertise/it-strategy",
+    "/expertise/partnerships": "/expertise/fintech-product#partners",
     "/expertise/incident-response":
       "/expertise/security-posture#incident-preparedness",
   };

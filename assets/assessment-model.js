@@ -676,14 +676,14 @@
       goal: "ai_goal",
       service: "/expertise/ai-strategy",
       support:
-        "An AI investment assessment or focused pilot review can examine the supporting evidence. Portfolio oversight is separately scoped where it addresses an agreed need.",
+        "An AI investment assessment or an AI pilot review can examine the supporting evidence.",
     },
     fin: {
       name: "Fintech launch and expansion self-assessment",
       goal: "fin_goal",
       service: "/expertise/fintech-product",
       support:
-        "A scoped commercial or market-entry review can investigate these dependencies. Partner selection can be commissioned as a focused engagement.",
+        "A business and commercial model review or a market entry assessment can investigate these dependencies. Banking and provider partner selection can be commissioned on its own.",
     },
     sec: {
       name: "Customer security review readiness check",
@@ -792,11 +792,11 @@
       kind === "fin" &&
       answers.fin_goal &&
       answers.fin_goal.value === "partners"
-        ? "/expertise/partnerships"
+        ? "/expertise/fintech-product#partners"
         : def.service;
     const support =
-      service === "/expertise/partnerships"
-        ? "A focused partner-selection engagement can define comparison criteria, examine alternatives and prepare onboarding requirements."
+      service === "/expertise/fintech-product#partners"
+        ? "Banking and provider partner selection can define comparison criteria, examine alternatives and prepare onboarding requirements."
         : def.support;
     return {
       name: def.name,
